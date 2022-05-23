@@ -34,12 +34,12 @@ public class Company {
     private Set<Interview> interviews;
 
     @OneToMany(mappedBy = "company")
-    private Set<Interview> ratings;
+    private Set<Rating> ratings;
 
     @OneToMany(mappedBy = "company")
-    private Set<Interview> comments;
+    private Set<Comment> comments;
 
     @OneToMany(mappedBy = "company")
-    private Set<Interview> salaries;
+    private Set<Salary> salaries;
 
 }
