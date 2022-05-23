@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IAuthTokenRepository extends JpaRepository<Long, AuthToken> {
+public interface IAuthTokenRepository extends JpaRepository<AuthToken, Long> {
 }
