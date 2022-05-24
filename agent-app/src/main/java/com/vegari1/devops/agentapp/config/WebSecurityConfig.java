@@ -57,22 +57,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .exceptionHandling().authenticationEntryPoint(restAuthenticationEntryPoint).and()
                 .authorizeRequests().antMatchers("/auth/**").permitAll()
-                .antMatchers("/h2-console/**").permitAll()
-                .antMatchers("/api/product/**").permitAll()
-                .antMatchers("/api/course").permitAll()
                 .anyRequest().authenticated().and()
                 .cors().and()
                 .addFilterBefore(new TokenAuthenticationFilter(tokenUtils, customUserDetailsService), BasicAuthenticationFilter.class);
         http.csrf().disable();
         http.headers().xssProtection()
                 .and().contentSecurityPolicy("script-src 'self'");
-    }
-
-    @Override
-    public void configure(WebSecurity web) {
-        web.ignoring().antMatchers(HttpMethod.POST, "/auth/login");
-        web.ignoring().antMatchers(HttpMethod.GET, "/", "/webjars/**", "/*.html", "favicon.ico", "/**/*.html",
-                "/**/*.css", "/**/*.js");
     }
 
 }
