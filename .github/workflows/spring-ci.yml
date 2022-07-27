@@ -30,7 +30,7 @@ jobs:
           cache: maven
           
       - name: Build and Test with Maven
-        run: mvn -B test --file pom.xml
+        run: mvn -B test --file ./agent-app/pom.xml
       
       - name: Create a Release
         id: version
