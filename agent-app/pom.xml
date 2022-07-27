@@ -10,12 +10,20 @@
 	</parent>
 	<groupId>com.vegari-1.devops</groupId>
 	<artifactId>agent-app</artifactId>
-	<version>0.1</version>
+	<version>${revision}</version>
 	<name>agent-app</name>
 	<description>Agent application for reviewing IT companies</description>
 	<properties>
 		<java.version>11</java.version>
+		<revision>0.1</revision>
 	</properties>
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub Packages</name>
+			<url>https://maven.pkg.github.com/Vegari-1/AgentApp</url>
+		</repository>
+	</distributionManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -78,5 +86,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
