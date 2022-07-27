@@ -44,7 +44,7 @@ jobs:
 
       - name: Publish package to GPR
         if: github.event_name == 'push'
-        run: mvn --batch-mode deploy -DskipTests -Drevision=${{ steps.version.outputs.new-release-version }}
+        run: mvn --file ./agent-app/pom.xml --batch-mode deploy -DskipTests -Drevision=${{ steps.version.outputs.new-release-version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
