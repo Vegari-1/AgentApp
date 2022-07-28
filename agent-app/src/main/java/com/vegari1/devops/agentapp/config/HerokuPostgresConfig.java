@@ -1,9 +1,9 @@
 package com.vegari1.devops.agentapp.config;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
@@ -11,10 +11,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 @Configuration
-@ConditionalOnProperty(
-        value = "stage",
-        havingValue = "test"
-)
+@Conditional(EnvConfigCondition.class)
 public class HerokuPostgresConfig {
 
     @Value("${DATABASE_URL}")
@@ -22,6 +19,7 @@ public class HerokuPostgresConfig {
 
     @Bean
     public DataSource dataSource() throws URISyntaxException {
+        System.out.println("Kreirana klasa za heroku!!!");
         URI dbUri = new URI(databaseUrl);
 
         String username = dbUri.getUserInfo().split(":")[0];
