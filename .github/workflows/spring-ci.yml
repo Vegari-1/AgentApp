@@ -34,7 +34,7 @@ jobs:
       
       - name: Init Heroku structure
         run: |
-          cd ./agent-app/deployment
+          cd agent-app/deployment
           export HEROKU_EMAIL=eva.jankovic@uns.ac.rs
           export HEROKU_API_KEY=6e1262aa-cfb8-434f-8080-f6e6c2f43f52
           docker compose up init
