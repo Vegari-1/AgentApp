@@ -32,8 +32,8 @@ jobs:
       #- name: Build and Test with Maven
        # run: mvn -B test --file ./agent-app/pom.xml
       
-      - name: Check Docker version
-        run: docker --version
+      - name: Init Heroku structure
+        run: HEROKU_EMAIL=eva.jankovic@uns.ac.rs HEROKU_API_KEY=6e1262aa-cfb8-434f-8080-f6e6c2f43f52 docker compose up init
       
       - name: Create a Release
         id: version
