@@ -32,11 +32,13 @@ jobs:
       #- name: Build and Test with Maven
        # run: mvn -B test --file ./agent-app/pom.xml
       
-      - name: Init Heroku structure
+      - name: Deploy app to TEST env
+        #if: github.event_name == 'push'
+        if: github.ref_name == 'develop'
         run: |
           cd agent-app/deployment
-          export HEROKU_EMAIL=${{ secrets.HEROKU_EMAIL }}
-          export HEROKU_API_KEY=${{ secrets.HEROKU_API_KEY }}
+          export HEROKU_EMAIL=${{ secrets.HEROKU_TEST_EMAIL }}
+          export HEROKU_API_KEY=${{ secrets.HEROKU_TEST_API_KEY }}
           docker compose up init
       
       - name: Create a Release
