@@ -34,7 +34,7 @@ jobs:
       
       - name: Deploy app to TEST env
         #if: github.event_name == 'push'
-        if: github.ref_name == 'develop'
+        if: github.ref_name == 'feature/33-deploy-app'
         run: |
           cd agent-app/deployment
           export HEROKU_EMAIL=${{ secrets.HEROKU_TEST_EMAIL }}
