@@ -35,8 +35,8 @@ jobs:
       - run: echo ${{ github.ref_name }}
       
       - name: Deploy app to TEST env
-        #if: github.event_name == 'push'
-        if: github.ref_name == 'develop'
+        if: github.event_name == 'pull_request' && github.ref_name == '34/merge' 
+        #if: github.ref_name == 'develop'
         run: |
           cd agent-app/deployment
           export HEROKU_EMAIL=${{ secrets.HEROKU_TEST_EMAIL }}
