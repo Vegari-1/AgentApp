@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/api/company")
+@RequestMapping(value = "/api/job-offer")
 public class JobOfferController {
 
     private final IJobOfferService jobOfferService;

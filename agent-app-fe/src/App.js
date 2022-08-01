@@ -11,11 +11,11 @@ function App() {
         </p>
         <a
           className="App-link"
-          href="https://reactjs.org"
+          href={process.env.REACT_APP_API_URL+"/test"}
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          Say hello
         </a>
       </header>
     </div>
