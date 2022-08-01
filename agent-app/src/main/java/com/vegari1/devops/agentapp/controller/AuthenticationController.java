@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/api/company")
+@RequestMapping(value = "/auth")
 public class AuthenticationController {
 
     private final IUserService userService;
