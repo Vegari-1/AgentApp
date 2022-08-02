@@ -1,7 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 function App() {
+
+  function handleClick(e) {
+    e.preventDefault();
+    axios.get(process.env.REACT_APP_API_URL+'/test')
+      .then(res => {
+        alert(res.data)
+      })
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -9,14 +19,12 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href={process.env.REACT_APP_API_URL+"/test"}
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          className="App-link test-btn"
+          onClick={handleClick}
         >
           Say hello
-        </a>
+        </button>
       </header>
     </div>
   );
