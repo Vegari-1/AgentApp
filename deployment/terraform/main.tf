@@ -46,11 +46,11 @@ resource "heroku_addon" "database" {
   plan = "heroku-postgresql:hobby-dev"
 }
 
-//resource "heroku_config" "gateway" {
-//  vars = {
-//    API_URL = "${heroku_app.agent_app.name}.herokuapp.com"
-//  }
-//}
+resource "heroku_config" "gateway" {
+  vars = {
+    API_URL = "${heroku_app.agent_app.name}.herokuapp.com"
+  }
+}
 
 resource "heroku_app" "gateway" {
   name   = var.frontend_app_name
@@ -58,39 +58,39 @@ resource "heroku_app" "gateway" {
   stack  = "container"
 }
 
-//resource "heroku_app_config_association" "gateway" {
-//  app_id = heroku_app.gateway.id
-//
-//  vars = heroku_config.gateway.vars
-//}
+resource "heroku_app_config_association" "gateway" {
+  app_id = heroku_app.gateway.id
 
-//resource "heroku_build" "gateway" {
-//  app_id = heroku_app.gateway.id
-//
-//  source {
-//    path = "gateway"
-//  }
-//  depends_on = [
-//    null_resource.gateway_build
-//  ]
-//}
+  vars = heroku_config.gateway.vars
+}
 
-//data "template_file" "gateway_build" {
-//  template = file("${path.module}/gateway/heroku.tpl")
-//  vars = {
-//    api_url = "\\\"  apiUrl:  'https://${heroku_app.agent_app.name}.herokuapp.com/api/server'\\\""
-//  }
-//}
-//
-//resource "null_resource" "gateway_build" {
-//  triggers = {
-//    template = data.template_file.gateway_build.rendered
-//  }
-//
-//  provisioner "local-exec" {
-//    command = "echo \"${data.template_file.gateway_build.rendered}\" > ${path.module}/gateway/heroku.yml"
-//  }
-//}
+resource "heroku_build" "gateway" {
+  app_id = heroku_app.gateway.id
+
+  source {
+    path = "agent-app-fe"
+  }
+  depends_on = [
+    null_resource.gateway_build
+  ]
+}
+
+data "template_file" "gateway_build" {
+  template = file("${path.module}/agent-app-fe/heroku.tpl")
+  vars = {
+    api_url = "\\\"'https://${heroku_app.agent_app.name}.herokuapp.com/api'\\\""
+  }
+}
+
+resource "null_resource" "gateway_build" {
+  triggers = {
+    template = data.template_file.gateway_build.rendered
+  }
+
+  provisioner "local-exec" {
+    command = "echo \"${data.template_file.gateway_build.rendered}\" > ${path.module}/agent-app-fe/heroku.yml"
+  }
+}
 
 output "agent_url" {
   value = "https://${heroku_app.agent_app.name}.herokuapp.com"
