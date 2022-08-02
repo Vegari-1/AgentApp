@@ -8,7 +8,9 @@ on:
 
 env:
   PROJ_DIR: ./agent-app
+  PROJ_DIR_FE: ./agent-app-fe
   DOCKERHUB_REPO: ${{ secrets.DOCKERHUB_USERNAME }}/agent-app
+  DOCKERHUB_REPO_FE: ${{ secrets.DOCKERHUB_USERNAME }}/agent-app-front
 
 jobs:
   ci-pipe:
@@ -57,7 +59,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build image and push to Docker Hub
+      - name: Build BE image and push to Docker Hub
         if: github.event_name == 'push'
         uses: docker/build-push-action@v2
         with:
@@ -66,6 +68,15 @@ jobs:
           push: true
           cache-from: type=registry,ref=${{ env.DOCKERHUB_REPO }}:buildcache
           cache-to: type=registry,ref=${{ env.DOCKERHUB_REPO }}:buildcache,mode=max
+      - name: Build FE image and push to Docker Hub
+        if: github.event_name == 'push'
+        uses: docker/build-push-action@v2
+        with:
+          context: ${{ env.PROJ_DIR_FE }}
+          tags: ${{ format('{0}:{1}', env.DOCKERHUB_REPO_FE, steps.version.outputs.new-release-version) }}, ${{ secrets.DOCKERHUB_REPO_FE }}:latest
+          push: true
+          cache-from: type=registry,ref=${{ env.DOCKERHUB_REPO_FE }}:buildcache
+          cache-to: type=registry,ref=${{ env.DOCKERHUB_REPO_FE }}:buildcache,mode=max
 
       - name: Deploy app to TEST env
         if: github.event_name == 'push' && github.ref_name == 'develop'
