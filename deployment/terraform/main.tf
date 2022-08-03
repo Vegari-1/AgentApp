@@ -68,7 +68,7 @@ resource "heroku_build" "gateway" {
   app_id = heroku_app.gateway.id
 
   source {
-    path = "agent-app-fe"
+    path = "agent_app_front"
   }
   depends_on = [
     null_resource.gateway_build
@@ -76,7 +76,7 @@ resource "heroku_build" "gateway" {
 }
 
 data "template_file" "gateway_build" {
-  template = file("${path.module}/agent-app-fe/heroku.tpl")
+  template = file("${path.module}/agent_app_front/heroku.tpl")
   vars = {
     api_url = "\\\"'https://${heroku_app.agent_app.name}.herokuapp.com/api'\\\""
   }
@@ -88,7 +88,7 @@ resource "null_resource" "gateway_build" {
   }
 
   provisioner "local-exec" {
-    command = "echo \"${data.template_file.gateway_build.rendered}\" > ${path.module}/agent-app-fe/heroku.yml"
+    command = "echo \"${data.template_file.gateway_build.rendered}\" > ${path.module}/agent_app_front/heroku.yml"
   }
 }
 
