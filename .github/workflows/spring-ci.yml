@@ -95,24 +95,31 @@ jobs:
           cache-from: type=registry,ref=${{ env.DOCKERHUB_REPO_FE }}:buildcache
           cache-to: type=registry,ref=${{ env.DOCKERHUB_REPO_FE }}:buildcache,mode=max
 
+      - name: Copy FE source files
+        if: github.event_name == 'push'
+        run: |
+          cp -R "${{ env.PROJ_DIR_FE }}" "./deployment/terraform/agent_app_front/source"
+
       - name: Deploy app to TEST env
         if: github.event_name == 'push' && github.ref_name == 'develop'
         run: |
-          cd agent-app/deployment
-          export TERRAFORM_BACKEND=agent-app-backend-test
-          export APP_NAME=dislinkt-agent-app-test
+          cd ./deployment
+          export TERRAFORM_BACKEND=agent-app-terraform-test
+          export APP_NAME=agent-app-backend-test
           export GATEWAY_NAME=agent-app-frontend-test
           export HEROKU_EMAIL=${{ secrets.HEROKU_TEST_EMAIL }}
           export HEROKU_API_KEY=${{ secrets.HEROKU_TEST_API_KEY }}
           docker compose up destroy
           docker compose up deploy
-      
+          docker compose up deploy
+
       - name: Deploy app to PROD env
         if: github.event_name == 'push' && github.ref_name == 'main'
         run: |
-          cd agent-app/deployment
+          cd ./deployment
           export HEROKU_EMAIL=${{ secrets.HEROKU_PROD_EMAIL }}
           export HEROKU_API_KEY=${{ secrets.HEROKU_PROD_API_KEY }}
           docker compose up destroy
+          docker compose up deploy
           docker compose up deploy
       

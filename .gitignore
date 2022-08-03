@@ -35,3 +35,6 @@ build/
 ### Terraform ###
 .terraform/
 .terraform.lock.hcl
+
+### FE Deployment ###
+deployment/terraform/agent_app_front/source/*
