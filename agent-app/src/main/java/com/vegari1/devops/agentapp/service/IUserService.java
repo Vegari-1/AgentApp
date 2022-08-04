@@ -1,8 +1,8 @@
 package com.vegari1.devops.agentapp.service;
 
-import com.vegari1.devops.agentapp.exception.BadCredentialsException;
 import com.vegari1.devops.agentapp.exception.EntityExistsException;
 import com.vegari1.devops.agentapp.model.User;
+import org.springframework.security.authentication.BadCredentialsException;
 
 public interface IUserService {
 

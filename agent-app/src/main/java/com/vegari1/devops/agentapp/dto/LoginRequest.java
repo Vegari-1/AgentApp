@@ -1,10 +1,13 @@
 package com.vegari1.devops.agentapp.dto;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
 
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class LoginRequest {
 
     @NotEmpty(message = "Username must not be empty")

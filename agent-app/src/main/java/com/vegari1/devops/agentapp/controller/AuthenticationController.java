@@ -33,6 +33,6 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<RegisterResponse> register(@Valid @RequestBody RegisterRequest registerRequest) {
         User user = userService.register(userMapper.toEntity(registerRequest));
-        return ResponseEntity.ok(userMapper.toResponse(user));
+        return new ResponseEntity<>(userMapper.toResponse(user), HttpStatus.CREATED);
     }
 }
