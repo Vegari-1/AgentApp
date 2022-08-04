@@ -19,7 +19,6 @@ public class HerokuPostgresConfig {
 
     @Bean
     public DataSource dataSource() throws URISyntaxException {
-        System.out.println("Kreirana klasa za heroku!!!");
         URI dbUri = new URI(databaseUrl);
 
         String username = dbUri.getUserInfo().split(":")[0];
