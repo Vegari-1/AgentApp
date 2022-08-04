@@ -31,6 +31,7 @@ public class User implements UserDetails {
     private String password;
     private String name;
     private String surname;
+
     private boolean enabled;
     private Timestamp lastPasswordResetDate;
 
