@@ -27,6 +27,10 @@ public class Company {
     private String companyWebsite;
     private String companyInfo;
 
+    @OneToOne
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    private User owner;
+
     @OneToMany(mappedBy = "company")
     private Set<JobOffer> jobOffers;
 
@@ -48,5 +52,6 @@ public class Company {
         this.companyEmail = registrationRequest.getCompanyEmail();
         this.companyWebsite = registrationRequest.getCompanyWebsite();
         this.companyInfo = registrationRequest.getCompanyInfo();
+        this.owner = registrationRequest.getOwner();
     }
 }

@@ -3,7 +3,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,20 +18,9 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(EntityExistsException.class)
-    public ResponseEntity<Object> handleEntityExistsException(
-            EntityExistsException ex) {
-
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("timestamp", LocalDateTime.now().toString());
-        body.put("message", ex.getMessage());
-
-        return new ResponseEntity<>(body, ex.getStatusCode());
-    }
-
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<Object> handleEntityNotFoundException(
-            EntityNotFoundException ex) {
+    @ExceptionHandler(BaseException.class)
+    public ResponseEntity<Object> handleBaseException(
+            BaseException ex) {
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now().toString());

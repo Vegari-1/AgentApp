@@ -2,6 +2,7 @@ package com.vegari1.devops.agentapp.service.impl;
 
 import com.vegari1.devops.agentapp.exception.EntityExistsException;
 import com.vegari1.devops.agentapp.exception.EntityNotFoundException;
+import com.vegari1.devops.agentapp.exception.ForbiddenException;
 import com.vegari1.devops.agentapp.model.Company;
 import com.vegari1.devops.agentapp.model.CompanyRegistrationRequest;
 import com.vegari1.devops.agentapp.model.User;
@@ -20,6 +21,25 @@ public class CompanyService implements ICompanyService {
     private final IUserRepository userRepository;
     private final ICompanyRepository companyRepository;
     private final ICompanyRegistrationRepository companyRegistrationRepository;
+
+    @Override
+    public Company getCompanyById(Long companyId) throws EntityNotFoundException {
+        return companyRepository.findById(companyId)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        Company.class.getSimpleName(), "id"));
+    }
+
+    @Override
+    public Company updateCompanyInfo(Long companyId, String companyInfo) throws EntityNotFoundException, ForbiddenException {
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new EntityNotFoundException(
+                        Company.class.getSimpleName(), "id"));
+        User owner = ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        if (!owner.equals(company.getOwner()))
+            throw new ForbiddenException(company.getClass().getSimpleName());
+        company.setCompanyInfo(companyInfo);
+        return companyRepository.save(company);
+    }
 
     @Override
     public CompanyRegistrationRequest createCompanyRegReq(CompanyRegistrationRequest companyRegReq)
@@ -52,9 +72,6 @@ public class CompanyService implements ICompanyService {
                     .orElseThrow(() -> new EntityNotFoundException("Company registration request", "id"));
         Company company = new Company(companyRegReq);
         company = companyRepository.save(company);
-        User owner = companyRegReq.getOwner();
-        owner.setCompany(company);
-        userRepository.save(owner);
         companyRegistrationRepository.delete(companyRegReq);
         return company;
     }
