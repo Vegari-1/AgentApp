@@ -42,4 +42,11 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private Set<Salary> salaries;
 
+    public Company(CompanyRegistrationRequest registrationRequest) {
+        this.industrySector = registrationRequest.getIndustrySector();
+        this.companyName = registrationRequest.getCompanyName();
+        this.companyEmail = registrationRequest.getCompanyEmail();
+        this.companyWebsite = registrationRequest.getCompanyWebsite();
+        this.companyInfo = registrationRequest.getCompanyInfo();
+    }
 }

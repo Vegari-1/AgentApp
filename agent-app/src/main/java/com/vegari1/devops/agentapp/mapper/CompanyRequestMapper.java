@@ -11,7 +11,7 @@ public class CompanyRequestMapper implements
     @Override
     public CompanyRegistrationRequest toEntity(CompanyRequestDto request) {
         return new CompanyRegistrationRequest(null, request.getIndustrySector(), request.getCompanyName(),
-                request.getCompanyEmail(), request.getCompanyWebsite(), request.getCompanyInfo());
+                request.getCompanyEmail(), request.getCompanyWebsite(), request.getCompanyInfo(), null);
     }
 
     @Override

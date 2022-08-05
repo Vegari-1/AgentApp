@@ -5,10 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -27,5 +24,9 @@ public class CompanyRegistrationRequest {
     private String companyEmail;
     private String companyWebsite;
     private String companyInfo;
+
+    @OneToOne
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    private User owner;
 
 }

@@ -1,17 +1,23 @@
 package com.vegari1.devops.agentapp.service.impl;
 
 import com.vegari1.devops.agentapp.exception.EntityExistsException;
+import com.vegari1.devops.agentapp.exception.EntityNotFoundException;
+import com.vegari1.devops.agentapp.model.Company;
 import com.vegari1.devops.agentapp.model.CompanyRegistrationRequest;
+import com.vegari1.devops.agentapp.model.User;
 import com.vegari1.devops.agentapp.repository.ICompanyRegistrationRepository;
 import com.vegari1.devops.agentapp.repository.ICompanyRepository;
+import com.vegari1.devops.agentapp.repository.IUserRepository;
 import com.vegari1.devops.agentapp.service.ICompanyService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Service
 public class CompanyService implements ICompanyService {
 
+    private final IUserRepository userRepository;
     private final ICompanyRepository companyRepository;
     private final ICompanyRegistrationRepository companyRegistrationRepository;
 
@@ -32,6 +38,32 @@ public class CompanyService implements ICompanyService {
                             existingCompany.getClass().getSimpleName(),
                             "company name or company email");
                 });
+        Long ownerId = ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
+        User owner = userRepository.findById(ownerId)
+                .orElseThrow(() -> new EntityNotFoundException(User.class.getSimpleName(), "id"));
+        companyRegReq.setOwner(owner);
         return companyRegistrationRepository.save(companyRegReq);
+    }
+
+    @Override
+    public Company acceptCompanyRequest(Long companyRequestId) {
+        CompanyRegistrationRequest companyRegReq =
+                companyRegistrationRepository.findById(companyRequestId)
+                    .orElseThrow(() -> new EntityNotFoundException("Company registration request", "id"));
+        Company company = new Company(companyRegReq);
+        company = companyRepository.save(company);
+        User owner = companyRegReq.getOwner();
+        owner.setCompany(company);
+        userRepository.save(owner);
+        companyRegistrationRepository.delete(companyRegReq);
+        return company;
+    }
+
+    @Override
+    public void declineCompanyRequest(Long companyRequestId) {
+        CompanyRegistrationRequest companyRegReq =
+                companyRegistrationRepository.findById(companyRequestId)
+                    .orElseThrow(() -> new EntityNotFoundException("Company registration request", "id"));
+        companyRegistrationRepository.delete(companyRegReq);
     }
 }
