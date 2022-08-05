@@ -81,7 +81,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ${{ env.PROJ_DIR }}
-          tags: ${{ format('{0}:{1}', env.DOCKERHUB_REPO, steps.version.outputs.new-release-version) }}, ${{ secrets.DOCKERHUB_REPO }}:latest
+          tags: ${{ env.DOCKERHUB_REPO }}:latest, ${{ env.DOCKERHUB_REPO }}/:${{ steps.version.outputs.new-release-version }}
           push: true
           cache-from: type=registry,ref=${{ env.DOCKERHUB_REPO }}:buildcache
           cache-to: type=registry,ref=${{ env.DOCKERHUB_REPO }}:buildcache,mode=max
@@ -90,7 +90,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ${{ env.PROJ_DIR_FE }}
-          tags: ${{ format('{0}:{1}', env.DOCKERHUB_REPO_FE, steps.version.outputs.new-release-version) }}, ${{ secrets.DOCKERHUB_REPO_FE }}:latest
+          tags: ${{ env.DOCKERHUB_REPO_FE }}:latest, ${{ env.DOCKERHUB_REPO_FE }}/:${{ steps.version.outputs.new-release-version }}
           push: true
           cache-from: type=registry,ref=${{ env.DOCKERHUB_REPO_FE }}:buildcache
           cache-to: type=registry,ref=${{ env.DOCKERHUB_REPO_FE }}:buildcache,mode=max
