@@ -12,12 +12,9 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import javax.swing.text.html.parser.Entity;
 
 @AllArgsConstructor
 @Service
@@ -42,10 +39,10 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public String login(User user) throws AuthenticationException {
+    public String login(User user) throws BadCredentialsException {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return tokenUtils.generateToken(user.getUsername(), user.getAuthorities());
+        return tokenUtils.generateToken(user.getUsername(), authentication.getAuthorities());
     }
 }
