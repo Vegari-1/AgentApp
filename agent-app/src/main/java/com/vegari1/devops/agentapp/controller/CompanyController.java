@@ -1,6 +1,7 @@
 package com.vegari1.devops.agentapp.controller;
 
 import com.vegari1.devops.agentapp.dto.CompanyDto;
+import com.vegari1.devops.agentapp.dto.CompanyInfoRequest;
 import com.vegari1.devops.agentapp.dto.CompanyRequestDto;
 import com.vegari1.devops.agentapp.mapper.CompanyMapper;
 import com.vegari1.devops.agentapp.mapper.CompanyRequestMapper;
@@ -24,6 +25,21 @@ public class CompanyController {
     private final CompanyRequestMapper companyRequestMapper;
     private final CompanyMapper companyMapper;
 
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @GetMapping("/{companyId}")
+    public ResponseEntity<CompanyDto> getCompanyById(@PathVariable Long companyId) {
+        Company company = companyService.getCompanyById(companyId);
+        return ResponseEntity.ok(companyMapper.toResponse(company));
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PatchMapping("/{companyId}")
+    public ResponseEntity<CompanyDto> updateCompanyInfo(
+            @PathVariable Long companyId, @RequestBody CompanyInfoRequest companyInfoRequest) {
+        Company company = companyService.updateCompanyInfo(companyId, companyInfoRequest.getCompanyInfo());
+        return ResponseEntity.ok(companyMapper.toResponse(company));
+    }
+
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/request")
     public ResponseEntity<CompanyRequestDto> createCompanyRegistrationRequest(
@@ -43,9 +59,10 @@ public class CompanyController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/request/{companyRequestId}")
-    public ResponseEntity<CompanyRequestDto> declineCompanyRegistrationRequest(
+    public ResponseEntity<Void> declineCompanyRegistrationRequest(
             @PathVariable Long companyRequestId) {
         companyService.declineCompanyRequest(companyRequestId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }
