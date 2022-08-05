@@ -2,7 +2,9 @@ package com.vegari1.devops.agentapp.service.impl;
 
 import com.vegari1.devops.agentapp.auth.TokenUtils;
 import com.vegari1.devops.agentapp.exception.EntityExistsException;
+import com.vegari1.devops.agentapp.model.Authority;
 import com.vegari1.devops.agentapp.model.User;
+import com.vegari1.devops.agentapp.repository.IAuthorityRepository;
 import com.vegari1.devops.agentapp.repository.IUserRepository;
 import com.vegari1.devops.agentapp.service.IUserService;
 import lombok.AllArgsConstructor;
@@ -22,6 +24,7 @@ import javax.swing.text.html.parser.Entity;
 public class UserService implements IUserService {
 
     private final IUserRepository userRepository;
+    private final IAuthorityRepository authorityRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final TokenUtils tokenUtils;
@@ -33,6 +36,8 @@ public class UserService implements IUserService {
                     throw new EntityExistsException(existingUser.getClass().getSimpleName(), "username");
                 });
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Authority userAuthority = authorityRepository.findByName("ROLE_USER");
+        user.addAuthority(userAuthority);
         return userRepository.save(user);
     }
 
