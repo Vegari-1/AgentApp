@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -52,6 +53,13 @@ public class User implements UserDetails {
     public void setPassword(String password) {
         this.lastPasswordResetDate = new Timestamp(new Date().getTime());
         this.password = password;
+    }
+
+    public void addAuthority(Authority authority) {
+        if (this.authorities == null) {
+            this.authorities = new HashSet<>();
+        }
+        this.authorities.add(authority);
     }
 
     @Override
