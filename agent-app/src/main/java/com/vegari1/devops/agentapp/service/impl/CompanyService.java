@@ -3,14 +3,8 @@ package com.vegari1.devops.agentapp.service.impl;
 import com.vegari1.devops.agentapp.exception.EntityExistsException;
 import com.vegari1.devops.agentapp.exception.EntityNotFoundException;
 import com.vegari1.devops.agentapp.exception.ForbiddenException;
-import com.vegari1.devops.agentapp.model.Comment;
-import com.vegari1.devops.agentapp.model.Company;
-import com.vegari1.devops.agentapp.model.CompanyRegistrationRequest;
-import com.vegari1.devops.agentapp.model.User;
-import com.vegari1.devops.agentapp.repository.ICommentRepository;
-import com.vegari1.devops.agentapp.repository.ICompanyRegistrationRepository;
-import com.vegari1.devops.agentapp.repository.ICompanyRepository;
-import com.vegari1.devops.agentapp.repository.IUserRepository;
+import com.vegari1.devops.agentapp.model.*;
+import com.vegari1.devops.agentapp.repository.*;
 import com.vegari1.devops.agentapp.service.ICompanyService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,6 +20,7 @@ public class CompanyService implements ICompanyService {
     private final IUserRepository userRepository;
     private final ICompanyRepository companyRepository;
     private final ICommentRepository commentRepository;
+    private final IInterviewRepository interviewRepository;
     private final ICompanyRegistrationRepository companyRegistrationRepository;
 
     @Override
@@ -108,5 +103,25 @@ public class CompanyService implements ICompanyService {
         companyRepository.findById(companyId)
                 .orElseThrow(() -> new EntityNotFoundException("Company", "id"));
         return commentRepository.findByCompanyId(companyId);
+    }
+
+    @Override
+    public Interview createCompanyInterview(Interview interview, Long companyId) throws EntityNotFoundException, ForbiddenException {
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new EntityNotFoundException("Company", "id"));
+        User user = ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        if (company.getOwner().equals(user))
+            throw new ForbiddenException(company.getClass().getSimpleName());
+        interview.setCompany(company);
+        interview.setUser(user);
+        interview.setTimestamp(new Date());
+        return interviewRepository.save(interview);
+    }
+
+    @Override
+    public List<Interview> getCompanyInterviews(Long companyId) {
+        companyRepository.findById(companyId)
+                .orElseThrow(() -> new EntityNotFoundException("Company", "id"));
+        return interviewRepository.findByCompanyId(companyId);
     }
 }
