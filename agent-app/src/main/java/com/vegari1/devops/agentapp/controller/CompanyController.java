@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -74,6 +75,14 @@ public class CompanyController {
             @Valid @RequestBody CommentRequest commentRequest) {
         Comment comment = companyService.createCompanyComment(commentMapper.toEntity(commentRequest), companyId);
         return new ResponseEntity<>(commentMapper.toResponse(comment), HttpStatus.CREATED);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/{companyId}/comment")
+    public ResponseEntity<List<CommentResponse>> getAllCompanyComments(
+            @PathVariable Long companyId) {
+        List<Comment> comments = companyService.getCompanyComments(companyId);
+        return new ResponseEntity<>(commentMapper.toResponseList(comments), HttpStatus.CREATED);
     }
 
 }

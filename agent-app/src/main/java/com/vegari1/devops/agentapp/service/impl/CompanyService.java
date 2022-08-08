@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @Service
@@ -100,5 +101,12 @@ public class CompanyService implements ICompanyService {
         comment.setUser(user);
         comment.setTimestamp(new Date());
         return commentRepository.save(comment);
+    }
+
+    @Override
+    public List<Comment> getCompanyComments(Long companyId) throws EntityNotFoundException {
+        companyRepository.findById(companyId)
+                .orElseThrow(() -> new EntityNotFoundException("Company", "id"));
+        return commentRepository.findByCompanyId(companyId);
     }
 }
