@@ -2,12 +2,12 @@ package com.vegari1.devops.agentapp.mapper;
 
 import com.vegari1.devops.agentapp.dto.LoginRequest;
 import com.vegari1.devops.agentapp.dto.RegisterRequest;
-import com.vegari1.devops.agentapp.dto.RegisterResponse;
+import com.vegari1.devops.agentapp.dto.UserResponse;
 import com.vegari1.devops.agentapp.model.User;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserMapper implements IMapper<User, RegisterRequest, RegisterResponse> {
+public class UserMapper implements IMapper<User, RegisterRequest, UserResponse> {
 
     public User toEntity(LoginRequest request) {
         User user = new User();
@@ -28,7 +28,7 @@ public class UserMapper implements IMapper<User, RegisterRequest, RegisterRespon
     }
 
     @Override
-    public RegisterResponse toResponse(User entity) {
-        return new RegisterResponse(entity.getId(), entity.getUsername(), entity.getName(), entity.getSurname());
+    public UserResponse toResponse(User entity) {
+        return new UserResponse(entity.getId(), entity.getUsername(), entity.getName(), entity.getSurname());
     }
 }

@@ -28,7 +28,7 @@ public class JobOfferMapper implements
     @Override
     public JobOfferResponse toResponse(JobOffer entity) {
         return new JobOfferResponse(entity.getId(), entity.getTitle(), entity.getPosition(), entity.getJobDescription(),
-                entity.getQualifications(), entity.getStartDate(), entity.getEndDate(),
+                entity.getQualifications(), entity.getStartDate(), entity.getEndDate(), entity.getTimestamp(),
                 companyMapper.toResponse(entity.getCompany()));
     }
 }
