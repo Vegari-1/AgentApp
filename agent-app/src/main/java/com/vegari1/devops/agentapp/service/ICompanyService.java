@@ -7,6 +7,8 @@ import com.vegari1.devops.agentapp.model.Comment;
 import com.vegari1.devops.agentapp.model.Company;
 import com.vegari1.devops.agentapp.model.CompanyRegistrationRequest;
 
+import java.util.List;
+
 public interface ICompanyService {
 
     Company getCompanyById(Long companyId) throws EntityNotFoundException;
@@ -21,4 +23,6 @@ public interface ICompanyService {
     void declineCompanyRequest(Long companyRequestId);
 
     Comment createCompanyComment(Comment comment, Long companyId) throws EntityNotFoundException, ForbiddenException;
+
+    List<Comment> getCompanyComments(Long companyId) throws EntityNotFoundException;
 }
