@@ -13,6 +13,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Service
 public class JobOfferService implements IJobOfferService {
@@ -31,5 +33,18 @@ public class JobOfferService implements IJobOfferService {
             throw new ForbiddenException(company.getClass().getSimpleName());
         jobOffer.setCompany(company);
         return jobOfferRepository.save(jobOffer);
+    }
+
+    @Override
+    public JobOffer getJobOfferById(Long jobOfferId) throws EntityNotFoundException {
+        return jobOfferRepository.findById(jobOfferId)
+                .orElseThrow(() -> new EntityNotFoundException("Job offer", "id"));
+    }
+
+    @Override
+    public List<JobOffer> getJobOfferByCompanyId(Long companyId) throws EntityNotFoundException {
+        companyRepository.findById(companyId)
+                .orElseThrow(() -> new EntityNotFoundException("Company", "id"));
+        return jobOfferRepository.findByCompanyId(companyId);
     }
 }
