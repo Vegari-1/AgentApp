@@ -1,14 +1,8 @@
 package com.vegari1.devops.agentapp.controller;
 
 import com.vegari1.devops.agentapp.dto.*;
-import com.vegari1.devops.agentapp.mapper.CommentMapper;
-import com.vegari1.devops.agentapp.mapper.CompanyMapper;
-import com.vegari1.devops.agentapp.mapper.CompanyRequestMapper;
-import com.vegari1.devops.agentapp.mapper.InterviewMapper;
-import com.vegari1.devops.agentapp.model.Comment;
-import com.vegari1.devops.agentapp.model.Company;
-import com.vegari1.devops.agentapp.model.CompanyRegistrationRequest;
-import com.vegari1.devops.agentapp.model.Interview;
+import com.vegari1.devops.agentapp.mapper.*;
+import com.vegari1.devops.agentapp.model.*;
 import com.vegari1.devops.agentapp.service.ICompanyService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +11,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @RestController
@@ -25,10 +21,11 @@ import java.util.List;
 public class CompanyController {
 
     private final ICompanyService companyService;
-    private final CompanyRequestMapper companyRequestMapper;
+    private final SalaryMapper salaryMapper;
     private final CompanyMapper companyMapper;
     private final CommentMapper commentMapper;
     private final InterviewMapper interviewMapper;
+    private final CompanyRequestMapper companyRequestMapper;
 
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/{companyId}")
@@ -103,5 +100,30 @@ public class CompanyController {
             @PathVariable Long companyId) {
         List<Interview> interviews = companyService.getCompanyInterviews(companyId);
         return ResponseEntity.ok(interviewMapper.toResponseList(interviews));
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PostMapping("/{companyId}/salary")
+    public ResponseEntity<SalaryResponse> createCompanySalary(
+            @PathVariable Long companyId,
+            @Valid @RequestBody SalaryRequest salaryRequest) {
+        Salary salary = companyService.createCompanySalary(salaryMapper.toEntity(salaryRequest), companyId);
+        return new ResponseEntity<>(salaryMapper.toResponse(salary), HttpStatus.CREATED);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/{companyId}/salary")
+    public ResponseEntity<List<SalaryResponse>> getAllCompanySalaries(
+            @PathVariable Long companyId) {
+        List<Salary> salaries = companyService.getCompanySalaries(companyId);
+        return ResponseEntity.ok(salaryMapper.toResponseList(salaries));
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/{companyId}/salary/mean")
+    public ResponseEntity<List<SalaryMeanResponse>> getAllCompanyMeanSalaries(
+            @PathVariable Long companyId) {
+        Map<String, Double> meanSalaries = companyService.getCompanyMeanSalaries(companyId);
+        return ResponseEntity.ok(salaryMapper.toResponseList(meanSalaries));
     }
 }

@@ -10,14 +10,20 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
+import static java.util.stream.Collectors.averagingDouble;
+import static java.util.stream.Collectors.groupingBy;
 
 @AllArgsConstructor
 @Service
 public class CompanyService implements ICompanyService {
 
     private final IUserRepository userRepository;
+    private final ISalaryRepository salaryRepository;
     private final ICompanyRepository companyRepository;
     private final ICommentRepository commentRepository;
     private final IInterviewRepository interviewRepository;
@@ -123,5 +129,35 @@ public class CompanyService implements ICompanyService {
         companyRepository.findById(companyId)
                 .orElseThrow(() -> new EntityNotFoundException("Company", "id"));
         return interviewRepository.findByCompanyId(companyId);
+    }
+
+    @Override
+    public Salary createCompanySalary(Salary salary, Long companyId) {
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new EntityNotFoundException("Company", "id"));
+        User user = ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        if (company.getOwner().equals(user))
+            throw new ForbiddenException(company.getClass().getSimpleName());
+        salary.setCompany(company);
+        salary.setUser(user);
+        salary.setTimestamp(new Date());
+        return salaryRepository.save(salary);
+    }
+
+    @Override
+    public List<Salary> getCompanySalaries(Long companyId) {
+        companyRepository.findById(companyId)
+                .orElseThrow(() -> new EntityNotFoundException("Company", "id"));
+        return salaryRepository.findByCompanyId(companyId);
+    }
+
+    @Override
+    public Map<String, Double> getCompanyMeanSalaries(Long companyId) {
+        companyRepository.findById(companyId)
+                .orElseThrow(() -> new EntityNotFoundException("Company", "id"));
+
+        List<Salary> salaries = salaryRepository.findByCompanyId(companyId);
+        return salaries.stream()
+                .collect(groupingBy(Salary::getPosition, averagingDouble(Salary::getAmount)));
     }
 }

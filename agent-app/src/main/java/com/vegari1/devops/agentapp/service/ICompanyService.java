@@ -3,12 +3,11 @@ package com.vegari1.devops.agentapp.service;
 import com.vegari1.devops.agentapp.exception.EntityExistsException;
 import com.vegari1.devops.agentapp.exception.EntityNotFoundException;
 import com.vegari1.devops.agentapp.exception.ForbiddenException;
-import com.vegari1.devops.agentapp.model.Comment;
-import com.vegari1.devops.agentapp.model.Company;
-import com.vegari1.devops.agentapp.model.CompanyRegistrationRequest;
-import com.vegari1.devops.agentapp.model.Interview;
+import com.vegari1.devops.agentapp.model.*;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 public interface ICompanyService {
 
@@ -30,4 +29,10 @@ public interface ICompanyService {
     Interview createCompanyInterview(Interview interview, Long companyId) throws EntityNotFoundException, ForbiddenException;
 
     List<Interview> getCompanyInterviews(Long companyId);
+
+    Salary createCompanySalary(Salary salary, Long companyId);
+
+    List<Salary> getCompanySalaries(Long companyId);
+
+    Map<String, Double> getCompanyMeanSalaries(Long companyId);
 }
