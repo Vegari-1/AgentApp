@@ -8,9 +8,11 @@ import java.util.List;
 
 public interface IJobOfferService {
 
-    JobOffer createJobOffer(JobOffer jobOffer, Long companyId) throws EntityNotFoundException, ForbiddenException;
+    List<JobOffer> getJobOffers();
 
     JobOffer getJobOfferById(Long jobOfferId) throws EntityNotFoundException;
 
     List<JobOffer> getJobOfferByCompanyId(Long companyId) throws EntityNotFoundException;
+
+    JobOffer createJobOffer(JobOffer jobOffer, Long companyId) throws EntityNotFoundException, ForbiddenException;
 }
