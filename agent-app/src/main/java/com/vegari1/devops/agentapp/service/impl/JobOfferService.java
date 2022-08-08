@@ -23,16 +23,8 @@ public class JobOfferService implements IJobOfferService {
     private final ICompanyRepository companyRepository;
 
     @Override
-    public JobOffer createJobOffer(JobOffer jobOffer, Long companyId) throws EntityNotFoundException, ForbiddenException {
-        if (jobOffer.getEndDate().before(jobOffer.getStartDate()))
-            throw new EntityNotValid("Job offer", "start date and end date");
-        Company company = companyRepository.findById(companyId)
-                .orElseThrow(() -> new EntityNotFoundException("Company", "id"));
-        User owner = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        if (!owner.equals(company.getOwner()))
-            throw new ForbiddenException(company.getClass().getSimpleName());
-        jobOffer.setCompany(company);
-        return jobOfferRepository.save(jobOffer);
+    public List<JobOffer> getJobOffers() {
+        return jobOfferRepository.findAll();
     }
 
     @Override
@@ -46,5 +38,18 @@ public class JobOfferService implements IJobOfferService {
         companyRepository.findById(companyId)
                 .orElseThrow(() -> new EntityNotFoundException("Company", "id"));
         return jobOfferRepository.findByCompanyId(companyId);
+    }
+
+    @Override
+    public JobOffer createJobOffer(JobOffer jobOffer, Long companyId) throws EntityNotFoundException, ForbiddenException {
+        if (jobOffer.getEndDate().before(jobOffer.getStartDate()))
+            throw new EntityNotValid("Job offer", "start date and end date");
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new EntityNotFoundException("Company", "id"));
+        User owner = ((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        if (!owner.equals(company.getOwner()))
+            throw new ForbiddenException(company.getClass().getSimpleName());
+        jobOffer.setCompany(company);
+        return jobOfferRepository.save(jobOffer);
     }
 }

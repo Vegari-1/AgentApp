@@ -26,12 +26,10 @@ public class JobOfferController {
     private final JobOfferMapper jobOfferMapper;
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @PostMapping("/{companyId}")
-    public ResponseEntity<JobOfferResponse> createJobOffer(
-            @PathVariable Long companyId,
-            @Valid @RequestBody JobOfferRequest jobOfferRequest) {
-        JobOffer jobOffer = jobOfferService.createJobOffer(jobOfferMapper.toEntity(jobOfferRequest), companyId);
-        return new ResponseEntity<>(jobOfferMapper.toResponse(jobOffer), HttpStatus.CREATED);
+    @GetMapping
+    public ResponseEntity<List<JobOfferResponse>> getAllJobOffers() {
+        List<JobOffer> jobOffers = jobOfferService.getJobOffers();
+        return new ResponseEntity<>(jobOfferMapper.toResponseList(jobOffers), HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -48,6 +46,15 @@ public class JobOfferController {
             @PathVariable Long companyId) {
         List<JobOffer> jobOffers = jobOfferService.getJobOfferByCompanyId(companyId);
         return new ResponseEntity<>(jobOfferMapper.toResponseList(jobOffers), HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PostMapping("/{companyId}")
+    public ResponseEntity<JobOfferResponse> createJobOffer(
+            @PathVariable Long companyId,
+            @Valid @RequestBody JobOfferRequest jobOfferRequest) {
+        JobOffer jobOffer = jobOfferService.createJobOffer(jobOfferMapper.toEntity(jobOfferRequest), companyId);
+        return new ResponseEntity<>(jobOfferMapper.toResponse(jobOffer), HttpStatus.CREATED);
     }
 
 }
