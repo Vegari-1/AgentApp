@@ -1,10 +1,10 @@
 package com.vegari1.devops.agentapp.controller;
 
-import com.vegari1.devops.agentapp.dto.CompanyDto;
-import com.vegari1.devops.agentapp.dto.CompanyInfoRequest;
-import com.vegari1.devops.agentapp.dto.CompanyRequestDto;
+import com.vegari1.devops.agentapp.dto.*;
+import com.vegari1.devops.agentapp.mapper.CommentMapper;
 import com.vegari1.devops.agentapp.mapper.CompanyMapper;
 import com.vegari1.devops.agentapp.mapper.CompanyRequestMapper;
+import com.vegari1.devops.agentapp.model.Comment;
 import com.vegari1.devops.agentapp.model.Company;
 import com.vegari1.devops.agentapp.model.CompanyRegistrationRequest;
 import com.vegari1.devops.agentapp.service.ICompanyService;
@@ -24,6 +24,7 @@ public class CompanyController {
     private final ICompanyService companyService;
     private final CompanyRequestMapper companyRequestMapper;
     private final CompanyMapper companyMapper;
+    private final CommentMapper commentMapper;
 
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/{companyId}")
@@ -63,6 +64,16 @@ public class CompanyController {
             @PathVariable Long companyRequestId) {
         companyService.declineCompanyRequest(companyRequestId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PostMapping("/{companyId}/comment")
+    public ResponseEntity<CommentResponse> createCompanyComment(
+            @PathVariable Long companyId,
+            @Valid @RequestBody CommentRequest commentRequest) {
+        Comment comment = companyService.createCompanyComment(commentMapper.toEntity(commentRequest), companyId);
+        return new ResponseEntity<>(commentMapper.toResponse(comment), HttpStatus.CREATED);
     }
 
 }

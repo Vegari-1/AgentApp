@@ -2,11 +2,8 @@ package com.vegari1.devops.agentapp.controller;
 
 import com.vegari1.devops.agentapp.dto.JobOfferRequest;
 import com.vegari1.devops.agentapp.dto.JobOfferResponse;
-import com.vegari1.devops.agentapp.dto.RegisterRequest;
-import com.vegari1.devops.agentapp.dto.RegisterResponse;
 import com.vegari1.devops.agentapp.mapper.JobOfferMapper;
 import com.vegari1.devops.agentapp.model.JobOffer;
-import com.vegari1.devops.agentapp.model.User;
 import com.vegari1.devops.agentapp.service.IJobOfferService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

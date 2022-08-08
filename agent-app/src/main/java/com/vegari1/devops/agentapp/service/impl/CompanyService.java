@@ -3,9 +3,11 @@ package com.vegari1.devops.agentapp.service.impl;
 import com.vegari1.devops.agentapp.exception.EntityExistsException;
 import com.vegari1.devops.agentapp.exception.EntityNotFoundException;
 import com.vegari1.devops.agentapp.exception.ForbiddenException;
+import com.vegari1.devops.agentapp.model.Comment;
 import com.vegari1.devops.agentapp.model.Company;
 import com.vegari1.devops.agentapp.model.CompanyRegistrationRequest;
 import com.vegari1.devops.agentapp.model.User;
+import com.vegari1.devops.agentapp.repository.ICommentRepository;
 import com.vegari1.devops.agentapp.repository.ICompanyRegistrationRepository;
 import com.vegari1.devops.agentapp.repository.ICompanyRepository;
 import com.vegari1.devops.agentapp.repository.IUserRepository;
@@ -14,12 +16,15 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @AllArgsConstructor
 @Service
 public class CompanyService implements ICompanyService {
 
     private final IUserRepository userRepository;
     private final ICompanyRepository companyRepository;
+    private final ICommentRepository commentRepository;
     private final ICompanyRegistrationRepository companyRegistrationRepository;
 
     @Override
@@ -82,5 +87,18 @@ public class CompanyService implements ICompanyService {
                 companyRegistrationRepository.findById(companyRequestId)
                     .orElseThrow(() -> new EntityNotFoundException("Company registration request", "id"));
         companyRegistrationRepository.delete(companyRegReq);
+    }
+
+    @Override
+    public Comment createCompanyComment(Comment comment, Long companyId) throws EntityNotFoundException, ForbiddenException {
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new EntityNotFoundException("Company", "id"));
+        User user = ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        if (company.getOwner().equals(user))
+            throw new ForbiddenException(company.getClass().getSimpleName());
+        comment.setCompany(company);
+        comment.setUser(user);
+        comment.setTimestamp(new Date());
+        return commentRepository.save(comment);
     }
 }
