@@ -2,7 +2,7 @@ package com.vegari1.devops.agentapp;
 
 import com.vegari1.devops.agentapp.dto.LoginRequest;
 import com.vegari1.devops.agentapp.dto.RegisterRequest;
-import com.vegari1.devops.agentapp.dto.RegisterResponse;
+import com.vegari1.devops.agentapp.dto.UserResponse;
 import com.vegari1.devops.agentapp.model.User;
 import com.vegari1.devops.agentapp.repository.IUserRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -71,12 +71,12 @@ public class AgentAppApplicationTests {
 
 	@Test
 	public void registerCorrectDataShouldReturnRegisterResponse() {
-		ResponseEntity<RegisterResponse> response = this.restTemplate.postForEntity(
+		ResponseEntity<UserResponse> response = this.restTemplate.postForEntity(
 				"http://localhost:" + port + "/auth/register",
 				registerRequest,
-				RegisterResponse.class);
+				UserResponse.class);
 		assertEquals(HttpStatus.CREATED.value(), response.getStatusCode().value());
-		RegisterResponse responseBody = response.getBody();
+		UserResponse responseBody = response.getBody();
 		assertNotNull(responseBody);
 		assertEquals(requestUsername, responseBody.getUsername());
 		assertEquals(requestName, responseBody.getName());

@@ -2,7 +2,7 @@ package com.vegari1.devops.agentapp.controller;
 
 import com.vegari1.devops.agentapp.dto.LoginRequest;
 import com.vegari1.devops.agentapp.dto.RegisterRequest;
-import com.vegari1.devops.agentapp.dto.RegisterResponse;
+import com.vegari1.devops.agentapp.dto.UserResponse;
 import com.vegari1.devops.agentapp.mapper.UserMapper;
 import com.vegari1.devops.agentapp.model.User;
 import com.vegari1.devops.agentapp.service.IUserService;
@@ -31,7 +31,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<RegisterResponse> register(@Valid @RequestBody RegisterRequest registerRequest) {
+    public ResponseEntity<UserResponse> register(@Valid @RequestBody RegisterRequest registerRequest) {
         User user = userService.register(userMapper.toEntity(registerRequest));
         return new ResponseEntity<>(userMapper.toResponse(user), HttpStatus.CREATED);
     }

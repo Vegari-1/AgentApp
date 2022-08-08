@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterResponse {
+public class UserResponse {
 
     private Long id;
     private String username;

@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @AllArgsConstructor
@@ -50,6 +51,7 @@ public class JobOfferService implements IJobOfferService {
         if (!owner.equals(company.getOwner()))
             throw new ForbiddenException(company.getClass().getSimpleName());
         jobOffer.setCompany(company);
+        jobOffer.setTimestamp(new Date());
         return jobOfferRepository.save(jobOffer);
     }
 }

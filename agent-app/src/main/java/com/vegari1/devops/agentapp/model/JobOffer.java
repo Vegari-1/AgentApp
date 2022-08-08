@@ -27,6 +27,8 @@ public class JobOffer {
     private Date startDate;
     private Date endDate;
 
+    private Date timestamp;
+
     @ManyToOne
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;

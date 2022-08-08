@@ -20,6 +20,7 @@ public class JobOfferResponse {
     private String qualifications;
     private Date startDate;
     private Date endDate;
+    private Date timestamp;
     private CompanyDto company;
 
 }
