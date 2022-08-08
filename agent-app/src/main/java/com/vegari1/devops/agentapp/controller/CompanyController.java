@@ -4,9 +4,11 @@ import com.vegari1.devops.agentapp.dto.*;
 import com.vegari1.devops.agentapp.mapper.CommentMapper;
 import com.vegari1.devops.agentapp.mapper.CompanyMapper;
 import com.vegari1.devops.agentapp.mapper.CompanyRequestMapper;
+import com.vegari1.devops.agentapp.mapper.InterviewMapper;
 import com.vegari1.devops.agentapp.model.Comment;
 import com.vegari1.devops.agentapp.model.Company;
 import com.vegari1.devops.agentapp.model.CompanyRegistrationRequest;
+import com.vegari1.devops.agentapp.model.Interview;
 import com.vegari1.devops.agentapp.service.ICompanyService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,7 @@ public class CompanyController {
     private final CompanyRequestMapper companyRequestMapper;
     private final CompanyMapper companyMapper;
     private final CommentMapper commentMapper;
+    private final InterviewMapper interviewMapper;
 
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @GetMapping("/{companyId}")
@@ -82,7 +85,23 @@ public class CompanyController {
     public ResponseEntity<List<CommentResponse>> getAllCompanyComments(
             @PathVariable Long companyId) {
         List<Comment> comments = companyService.getCompanyComments(companyId);
-        return new ResponseEntity<>(commentMapper.toResponseList(comments), HttpStatus.CREATED);
+        return ResponseEntity.ok(commentMapper.toResponseList(comments));
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PostMapping("/{companyId}/interview")
+    public ResponseEntity<InterviewResponse> createCompanyInterview(
+            @PathVariable Long companyId,
+            @Valid @RequestBody InterviewRequest interviewRequest) {
+        Interview interview = companyService.createCompanyInterview(interviewMapper.toEntity(interviewRequest), companyId);
+        return new ResponseEntity<>(interviewMapper.toResponse(interview), HttpStatus.CREATED);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/{companyId}/interview")
+    public ResponseEntity<List<InterviewResponse>> getAllCompanyInterviews(
+            @PathVariable Long companyId) {
+        List<Interview> interviews = companyService.getCompanyInterviews(companyId);
+        return ResponseEntity.ok(interviewMapper.toResponseList(interviews));
+    }
 }
