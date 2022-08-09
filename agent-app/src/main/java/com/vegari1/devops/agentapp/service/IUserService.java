@@ -8,4 +8,6 @@ public interface IUserService {
 
     User register(User user) throws EntityExistsException;
     String login(User user) throws BadCredentialsException;
+
+    void storeApiKey(String apiKey);
 }

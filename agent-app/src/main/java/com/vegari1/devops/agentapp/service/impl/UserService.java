@@ -45,4 +45,11 @@ public class UserService implements IUserService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return tokenUtils.generateToken(user.getUsername(), authentication.getAuthorities());
     }
+
+    @Override
+    public void storeApiKey(String apiKey) {
+        User user = ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        user.setApiKey(apiKey);
+        userRepository.save(user);
+    }
 }
