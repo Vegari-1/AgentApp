@@ -1,16 +1,9 @@
 package com.vegari1.devops.agentapp.dto;
 
-import com.vegari1.devops.agentapp.model.Comment;
-import com.vegari1.devops.agentapp.model.Interview;
-import com.vegari1.devops.agentapp.model.Rating;
-import com.vegari1.devops.agentapp.model.Salary;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import javax.persistence.OneToMany;
-import java.util.Set;
 
 @Getter
 @Setter

@@ -38,9 +38,6 @@ public class Company {
     private Set<Interview> interviews;
 
     @OneToMany(mappedBy = "company")
-    private Set<Rating> ratings;
-
-    @OneToMany(mappedBy = "company")
     private Set<Comment> comments;
 
     @OneToMany(mappedBy = "company")
