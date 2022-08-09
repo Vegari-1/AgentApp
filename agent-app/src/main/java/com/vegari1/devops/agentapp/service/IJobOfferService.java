@@ -15,4 +15,5 @@ public interface IJobOfferService {
     List<JobOffer> getJobOfferByCompanyId(Long companyId) throws EntityNotFoundException;
 
     JobOffer createJobOffer(JobOffer jobOffer, Long companyId) throws EntityNotFoundException, ForbiddenException;
+
 }
