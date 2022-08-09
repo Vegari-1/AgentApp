@@ -33,9 +33,8 @@ public class User implements UserDetails {
     private boolean enabled;
     private Timestamp lastPasswordResetDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "auth_token_id", referencedColumnName = "id")
-    private AuthToken authToken;
+    // Dislinkt API-key
+    private String apiKey;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_authority",
