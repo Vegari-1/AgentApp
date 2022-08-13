@@ -1,0 +1,37 @@
+@import "../../../styles.css";
+
+.primary-button {
+  display: block;
+  width: 100%;
+
+  border-radius: 40px;
+  border: 1px solid var(--PRIMARY-COLOR);
+  background-color: var(--PRIMARY-COLOR);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+  font-weight: 1000;
+
+  cursor: pointer;
+}
+
+.primary-button:hover {
+  border: 1px solid var(--PRIMARY-COLOR-DARKER);
+  background-color: var(--PRIMARY-COLOR-DARKER);
+}
+
+.primary-button:active {
+  border: 1px solid var(--PRIMARY-COLOR-DARKER);
+  background-color: var(--PRIMARY-COLOR-DARKER);
+}
+
+.primary-button:focus-visible {
+  outline: 1px solid var(--PRIMARY-COLOR-DARKER);
+}

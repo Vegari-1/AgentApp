@@ -1,0 +1,33 @@
+@import "../../../styles.css";
+
+.primary-input-field {
+  background-color: #f6f6f6;
+  padding: 12px 20px;
+  margin: 6px 0;
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 40px;
+  box-sizing: border-box;
+}
+
+.primary-input-field-error {
+  outline: 1px solid var(--DANGER) !important;
+}
+
+.primary-input-field:focus-visible {
+  outline: 1px solid var(--PRIMARY-COLOR);
+}
+
+.primary-input-error-label {
+  height: 16px;
+
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 16px;
+  display: block;
+  text-align: left;
+
+  color: var(--DANGER);
+}

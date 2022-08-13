@@ -18,7 +18,7 @@ import javax.validation.Valid;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping(value = "/auth")
+@RequestMapping(value = "/api/auth")
 public class AuthenticationController {
 
     private final IUserService userService;

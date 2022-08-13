@@ -1,0 +1,28 @@
+@import "../../../styles.css";
+
+.label {
+  font-weight: bold;
+  margin: 0;
+
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+}
+
+.sing-in-form {
+  margin-top: 15%;
+  text-align: center;
+}
+
+.fields {
+  margin: 10px 10%;
+}
+
+.button {
+  margin: 10px 25%;
+}
+
+.logo {
+  width: 15%;
+  height: 15%;
+  margin-top: 10px;
+}
