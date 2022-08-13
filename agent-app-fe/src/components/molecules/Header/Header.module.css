@@ -1,0 +1,35 @@
+@import "../../../styles.css";
+
+.header-wrapper {
+  padding: 15px 50px;
+  background-color: var(--PRIMARY-COLOR-LIGHTER);
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-title {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+  font-weight: 500;
+}
+
+.header-menu {
+  display: flex;
+  align-items: center;
+}
+
+.header-menu-item {
+  background-color: var(--PRIMARY-COLOR-LIGHTER);
+}
+
+.header-separator {
+  margin: 0;
+  width: 99%;
+  border: 2px solid var(--SECONDARY-COLOR-LIGHTER);
+}

@@ -1,0 +1,30 @@
+@import "../../../styles.css";
+
+.header-item {
+  height: 36px;
+  padding: 0 15px;
+  border-radius: 0 var(--BORDER-RADIUS);
+
+  background: var(--PRIMARY-COLOR-LIGHTER);
+
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 18px;
+
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+
+  cursor: pointer;
+}
+
+.header-item:hover {
+  background: var(--PRIMARY-COLOR-DARKER);
+}
+
+.header-link {
+  color: #fff;
+  text-decoration: none;
+}
