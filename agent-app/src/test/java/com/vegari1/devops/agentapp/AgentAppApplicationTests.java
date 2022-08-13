@@ -61,7 +61,7 @@ public class AgentAppApplicationTests {
 	@Test
 	public void loginCorrectDataShouldReturnToken() {
 		ResponseEntity<String> response = this.restTemplate.postForEntity(
-				"http://localhost:" + port + "/auth/login",
+				"http://localhost:" + port + "/api/auth/login",
 				new LoginRequest(username, password),
 				String.class);
 		assertEquals(HttpStatus.OK.value(), response.getStatusCode().value());
@@ -72,7 +72,7 @@ public class AgentAppApplicationTests {
 	@Test
 	public void registerCorrectDataShouldReturnRegisterResponse() {
 		ResponseEntity<UserResponse> response = this.restTemplate.postForEntity(
-				"http://localhost:" + port + "/auth/register",
+				"http://localhost:" + port + "/api/auth/register",
 				registerRequest,
 				UserResponse.class);
 		assertEquals(HttpStatus.CREATED.value(), response.getStatusCode().value());
@@ -86,7 +86,7 @@ public class AgentAppApplicationTests {
 	@Test
 	public void registerExistingUsernameShouldReturnConflict() throws Exception {
 		ResponseEntity<Object> response = this.restTemplate.postForEntity(
-				"http://localhost:" + port + "/auth/register",
+				"http://localhost:" + port + "/api/auth/register",
 				registerRequestExisting,
 				Object.class);
 		assertEquals(HttpStatus.CONFLICT.value(), response.getStatusCode().value());
