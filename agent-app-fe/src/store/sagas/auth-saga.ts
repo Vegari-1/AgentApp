@@ -23,7 +23,7 @@ export function* handleSignUp({
   payload,
 }: ReturnType<typeof signUp>): Generator<any, any, UserModel> {
   try {
-    const user: UserModel = yield call(authService.signUp, payload.formValues);
+    yield call(authService.signUp, payload.formValues);
 
     yield put(goToSignIn());
     yield toast.success("Successfully signed up");

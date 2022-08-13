@@ -33,7 +33,7 @@ const SignUpForm: React.FC = () => {
       {({ handleSubmit }) => (
         <div className={classes["sing-up-form"]}>
           <h1 className={classes.label}>Sign Up</h1>
-          <img className={classes.logo} src="./images/logo.png" />
+          <img className={classes.logo} src="./images/logo.png" alt="logo" />
           <div className={classes.fields}>
             <Field
               component={PrimaryInputField}
