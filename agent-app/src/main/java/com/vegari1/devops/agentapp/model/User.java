@@ -54,6 +54,10 @@ public class User implements UserDetails {
         this.authorities.add(authority);
     }
 
+    public String getFullName() {
+        return name + " " + surname;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;

@@ -11,3 +11,8 @@ export interface SignInPayload {
 export interface SignUpPayload {
   formValues: SignUpFormValues;
 }
+
+export interface UserDataPayload {
+  displayName: string;
+  role: string;
+}

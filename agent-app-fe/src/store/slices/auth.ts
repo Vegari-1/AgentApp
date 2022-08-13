@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { SignInPayload, SignUpPayload } from "../../models/slices/auth";
+import { SignInPayload, SignUpPayload, UserDataPayload } from "../../models/slices/auth";
 
 const initAuthSliceValues = {
   signInActive: false,
+  userData: {} as UserDataPayload
 };
 
 const authSlice = createSlice({
@@ -15,9 +16,12 @@ const authSlice = createSlice({
     goToSignIn(state) {
       state.signInActive = true;
     },
+    userData(state, action: PayloadAction<UserDataPayload>) {
+      state.userData = action.payload;
+    }
   },
 });
 
-export const { signIn, signUp, goToSignIn } = authSlice.actions;
+export const { signIn, signUp, goToSignIn, userData } = authSlice.actions;
 
 export default authSlice.reducer;
