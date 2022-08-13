@@ -1,0 +1,34 @@
+@import "../../../styles.css";
+
+.side-bar-header-wrapper {
+  height: 15%;
+  margin-top: 30px;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-bottom: 15%;
+
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+
+  background-image: url("../../../../public/images/logo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.logo-title {
+  margin-top: 15%;
+  font-size: 24px;
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+  font-weight: 700;
+}
