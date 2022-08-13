@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito");
+
+:root {
+  /*COLORS*/
+
+  --PRIMARY-COLOR: #704765;
+  --PRIMARY-COLOR-LIGHTER: #86607c;
+  --PRIMARY-COLOR-DARKER: #5e3b54;
+
+  --SECONDARY-COLOR: #dce0e7;
+  --SECONDARY-COLOR-LIGHTER: rgb(183, 201, 226, 0.2);
+
+  --DARK-GREY: #b8b8b8;
+
+  --DANGER: #ff7e92;
+  --SUCCESS: rgba(72, 202, 70, 0.6);
+  --ERROR: rgba(255, 126, 146, 0.6);
+
+  /*FONTS*/
+
+  --PRIMARY-FONT-FAMILY: "Nunito", sans-serif;
+  --PRIMARY-FONT-STYLE: "normal";
+
+  /*STYLES*/
+
+  --BORDER-RADIUS: 10px;
+  --SIDE-BAR-BOX-SHADOW: 5px 0px 10px rgba(0, 0, 0, 0.15);
+}
