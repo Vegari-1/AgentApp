@@ -7,7 +7,7 @@ import AuthPage from "./pages/AuthPage/AuthPage";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
-// import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 function App() {
   return (
@@ -26,7 +26,7 @@ function App() {
           <Route path="/" element={<Navigate to="/auth" />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          {/* <Route path="*" element={<NotFoundPage />} /> */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
     </Fragment>

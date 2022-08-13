@@ -1,0 +1,38 @@
+@import "../../../styles.css";
+
+.page-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: var(--SECONDARY-COLOR);
+}
+
+.center-div {
+  width: 40%;
+  height: 60%;
+
+  background: #ffff;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  border-radius: 10px;
+
+  text-align: center;
+
+  padding-bottom: 1%;
+}
+
+.picture-holder {
+  height: 70%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+
+  background-image: url("../../../../public/images/not-found.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.button-holder {
+  margin-left: 15%;
+  margin-right: 15%;
+}
