@@ -43,7 +43,8 @@ public class UserService implements IUserService {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return tokenUtils.generateToken(user.getUsername(), authentication.getAuthorities());
+        user = (User) authentication.getPrincipal();
+        return tokenUtils.generateToken(user.getId(), user.getUsername(), user.getFullName(), user.getAuthorities());
     }
 
     @Override

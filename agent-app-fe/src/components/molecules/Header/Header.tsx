@@ -4,10 +4,11 @@ import HeaderItem from "../../atoms/HeaderItem/HeaderItem";
 import HeaderItemModel from "../../../models/HeaderItemModel";
 
 interface HeaderProps {
+  fullName: string;
   menuItems?: HeaderItemModel[];
 }
 
-const Header: React.FC<HeaderProps> = ({ menuItems }) => {
+const Header: React.FC<HeaderProps> = ({ fullName, menuItems }) => {
   return (
     <Fragment>
       <div className={classes["header-wrapper"]}>
@@ -18,7 +19,7 @@ const Header: React.FC<HeaderProps> = ({ menuItems }) => {
             ))
           }
         </div>
-        <div className={classes["header-title"]}>Name Surname</div>
+        <div className={classes["header-title"]}>{fullName}</div>
       </div>
       <hr className={classes["header-separator"]} />
     </Fragment>

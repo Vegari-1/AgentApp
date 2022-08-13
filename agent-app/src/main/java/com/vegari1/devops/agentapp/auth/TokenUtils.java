@@ -1,7 +1,10 @@
 package com.vegari1.devops.agentapp.auth;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,14 +37,18 @@ public class TokenUtils {
 
     private SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
 
-    public String generateToken(String username, Collection<? extends GrantedAuthority> authorities) {
+    public String generateToken(Long id, String username, String fullName, Collection<? extends GrantedAuthority> authorities) {
+        Map<String, Object> user = new LinkedHashMap<>();
+        user.put("id", id);
+        user.put("displayName", fullName);
+        user.put("authorities", authorities);
         return Jwts.builder()
                 .setIssuer(APP_NAME)
                 .setSubject(username)
                 .setAudience(generateAudience())
                 .setIssuedAt(new Date())
                 .setExpiration(generateExpirationDate())
-                .claim("authorities", authorities)
+                .claim("user", user)
                 .signWith(SIGNATURE_ALGORITHM, SECRET).compact();
     }
 

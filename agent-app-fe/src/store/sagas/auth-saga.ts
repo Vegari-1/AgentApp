@@ -1,9 +1,10 @@
 import { toast } from "react-toastify";
 import { call, put } from "redux-saga/effects";
-
+import { UserDataPayload } from "../../models/slices/auth";
+import { goToSignIn, signIn, signUp, userData } from "../slices/auth";
 import UserModel from "../../models/UserModel";
 import authService from "../../services/AuthService";
-import { goToSignIn, signIn, signUp } from "../slices/auth";
+import jwt from "jwt-decode";
 
 export function* handleSignIn({
   payload,
@@ -12,7 +13,13 @@ export function* handleSignIn({
     const token: string = yield call(authService.signIn, payload.formValues);
 
     sessionStorage.setItem("token", token);
-    yield payload.navigate("/home");
+    const tokenUserPayload: any = jwt(token);
+    const userDataPayload: UserDataPayload = { 
+      displayName: tokenUserPayload.user.displayName, 
+      role: tokenUserPayload.user.authorities[0] 
+    }
+    yield put(userData(userDataPayload));
+    yield payload.navigate("/profile");
     yield toast.success("Successfully signed in");
   } catch (error: any) {
     yield toast.error(error.response.data.message);
