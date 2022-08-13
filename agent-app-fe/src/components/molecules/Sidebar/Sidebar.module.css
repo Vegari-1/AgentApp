@@ -1,0 +1,7 @@
+@import "../../../styles.css";
+
+.side-bar {
+  background: var(--SECONDARY-COLOR-LIGHTER);
+  z-index: 10;
+  box-shadow: var(--SIDE-BAR-BOX-SHADOW);
+}
