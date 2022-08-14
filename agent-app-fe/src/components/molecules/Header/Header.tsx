@@ -13,11 +13,13 @@ const Header: React.FC<HeaderProps> = ({ fullName, menuItems }) => {
     <Fragment>
       <div className={classes["header-wrapper"]}>
         <div className={classes["header-menu"]}>
-          {
-            menuItems?.map((menuItem) => (
-              <HeaderItem text={menuItem.text} link={menuItem.link} />
-            ))
-          }
+          {menuItems?.map((menuItem) => (
+            <HeaderItem
+              key={menuItem.text}
+              text={menuItem.text}
+              link={menuItem.link}
+            />
+          ))}
         </div>
         <div className={classes["header-title"]}>{fullName}</div>
       </div>
