@@ -1,9 +1,8 @@
 import { Field, Formik } from "formik";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import ApiKeyFormValues from "../../../models/forms/ApiKeyFormValues";
 
-import { signIn } from "../../../store/slices/auth";
+import { addApiKey } from "../../../store/slices/dislinkt";
 import apiKeyValidationSchema from "../../../validations/apiKeyValidationSchema";
 import PrimaryButton from "../../atoms/PrimaryButton/PrimaryButton";
 import PrimaryInputField from "../../atoms/PrimaryInputField/PrimaryInputField";
@@ -15,12 +14,10 @@ const apiKeyFormInitialValues: ApiKeyFormValues = {
 };
 
 const ApiKeyForm: React.FC = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const submitHandler = (formValues: ApiKeyFormValues) => {
-    console.log(formValues);
-    // dispatch(signIn({ formValues, navigate }));
+    dispatch(addApiKey({ formValues }));
   };
 
   return (
