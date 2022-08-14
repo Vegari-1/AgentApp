@@ -1,0 +1,35 @@
+@import "../../../styles.css";
+
+.card-wrapper {
+  width: 35%;
+  border-radius: var(--BORDER-RADIUS);
+
+  margin: 30px; /* mozda u vraperu iznad */
+  padding: 30px 40px 30px 40px;
+
+  background: var(--SECONDARY-COLOR);
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
+
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.card-title {
+  margin-top: 0;
+  border-bottom: 2px solid black;
+}
+
+.content-wrapper {
+  margin-top: 35px;
+  display: grid;
+  row-gap: 15px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.content-row-value {
+  font-weight: 600;
+  text-align: center;
+}
