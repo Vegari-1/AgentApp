@@ -1,9 +1,11 @@
 @import "../../../styles.css";
 
 .wrapper {
-  margin: 2% 15%;
+  padding: 2% 15%;
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: stretch;
   gap: 5%;
+  overflow: auto;
 }

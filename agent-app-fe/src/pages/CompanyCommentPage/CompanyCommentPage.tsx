@@ -30,7 +30,7 @@ const CompanyCommentPage: React.FC = () => {
   return (
     <CompanyPane>
       {comments.map((comment) => (
-        <TextCard review={comment}></TextCard>
+        <TextCard key={comment.id} review={comment}></TextCard>
       ))}
     </CompanyPane>
   );
