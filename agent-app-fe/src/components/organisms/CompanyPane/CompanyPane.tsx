@@ -34,7 +34,7 @@ const CompanyPane: React.FC<CompanyPaneProps> = ({ children }) => {
         menuItems={headerItems}
         fullName={userData.name + " " + userData.surname}
       />
-      <div className={classes["profile-wrapper"]}>{children}</div>
+      <div className={classes["wrapper"]}>{children}</div>
     </Layout>
   );
 };

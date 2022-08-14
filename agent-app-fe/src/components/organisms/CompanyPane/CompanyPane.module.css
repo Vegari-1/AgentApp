@@ -1,8 +1,9 @@
 @import "../../../styles.css";
 
-.profile-wrapper {
+.wrapper {
   margin: 2% 3%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
   gap: 5%;
 }
