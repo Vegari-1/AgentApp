@@ -4,6 +4,7 @@ import { UserDataPayload } from "../../../models/slices/auth";
 import { RootState } from "../../../store/store";
 import GridCard from "../../atoms/GridCard/GridCard";
 import ApiKeyForm from "../../molecules/ApiKeyForm/ApiKeyForm";
+import CompanyRegisterForm from "../../molecules/CompanyRegisterForm/CompanyRegisterForm";
 import Header from "../../molecules/Header/Header";
 import Layout from "../Layout/Layout";
 
@@ -23,8 +24,11 @@ const ProfilePane: React.FC = () => {
     <Layout>
       <Header fullName={userData.name + " " + userData.surname} />
       <div className={classes["profile-wrapper"]}>
-        <GridCard title={"Profile information"} content={userInfoData} />
-        <ApiKeyForm />
+        <div className={classes["left-wrapper"]}>
+          <GridCard title={"Profile information"} content={userInfoData} />
+          <ApiKeyForm />
+        </div>
+        <CompanyRegisterForm />
       </div>
       {/* kartice? jea*/}
       {/* da li ima kompaniju ili ne, ako ima, link do nje, ako nema, dugme kreiraj kompaniju */}

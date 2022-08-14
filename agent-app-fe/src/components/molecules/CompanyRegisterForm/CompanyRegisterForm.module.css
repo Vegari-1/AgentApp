@@ -8,10 +8,12 @@
   font-style: var(--PRIMARY-FONT-STYLE);
 }
 
-.api-key-form {
+.form {
+  width: 30%;
+  height: 80%;
   border-radius: var(--BORDER-RADIUS);
 
-  margin: 40px;
+  margin: 30px;
   padding: 30px 40px 30px 40px;
 
   background: var(--SECONDARY-COLOR);
@@ -31,7 +33,7 @@
 }
 
 .fields {
-  margin: 30px 10px 0 10px;
+  margin: 50px 10px 0 10px;
 }
 
 .button {
@@ -39,5 +41,5 @@
 }
 
 .logo {
-  width: 35%;
+  width: 15%;
 }

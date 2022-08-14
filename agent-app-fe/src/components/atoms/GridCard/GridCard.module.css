@@ -1,10 +1,9 @@
 @import "../../../styles.css";
 
 .card-wrapper {
-  width: 35%;
   border-radius: var(--BORDER-RADIUS);
 
-  margin: 30px; /* mozda u vraperu iznad */
+  margin: 40px;
   padding: 30px 40px 30px 40px;
 
   background: var(--SECONDARY-COLOR);
