@@ -11,7 +11,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -70,7 +69,7 @@ public class CompanyController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/{companyId}/comment")
-    public ResponseEntity<CommentResponse> createCompanyComment(
+    public ResponseEntity<ReviewResponse> createCompanyComment(
             @PathVariable Long companyId,
             @Valid @RequestBody CommentRequest commentRequest) {
         Comment comment = companyService.createCompanyComment(commentMapper.toEntity(commentRequest), companyId);
@@ -79,7 +78,7 @@ public class CompanyController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/{companyId}/comment")
-    public ResponseEntity<List<CommentResponse>> getAllCompanyComments(
+    public ResponseEntity<List<ReviewResponse>> getAllCompanyComments(
             @PathVariable Long companyId) {
         List<Comment> comments = companyService.getCompanyComments(companyId);
         return ResponseEntity.ok(commentMapper.toResponseList(comments));
@@ -87,7 +86,7 @@ public class CompanyController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/{companyId}/interview")
-    public ResponseEntity<InterviewResponse> createCompanyInterview(
+    public ResponseEntity<ReviewResponse> createCompanyInterview(
             @PathVariable Long companyId,
             @Valid @RequestBody InterviewRequest interviewRequest) {
         Interview interview = companyService.createCompanyInterview(interviewMapper.toEntity(interviewRequest), companyId);
@@ -96,7 +95,7 @@ public class CompanyController {
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/{companyId}/interview")
-    public ResponseEntity<List<InterviewResponse>> getAllCompanyInterviews(
+    public ResponseEntity<List<ReviewResponse>> getAllCompanyInterviews(
             @PathVariable Long companyId) {
         List<Interview> interviews = companyService.getCompanyInterviews(companyId);
         return ResponseEntity.ok(interviewMapper.toResponseList(interviews));

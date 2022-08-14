@@ -11,10 +11,10 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommentResponse {
+public class ReviewResponse {
 
-    private Long commentId;
-    private String commentText;
+    private Long id;
+    private String text;
     private Date timestamp;
     private UserResponse author;
 
