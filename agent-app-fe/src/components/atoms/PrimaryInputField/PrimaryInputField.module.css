@@ -6,7 +6,7 @@
   margin: 6px 0;
   width: 100%;
   border: 1px solid transparent;
-  border-radius: 40px;
+  border-radius: var(--BORDER-RADIUS);
   box-sizing: border-box;
 }
 

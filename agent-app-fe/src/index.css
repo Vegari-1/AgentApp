@@ -9,7 +9,7 @@ html, body {
   background: var(--SUCCESS);
   backdrop-filter: blur(4px);
 
-  border-radius: var(--BORDER-RADIUS);
+  border-radius: 0 var(--BORDER-RADIUS);
 
   font-family: var(--PRIMARY-FONT-FAMILY);
   font-style: var(--PRIMARY-FONT-STYLE);
@@ -24,7 +24,7 @@ html, body {
   background: var(--ERROR);
   backdrop-filter: blur(4px);
 
-  border-radius: var(--BORDER-RADIUS);
+  border-radius: 0 var(--BORDER-RADIUS);
 
   font-family: var(--PRIMARY-FONT-FAMILY);
   font-style: var(--PRIMARY-FONT-STYLE);
