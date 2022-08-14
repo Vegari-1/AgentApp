@@ -14,10 +14,12 @@ export function* handleSignIn({
 
     sessionStorage.setItem("token", token);
     const tokenUserPayload: any = jwt(token);
-    const userDataPayload: UserDataPayload = { 
-      displayName: tokenUserPayload.user.displayName, 
-      role: tokenUserPayload.user.authorities[0] 
-    }
+    const userDataPayload: UserDataPayload = {
+      username: tokenUserPayload.sub,
+      name: tokenUserPayload.user.name,
+      surname: tokenUserPayload.user.surname,
+      role: tokenUserPayload.user.authorities[0],
+    };
     yield put(userData(userDataPayload));
     yield payload.navigate("/profile");
     yield toast.success("Successfully signed in");

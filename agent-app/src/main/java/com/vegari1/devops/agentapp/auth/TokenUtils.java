@@ -1,7 +1,5 @@
 package com.vegari1.devops.agentapp.auth;
 
-import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -14,7 +12,6 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -37,18 +34,19 @@ public class TokenUtils {
 
     private SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS512;
 
-    public String generateToken(Long id, String username, String fullName, Collection<? extends GrantedAuthority> authorities) {
-        Map<String, Object> user = new LinkedHashMap<>();
-        user.put("id", id);
-        user.put("displayName", fullName);
-        user.put("authorities", authorities);
+    public String generateToken(User user) {
+        Map<String, Object> userMap = new LinkedHashMap<>();
+        userMap.put("id", user.getId());
+        userMap.put("name", user.getName());
+        userMap.put("surname", user.getSurname());
+        userMap.put("authorities", user.getAuthorities());
         return Jwts.builder()
                 .setIssuer(APP_NAME)
-                .setSubject(username)
+                .setSubject(user.getUsername())
                 .setAudience(generateAudience())
                 .setIssuedAt(new Date())
                 .setExpiration(generateExpirationDate())
-                .claim("user", user)
+                .claim("user", userMap)
                 .signWith(SIGNATURE_ALGORITHM, SECRET).compact();
     }
 
