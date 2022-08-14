@@ -1,0 +1,33 @@
+@import "../../../styles.css";
+
+.card-wrapper {
+  border-radius: 0 var(--BORDER-RADIUS);
+
+  margin-top: 40px;
+  padding: 30px 40px 30px 40px;
+
+  background: var(--SECONDARY-COLOR);
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
+
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+.card-footer {
+  padding-top: 20px;
+  font-weight: 600;
+}
+
+.left {
+  display: inline-block;
+  width: 50%;
+}
+
+.right {
+  display: inline-block;
+  width: 50%;
+  text-align: right;
+}
