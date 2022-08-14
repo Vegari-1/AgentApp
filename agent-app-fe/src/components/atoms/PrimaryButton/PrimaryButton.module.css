@@ -9,7 +9,6 @@
   background-color: var(--PRIMARY-COLOR);
   color: #ffffff;
   font-size: 18px;
-  font-weight: bold;
   padding: 12px 45px;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -33,5 +32,40 @@
 }
 
 .primary-button:focus-visible {
+  outline: 1px solid var(--PRIMARY-COLOR-DARKER);
+}
+
+.primary-button-small {
+  display: block;
+  width: 100%;
+
+  border-radius: 0 var(--BORDER-RADIUS);
+  border: 1px solid var(--PRIMARY-COLOR);
+  background-color: var(--PRIMARY-COLOR);
+  color: #ffffff;
+  font-size: 14px;
+  padding: 8px 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.primary-button-small:hover {
+  border: 1px solid var(--PRIMARY-COLOR-DARKER);
+  background-color: var(--PRIMARY-COLOR-DARKER);
+}
+
+.primary-button-small:active {
+  border: 1px solid var(--PRIMARY-COLOR-DARKER);
+  background-color: var(--PRIMARY-COLOR-DARKER);
+}
+
+.primary-button-small:focus-visible {
   outline: 1px solid var(--PRIMARY-COLOR-DARKER);
 }
