@@ -1,6 +1,7 @@
 import { Field, Formik } from "formik";
 import { useDispatch } from "react-redux";
 import CompanyRegisterFormValues from "../../../models/forms/CompanyRegisterFormValues";
+import { companyRegisterRequest } from "../../../store/slices/company";
 
 import companyRegisterValidationSchema from "../../../validations/companyRegisterValidationSchema";
 import PrimaryButton from "../../atoms/PrimaryButton/PrimaryButton";
@@ -20,16 +21,24 @@ const CompanyRegisterForm: React.FC = () => {
   const dispatch = useDispatch();
 
   const submitHandler = (formValues: CompanyRegisterFormValues) => {
-    console.log(formValues);
-    // dispatch(signIn({ formValues }));
+    dispatch(companyRegisterRequest({ formValues }));
   };
 
   return (
     <Formik
       initialValues={companyRegisterFormInitialValues}
       validationSchema={companyRegisterValidationSchema}
-      onSubmit={(formValues) => {
+      onSubmit={(formValues, { resetForm }) => {
         submitHandler(formValues);
+        resetForm({
+          values: {
+            industrySector: "",
+            companyName: "",
+            companyEmail: "",
+            companyWebsite: "",
+            companyInfo: "",
+          },
+        });
       }}
     >
       {({ handleSubmit }) => (
