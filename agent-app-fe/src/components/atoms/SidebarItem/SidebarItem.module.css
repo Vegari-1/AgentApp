@@ -5,7 +5,7 @@
   margin-left: 5%;
   margin-right: 5%;
   margin-bottom: 5%;
-  border-radius: var(--BORDER-RADIUS);
+  border-radius: 0 var(--BORDER-RADIUS);
 
   background: var(--PRIMARY-COLOR);
 
