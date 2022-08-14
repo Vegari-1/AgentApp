@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,7 +23,7 @@ public class JobOfferRequest {
     @NotEmpty(message = "Job description must not be empty")
     private String jobDescription;
     @NotEmpty(message = "Qualifications must not be empty")
-    private String qualifications;
+    private List<String> qualifications;
     @NotNull(message = "Start date must not be empty")
     private Date startDate;
     @NotNull(message = "End date must not be empty")

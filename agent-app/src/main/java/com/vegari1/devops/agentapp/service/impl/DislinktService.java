@@ -36,7 +36,7 @@ public class DislinktService implements IDislinktService {
         DislinktJobOfferRequest jobOfferRequest = new DislinktJobOfferRequest(
                         jobOffer.getPosition(),
                         jobOffer.getJobDescription(),
-                        new String[] {jobOffer.getQualifications()},
+                        jobOffer.getQualifications().toArray(new String[0]),
                         frontendUrl + companyUrl + "/" + jobOffer.getId());
         try {
             restTemplate.postForEntity(

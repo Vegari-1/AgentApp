@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,7 +18,7 @@ public class JobOfferResponse {
     private String title;
     private String position;
     private String jobDescription;
-    private String qualifications;
+    private List<String> qualifications;
     private Date startDate;
     private Date endDate;
     private Date timestamp;
