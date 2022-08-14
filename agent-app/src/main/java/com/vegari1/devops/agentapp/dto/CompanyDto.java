@@ -17,10 +17,5 @@ public class CompanyDto {
     private String companyEmail;
     private String companyWebsite;
     private String companyInfo;
-//    private Set<JobOffer> jobOffers;
-//    private Set<Interview> interviews;
-//    private Set<Rating> ratings;
-//    private Set<Comment> comments;
-//    private Set<Salary> salaries;
 
 }

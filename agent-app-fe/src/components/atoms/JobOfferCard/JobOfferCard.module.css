@@ -3,7 +3,7 @@
 .card-wrapper {
   border-radius: 0 var(--BORDER-RADIUS);
 
-  margin: 40px 15% 0 15%;
+  margin-top: 40px;
   padding: 30px 40px 30px 40px;
 
   background: var(--SECONDARY-COLOR);
@@ -35,6 +35,7 @@
   font-weight: 700;
   font-size: 20px;
   line-height: 26px;
+  text-decoration: underline;
 }
 
 .position {
