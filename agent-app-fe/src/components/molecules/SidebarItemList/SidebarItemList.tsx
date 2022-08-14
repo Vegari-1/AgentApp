@@ -7,6 +7,14 @@ import { useNavigate } from "react-router-dom";
 const SidebarItemList: React.FC = () => {
   const navigate = useNavigate();
 
+  const profileHandler = () => {
+    navigate("/profile");
+  };
+
+  const companiesHandler = () => {
+    navigate("/companies");
+  };
+
   const logoutHandler = () => {
     sessionStorage.removeItem("token");
     navigate("/auth");
@@ -17,14 +25,16 @@ const SidebarItemList: React.FC = () => {
       <SidebarItem
         text="Profile"
         icon={<ProfileIcon height={25} width={25} />}
+        onClickHandler={profileHandler}
       />
       <SidebarItem
         text="Companies"
         icon={<JobOfferIcon height={25} width={25} />}
+        onClickHandler={companiesHandler}
       />
-      <SidebarItem 
-        text="Logout" 
-        icon={<LogoutIcon height={25} width={25} />} 
+      <SidebarItem
+        text="Logout"
+        icon={<LogoutIcon height={25} width={25} />}
         onClickHandler={logoutHandler}
       />
     </div>
