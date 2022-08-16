@@ -51,6 +51,13 @@ public class CompanyController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/request")
+    public ResponseEntity<List<CompanyRequestDto>> getCompanyRegistrationRequest() {
+        List<CompanyRegistrationRequest> companyRequests = companyService.getCompanyRegReqs();
+        return ResponseEntity.ok(companyRequestMapper.toResponseList(companyRequests));
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/request/{companyRequestId}")
     public ResponseEntity<CompanyDto> acceptCompanyRegistrationRequest(
             @PathVariable Long companyRequestId) {

@@ -18,6 +18,8 @@ public interface ICompanyService {
     CompanyRegistrationRequest createCompanyRegReq(CompanyRegistrationRequest companyRegReq)
             throws EntityExistsException;
 
+    List<CompanyRegistrationRequest> getCompanyRegReqs();
+
     Company acceptCompanyRequest(Long companyRequestId);
 
     void declineCompanyRequest(Long companyRequestId);
