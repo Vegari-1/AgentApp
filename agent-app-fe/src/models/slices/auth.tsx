@@ -13,8 +13,10 @@ export interface SignUpPayload {
 }
 
 export interface UserDataPayload {
+  id: number;
   username: string;
   name: string;
   surname: string;
   role: string;
+  companyId: number;
 }

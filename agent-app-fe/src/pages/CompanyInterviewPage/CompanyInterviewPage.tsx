@@ -1,6 +1,10 @@
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import TextCard from "../../components/atoms/TextCard/TextCard";
 import CompanyPane from "../../components/organisms/CompanyPane/CompanyPane";
 import ReviewModel from "../../models/ReviewModel";
+import { UserDataPayload } from "../../models/slices/auth";
+import { RootState } from "../../store/store";
 
 const CompanyInterviewPage: React.FC = () => {
   const interviews: ReviewModel[] = [
@@ -45,8 +49,22 @@ const CompanyInterviewPage: React.FC = () => {
       },
     },
   ];
+
+  const { id } = useParams();
+  const userData: UserDataPayload = useSelector(
+    (state: RootState) => state.auth.userData
+  );
+
+  const addInterviewHandler = () => {
+    console.log("hello add interview");
+  };
+
   return (
-    <CompanyPane>
+    <CompanyPane
+      companyId={id!}
+      showAddButton={userData.companyId !== +id!}
+      onAddButtonClick={addInterviewHandler}
+    >
       {interviews.map((interview) => (
         <TextCard key={interview.id} review={interview}></TextCard>
       ))}

@@ -1,6 +1,10 @@
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import JobOfferCard from "../../components/atoms/JobOfferCard/JobOfferCard";
 import CompanyPane from "../../components/organisms/CompanyPane/CompanyPane";
 import JobOfferModel from "../../models/JobOfferModel";
+import { UserDataPayload } from "../../models/slices/auth";
+import { RootState } from "../../store/store";
 
 const CompanyJobOfferPage: React.FC = () => {
   const offers: JobOfferModel[] = [
@@ -40,8 +44,21 @@ const CompanyJobOfferPage: React.FC = () => {
     },
   ];
 
+  const { id } = useParams();
+  const userData: UserDataPayload = useSelector(
+    (state: RootState) => state.auth.userData
+  );
+
+  const addJobOfferHandler = () => {
+    console.log("hello add job offer");
+  };
+
   return (
-    <CompanyPane>
+    <CompanyPane
+      companyId={id!}
+      showAddButton={userData.companyId === +id!}
+      onAddButtonClick={addJobOfferHandler}
+    >
       {offers.map((offer) => (
         <JobOfferCard key={offer.id} jobOffer={offer} />
       ))}

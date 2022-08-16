@@ -11,3 +11,13 @@
   align-items: stretch;
   gap: 5%;
 }
+
+.add-button {
+  width: 65px;
+  height: 53px;
+  position: fixed;
+  right: 3%;
+  bottom: 60px;
+
+  z-index: 10;
+}
