@@ -73,6 +73,11 @@ public class CompanyService implements ICompanyService {
     }
 
     @Override
+    public List<CompanyRegistrationRequest> getCompanyRegReqs() {
+        return companyRegistrationRepository.findAll();
+    }
+
+    @Override
     public Company acceptCompanyRequest(Long companyRequestId) {
         CompanyRegistrationRequest companyRegReq =
                 companyRegistrationRepository.findById(companyRequestId)
