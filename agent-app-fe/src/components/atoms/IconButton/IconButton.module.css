@@ -1,0 +1,12 @@
+@import "../../../styles.css";
+
+.icon-button {
+  height: 100%;
+  width: 100%;
+  border: none;
+
+  background: var(--SECONDARY-COLOR-LIGHTER);
+  border-radius: 0 var(--BORDER-RADIUS);
+
+  cursor: pointer;
+}
