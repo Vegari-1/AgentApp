@@ -1,0 +1,11 @@
+.manage-requests {
+  width: 95%;
+  margin: 2% 0% 2% 5%;
+  flex: 1;
+  overflow: auto;
+}
+
+.no-requests {
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+}
