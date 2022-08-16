@@ -1,0 +1,53 @@
+@import "../../../styles.css";
+
+.card-wrapper {
+  border-radius: 0 var(--BORDER-RADIUS);
+
+  margin-top: 40px;
+  padding: 30px 40px 30px 40px;
+
+  background: var(--SECONDARY-COLOR);
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
+
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 18px;
+
+  display: flex;
+}
+
+.card-title {
+  width: 25%;
+}
+
+.card-info {
+  width: 75%;
+}
+
+.title {
+  height: 91%;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 26px;
+  text-decoration: underline;
+}
+
+.info {
+  height: 90%;
+}
+
+.contact {
+  display: inline-block;
+  font-size: 18px;
+  line-height: 22px;
+  padding-bottom: 20px;
+}
+
+.contact-right {
+  font-size: 18px;
+  line-height: 22px;
+  padding-bottom: 20px;
+  float: right;
+}
