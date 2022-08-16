@@ -6,26 +6,19 @@ import { useNavigate } from "react-router-dom";
 import { UserDataPayload } from "../../../models/slices/auth";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
+import classes from "./SidebarItemList.module.css";
 
 const SidebarItemList: React.FC = () => {
-  // da li je validno da ovde bude if sta ce biti prikazano kao lista u sidebaru u zavisnosti od role?
   const navigate = useNavigate();
   const userData: UserDataPayload = useSelector(
     (state: RootState) => state.auth.userData
   );
 
-  const [selected, setSelected] = useState(
-    window.location.href.split("/").at(-1)!
-  );
-
+  const selected = window.location.href.split("/").at(-1)!;
   const clickHandler = (value: string) => {
-    setSelected(value);
+    navigate("/" + value);
   };
-
-  useEffect(() => {
-    navigate("/" + selected);
-  }, [selected]);
 
   const logoutHandler = () => {
     sessionStorage.removeItem("token");
@@ -33,7 +26,7 @@ const SidebarItemList: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className={classes["wrapper"]}>
       {userData.role === "ROLE_USER" && (
         <Fragment>
           <SidebarItem
@@ -61,13 +54,15 @@ const SidebarItemList: React.FC = () => {
           onClick={clickHandler}
         />
       )}
-      <SidebarItem
-        text="Logout"
-        value="logout"
-        selected={selected}
-        icon={<LogoutIcon height={25} width={25} />}
-        onClick={logoutHandler}
-      />
+      <div className={classes["bottom"]}>
+        <SidebarItem
+          text="Logout"
+          value="logout"
+          selected={selected}
+          icon={<LogoutIcon height={25} width={25} />}
+          onClick={logoutHandler}
+        />
+      </div>
     </div>
   );
 };

@@ -33,7 +33,7 @@ function App() {
           <Route path="/" element={<Navigate to="/auth" />} />
           <Route path="/auth" element={<AuthPage />} />
 
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/requests" element={<AdminPage />} />
 
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/companies" element={<CompaniesPage />} />
