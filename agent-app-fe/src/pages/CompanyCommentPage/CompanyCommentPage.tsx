@@ -1,6 +1,10 @@
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import TextCard from "../../components/atoms/TextCard/TextCard";
 import CompanyPane from "../../components/organisms/CompanyPane/CompanyPane";
 import ReviewModel from "../../models/ReviewModel";
+import { UserDataPayload } from "../../models/slices/auth";
+import { RootState } from "../../store/store";
 
 const CompanyCommentPage: React.FC = () => {
   const comments: ReviewModel[] = [
@@ -25,8 +29,22 @@ const CompanyCommentPage: React.FC = () => {
       },
     },
   ];
+
+  const { id } = useParams();
+  const userData: UserDataPayload = useSelector(
+    (state: RootState) => state.auth.userData
+  );
+
+  const addCommentHandler = () => {
+    console.log("hello add comment");
+  };
+
   return (
-    <CompanyPane>
+    <CompanyPane
+      companyId={id!}
+      showAddButton={userData.companyId !== +id!}
+      onAddButtonClick={addCommentHandler}
+    >
       {comments.map((comment) => (
         <TextCard key={comment.id} review={comment}></TextCard>
       ))}

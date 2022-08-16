@@ -3,11 +3,16 @@ import classes from "./CompanyCard.module.css";
 
 interface CompanyCardProps {
   company: CompanyModel;
+  onClick: (id: string) => void;
 }
 
-const CompanyCard: React.FC<CompanyCardProps> = ({ company }) => {
+const CompanyCard: React.FC<CompanyCardProps> = ({ company, onClick }) => {
+  const onClickHandler = () => {
+    onClick(company.id);
+  };
+
   return (
-    <div className={classes["card-wrapper"]}>
+    <div className={classes["card-wrapper"]} onClick={onClickHandler}>
       <div className={classes["card-title"]}>
         <div className={classes["title"]}>{company.companyName}</div>
         <div className={classes["company"]}>

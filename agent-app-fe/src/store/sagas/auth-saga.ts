@@ -15,14 +15,20 @@ export function* handleSignIn({
     sessionStorage.setItem("token", token);
     const tokenUserPayload: any = jwt(token);
     const userDataPayload: UserDataPayload = {
+      id: tokenUserPayload.user.id,
       username: tokenUserPayload.sub,
       name: tokenUserPayload.user.name,
       surname: tokenUserPayload.user.surname,
-      role: tokenUserPayload.user.authorities[0],
+      role: tokenUserPayload.user.authorities[0].name,
+      companyId: tokenUserPayload.user.companyId,
     };
     yield put(userData(userDataPayload));
 
-    yield payload.navigate("/profile");
+    if (userDataPayload.role === "ROLE_ADMIN") {
+      yield payload.navigate("/admin");
+    } else {
+      yield payload.navigate("/profile");
+    }
     yield toast.success("Successfully signed in");
   } catch (error: any) {
     yield toast.error(error.response.data.message);
