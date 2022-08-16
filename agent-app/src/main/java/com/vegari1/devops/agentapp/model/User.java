@@ -42,6 +42,9 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "authority_id", referencedColumnName = "id"))
     private Set<Authority> authorities;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "owner", fetch = FetchType.LAZY)
+    private Company company;
+
     public void setPassword(String password) {
         this.lastPasswordResetDate = new Timestamp(new Date().getTime());
         this.password = password;
