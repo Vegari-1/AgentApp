@@ -7,8 +7,7 @@ export function* handleAddApiKey({
   payload,
 }: ReturnType<typeof addApiKey>): Generator<any, any, string> {
   try {
-    const token = sessionStorage.getItem("token");
-    yield call(dislinktService.addApiKey, payload.formValues, token!);
+    yield call(dislinktService.addApiKey, payload.formValues);
     yield toast.success("Successfully added API key");
   } catch (error: any) {
     yield toast.error(error.response.data.message);

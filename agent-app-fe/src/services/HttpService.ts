@@ -5,6 +5,13 @@ export class HttpService {
 
   constructor(options = {}) {
     this.client = axios.create(options);
+    this.client.interceptors.request.use((config: any) => {
+      const token = sessionStorage.getItem("token");
+      if (token) {
+        config.headers["Authorization"] = "Bearer " + token;
+      }
+      return config;
+    });
   }
 }
 

@@ -6,16 +6,8 @@ const ENDPOINTS = {
 };
 
 export class DislinktService extends ApiService {
-  addApiKey = async (apiKeyData: ApiKeyFormValues, token: string) => {
-    // DA LI OVDE MOZE INTERCEPTOR NEKI KAO U ANGULARU???
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-    const { data } = await this.apiClient.post(
-      ENDPOINTS.APIKEY,
-      apiKeyData,
-      config
-    );
+  addApiKey = async (apiKeyData: ApiKeyFormValues) => {
+    const { data } = await this.apiClient.post(ENDPOINTS.APIKEY, apiKeyData);
 
     return data;
   };

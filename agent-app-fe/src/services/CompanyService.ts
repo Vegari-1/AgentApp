@@ -7,16 +7,11 @@ const ENDPOINTS = {
 
 export class CompanyService extends ApiService {
   companyRegisterRequest = async (
-    companyRegisterData: CompanyRegisterFormValues,
-    token: string
+    companyRegisterData: CompanyRegisterFormValues
   ) => {
-    const config = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
     const { data } = await this.apiClient.post(
       ENDPOINTS.COMPANYREQUEST,
-      companyRegisterData,
-      config
+      companyRegisterData
     );
 
     return data;
