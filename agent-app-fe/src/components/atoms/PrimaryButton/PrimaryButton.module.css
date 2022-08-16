@@ -4,7 +4,7 @@
   display: block;
   width: 100%;
 
-  border-radius: 0 40px;
+  border-radius: var(--BORDER-RADIUS);
   border: 1px solid var(--PRIMARY-COLOR);
   background-color: var(--PRIMARY-COLOR);
   color: #ffffff;
@@ -39,7 +39,7 @@
   display: block;
   width: 100%;
 
-  border-radius: 0 var(--BORDER-RADIUS);
+  border-radius: var(--BORDER-RADIUS);
   border: 1px solid var(--PRIMARY-COLOR);
   background-color: var(--PRIMARY-COLOR);
   color: #ffffff;

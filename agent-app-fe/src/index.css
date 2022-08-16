@@ -1,6 +1,7 @@
 @import "./styles.css";
 
-html, body {
+html,
+body {
   margin: 0;
   height: 100%;
 }
@@ -9,7 +10,7 @@ html, body {
   background: var(--SUCCESS);
   backdrop-filter: blur(4px);
 
-  border-radius: 0 var(--BORDER-RADIUS);
+  border-radius: var(--BORDER-RADIUS);
 
   font-family: var(--PRIMARY-FONT-FAMILY);
   font-style: var(--PRIMARY-FONT-STYLE);
@@ -24,7 +25,7 @@ html, body {
   background: var(--ERROR);
   backdrop-filter: blur(4px);
 
-  border-radius: 0 var(--BORDER-RADIUS);
+  border-radius: var(--BORDER-RADIUS);
 
   font-family: var(--PRIMARY-FONT-FAMILY);
   font-style: var(--PRIMARY-FONT-STYLE);

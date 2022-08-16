@@ -3,7 +3,7 @@
 .header-item {
   height: 36px;
   padding: 0 15px;
-  border-radius: 0 var(--BORDER-RADIUS);
+  border-radius: var(--BORDER-RADIUS);
 
   background: var(--PRIMARY-COLOR-LIGHTER);
 

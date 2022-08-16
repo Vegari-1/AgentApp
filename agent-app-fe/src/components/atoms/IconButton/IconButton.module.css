@@ -6,7 +6,7 @@
   border: none;
 
   background: var(--SECONDARY-COLOR-LIGHTER);
-  border-radius: 0 var(--BORDER-RADIUS);
+  border-radius: var(--BORDER-RADIUS);
 
   cursor: pointer;
 }
