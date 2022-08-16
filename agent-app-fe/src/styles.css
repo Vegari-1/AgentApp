@@ -1,11 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito");
 
+html {
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+}
+
 :root {
   /*COLORS*/
 
-  --PRIMARY-COLOR: #2a555f;
-  --PRIMARY-COLOR-LIGHTER: #477480;
-  --PRIMARY-COLOR-DARKER: #112d32;
+  --PRIMARY-COLOR: #477480;
+  --PRIMARY-COLOR-LIGHTER: #477480e0;
+  --PRIMARY-COLOR-DARKER: #2a555f;
 
   --SECONDARY-COLOR: #ddf1ec;
   --SECONDARY-COLOR-LIGHTER: #ddf1ec8a;

@@ -32,4 +32,5 @@
   font-family: var(--PRIMARY-FONT-FAMILY);
   font-style: var(--PRIMARY-FONT-STYLE);
   font-weight: 700;
+  white-space: nowrap;
 }
