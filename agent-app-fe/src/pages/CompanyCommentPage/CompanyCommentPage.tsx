@@ -3,8 +3,6 @@ import CompanyPane from "../../components/organisms/CompanyPane/CompanyPane";
 import ReviewModel from "../../models/ReviewModel";
 
 const CompanyCommentPage: React.FC = () => {
-  // da li ti dobavis podatke koje ces proslediti?
-  // jea, det vud mejk sens
   const comments: ReviewModel[] = [
     {
       id: "1",

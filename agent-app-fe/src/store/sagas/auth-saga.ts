@@ -21,6 +21,7 @@ export function* handleSignIn({
       role: tokenUserPayload.user.authorities[0],
     };
     yield put(userData(userDataPayload));
+
     yield payload.navigate("/profile");
     yield toast.success("Successfully signed in");
   } catch (error: any) {

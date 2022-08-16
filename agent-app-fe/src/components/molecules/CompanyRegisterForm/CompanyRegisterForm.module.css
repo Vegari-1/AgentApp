@@ -10,6 +10,7 @@
 
 .form {
   width: 30%;
+  height: fit-content;
   border-radius: 0 var(--BORDER-RADIUS);
 
   margin: 30px;
@@ -23,12 +24,6 @@
   font-weight: 300;
   font-size: 16px;
   line-height: 18px;
-}
-
-.form-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .fields {
