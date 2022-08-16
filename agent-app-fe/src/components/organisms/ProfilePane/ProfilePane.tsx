@@ -30,7 +30,6 @@ const ProfilePane: React.FC = () => {
         </div>
         <CompanyRegisterForm />
       </div>
-      {/* kartice? jea*/}
       {/* da li ima kompaniju ili ne, ako ima, link do nje, ako nema, dugme kreiraj kompaniju */}
     </Layout>
   );

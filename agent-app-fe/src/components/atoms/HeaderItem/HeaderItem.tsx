@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import classes from "./HeaderItem.module.css";
 
 interface HeaderItemProps {
@@ -7,10 +7,20 @@ interface HeaderItemProps {
 }
 
 const HeaderItem: React.FC<HeaderItemProps> = ({ text, link }) => {
+  const activeStyle = {
+    textDecoration: "underline",
+  };
 
   return (
     <div className={classes["header-item"]}>
-      <Link to={link} className={classes['header-link']}>{text}</Link>
+      <NavLink
+        end
+        to={link}
+        style={({ isActive }) => (isActive ? activeStyle : {})}
+        className={classes["header-link"]}
+      >
+        {text}
+      </NavLink>
     </div>
   );
 };

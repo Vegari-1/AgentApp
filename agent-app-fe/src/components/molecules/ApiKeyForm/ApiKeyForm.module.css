@@ -9,7 +9,7 @@
 }
 
 .api-key-form {
-  border-radius: var(--BORDER-RADIUS);
+  border-radius: 0 var(--BORDER-RADIUS);
 
   margin: 40px;
   padding: 30px 40px 30px 40px;

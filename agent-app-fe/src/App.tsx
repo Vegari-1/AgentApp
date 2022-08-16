@@ -20,7 +20,7 @@ function App() {
     <Fragment>
       <ToastContainer
         position="top-right"
-        autoClose={50000000}
+        autoClose={3000}
         hideProgressBar={true}
         closeOnClick={true}
         pauseOnHover={true}

@@ -7,12 +7,7 @@ export function* handleCompanyRegisterRequest({
   payload,
 }: ReturnType<typeof companyRegisterRequest>): Generator<any, any, string> {
   try {
-    const token = sessionStorage.getItem("token");
-    yield call(
-      companyService.companyRegisterRequest,
-      payload.formValues,
-      token!
-    );
+    yield call(companyService.companyRegisterRequest, payload.formValues);
     yield toast.success("Succesfully created company registration request");
   } catch (error: any) {
     yield toast.error(error.response.data.message);

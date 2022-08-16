@@ -1,12 +1,14 @@
 @import "../../../styles.css";
 
 .profile-wrapper {
-  margin: 2% 3%;
+  padding: 10% 3% 2% 3%;
   display: flex;
+  flex: 1;
   align-items: center;
-  gap: 5%;
+  gap: 2%;
+  overflow: auto;
 }
 
 .left-wrapper {
-  width: 50%;
+  width: 60%;
 }

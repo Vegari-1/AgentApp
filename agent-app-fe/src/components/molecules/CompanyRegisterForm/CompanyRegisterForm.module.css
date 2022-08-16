@@ -10,8 +10,7 @@
 
 .form {
   width: 30%;
-  height: 80%;
-  border-radius: var(--BORDER-RADIUS);
+  border-radius: 0 var(--BORDER-RADIUS);
 
   margin: 30px;
   padding: 30px 40px 30px 40px;
