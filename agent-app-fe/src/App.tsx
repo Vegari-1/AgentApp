@@ -14,6 +14,7 @@ import CompanyCommentPage from "./pages/CompanyCommentPage/CompanyCommentPage";
 import CompanyInterviewPage from "./pages/CompanyInterviewPage/CompanyInterviewPage";
 import CompanySalaryPage from "./pages/CompanySalaryPage/CompanySalaryPage";
 import CompaniesPage from "./pages/CompaniesPage/CompaniesPage";
+import AdminPage from "./pages/AdminPage/AdminPage";
 
 function App() {
   return (
@@ -31,6 +32,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/auth" />} />
           <Route path="/auth" element={<AuthPage />} />
+
+          <Route path="/admin" element={<AdminPage />} />
+
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/companies" element={<CompaniesPage />} />
           <Route path="/company/:id" element={<CompanyPage />} />
