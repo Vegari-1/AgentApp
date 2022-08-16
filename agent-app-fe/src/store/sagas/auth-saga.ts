@@ -25,7 +25,7 @@ export function* handleSignIn({
     yield put(userData(userDataPayload));
 
     if (userDataPayload.role === "ROLE_ADMIN") {
-      yield payload.navigate("/admin");
+      yield payload.navigate("/requests");
     } else {
       yield payload.navigate("/profile");
     }
