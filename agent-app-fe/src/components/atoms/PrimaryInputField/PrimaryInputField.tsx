@@ -28,12 +28,12 @@ const PrimaryInputField: React.FC<PrimaryInputFieldProps> = ({
         name={name}
         value={value as string}
         onChange={(e) => {
-          onChange(name)(e.target.value);
           setFieldTouched(name, true);
+          onChange(name)(e.target.value);
         }}
         onBlur={() => {
-          onBlur(name);
           setFieldTouched(name, true);
+          onBlur(name);
         }}
       />
       <label className={classes["primary-input-error-label"]}>{errorMsg}</label>

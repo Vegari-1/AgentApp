@@ -28,6 +28,10 @@
   background: var(--PRIMARY-COLOR-DARKER);
 }
 
+.side-bar-item-active {
+  background: var(--PRIMARY-COLOR-DARKER);
+}
+
 .side-bar-item-icon {
   margin-right: 5%;
   margin-left: 5%;
