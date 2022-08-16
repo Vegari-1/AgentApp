@@ -1,6 +1,7 @@
 import CompanyCard from "../../components/atoms/CompanyCard/CompanyCard";
-import CompaniesPane from "../../components/organisms/CompaniesPane/CompaniesPane";
+import Layout from "../../components/organisms/Layout/Layout";
 import CompanyModel from "../../models/CompanyModel";
+import classes from "./CompaniesPage.module.css";
 
 const CompaniesPage: React.FC = () => {
   const companies: CompanyModel[] = [
@@ -24,11 +25,13 @@ const CompaniesPage: React.FC = () => {
     },
   ];
   return (
-    <CompaniesPane>
-      {companies.map((company) => (
-        <CompanyCard key={company.id} company={company} />
-      ))}
-    </CompaniesPane>
+    <Layout>
+      <div className={classes["content-wrapper"]}>
+        {companies.map((company) => (
+          <CompanyCard key={company.id} company={company} />
+        ))}
+      </div>
+    </Layout>
   );
 };
 

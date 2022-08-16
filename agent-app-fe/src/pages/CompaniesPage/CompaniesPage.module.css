@@ -1,11 +1,13 @@
-@import "../../../styles.css";
+@import "../../styles.css";
 
-.wrapper {
+.content-wrapper {
   padding: 2% 15%;
+
   display: flex;
   flex: 1;
+  overflow: auto;
+
   flex-direction: column;
   align-items: stretch;
   gap: 5%;
-  overflow: auto;
 }

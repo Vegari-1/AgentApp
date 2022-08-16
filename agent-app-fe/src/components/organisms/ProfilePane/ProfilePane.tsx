@@ -5,7 +5,6 @@ import { RootState } from "../../../store/store";
 import GridCard from "../../atoms/GridCard/GridCard";
 import ApiKeyForm from "../../molecules/ApiKeyForm/ApiKeyForm";
 import CompanyRegisterForm from "../../molecules/CompanyRegisterForm/CompanyRegisterForm";
-import Header from "../../molecules/Header/Header";
 import Layout from "../Layout/Layout";
 
 import classes from "./ProfilePane.module.css";
@@ -22,8 +21,7 @@ const ProfilePane: React.FC = () => {
 
   return (
     <Layout>
-      <Header fullName={userData.name + " " + userData.surname} />
-      <div className={classes["profile-wrapper"]}>
+      <div className={classes["content-wrapper"]}>
         <div className={classes["left-wrapper"]}>
           <GridCard title={"Profile information"} content={userInfoData} />
           <ApiKeyForm />

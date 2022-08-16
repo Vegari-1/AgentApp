@@ -3,9 +3,6 @@ import CompanyPane from "../../components/organisms/CompanyPane/CompanyPane";
 import JobOfferModel from "../../models/JobOfferModel";
 
 const CompanyJobOfferPage: React.FC = () => {
-  // da li ti dobavis podatke koje ces proslediti?
-  // jea, det vud mejk sens
-
   const offers: JobOfferModel[] = [
     {
       id: "1",

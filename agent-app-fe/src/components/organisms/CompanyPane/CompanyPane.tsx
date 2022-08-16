@@ -1,11 +1,6 @@
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import HeaderItemModel from "../../../models/HeaderItemModel";
-import { UserDataPayload } from "../../../models/slices/auth";
-import { RootState } from "../../../store/store";
-import Header from "../../molecules/Header/Header";
 import Layout from "../Layout/Layout";
-
 import classes from "./CompanyPane.module.css";
 
 interface CompanyPaneProps {
@@ -13,13 +8,8 @@ interface CompanyPaneProps {
 }
 
 const CompanyPane: React.FC<CompanyPaneProps> = ({ children }) => {
-  const userData: UserDataPayload = useSelector(
-    (state: RootState) => state.auth.userData
-  );
-
   const { id } = useParams();
   const rootUrl: string = "/company/" + id;
-
   const headerItems: HeaderItemModel[] = [
     { text: "About", link: rootUrl },
     { text: "Job offers", link: rootUrl + "/job-offer" },
@@ -29,12 +19,8 @@ const CompanyPane: React.FC<CompanyPaneProps> = ({ children }) => {
   ];
 
   return (
-    <Layout>
-      <Header
-        menuItems={headerItems}
-        fullName={userData.name + " " + userData.surname}
-      />
-      <div className={classes["wrapper"]}>{children}</div>
+    <Layout headerItems={headerItems}>
+      <div className={classes["content-wrapper"]}>{children}</div>
     </Layout>
   );
 };

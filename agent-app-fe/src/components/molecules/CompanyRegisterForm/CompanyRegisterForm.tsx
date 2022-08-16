@@ -43,9 +43,7 @@ const CompanyRegisterForm: React.FC = () => {
     >
       {({ handleSubmit }) => (
         <div className={classes["form"]}>
-          <div className={classes["form-title"]}>
-            <h2 className={classes.label}>Register company</h2>
-          </div>
+          <h2 className={classes.label}>Register company</h2>
           <div className={classes.fields}>
             <Field
               component={PrimaryInputField}
