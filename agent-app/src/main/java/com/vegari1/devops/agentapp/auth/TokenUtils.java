@@ -39,6 +39,8 @@ public class TokenUtils {
         userMap.put("id", user.getId());
         userMap.put("name", user.getName());
         userMap.put("surname", user.getSurname());
+        if (user.getCompany() != null)
+            userMap.put("companyId", user.getCompany().getId());
         userMap.put("authorities", user.getAuthorities());
         return Jwts.builder()
                 .setIssuer(APP_NAME)
