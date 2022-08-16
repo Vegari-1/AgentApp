@@ -13,6 +13,7 @@ import CompanyJobOfferPage from "./pages/CompanyJobOfferPage/CompanyJobOfferPage
 import CompanyCommentPage from "./pages/CompanyCommentPage/CompanyCommentPage";
 import CompanyInterviewPage from "./pages/CompanyInterviewPage/CompanyInterviewPage";
 import CompanySalaryPage from "./pages/CompanySalaryPage/CompanySalaryPage";
+import CompaniesPage from "./pages/CompaniesPage/CompaniesPage";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/" element={<Navigate to="/auth" />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/companies" element={<CompaniesPage />} />
           <Route path="/company/:id" element={<CompanyPage />} />
           <Route
             path="/company/:id/job-offer"
