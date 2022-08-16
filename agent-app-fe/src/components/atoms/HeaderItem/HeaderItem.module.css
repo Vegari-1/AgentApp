@@ -5,10 +5,6 @@
   padding: 0 15px;
   border-radius: var(--BORDER-RADIUS);
 
-  background: var(--PRIMARY-COLOR-LIGHTER);
-
-  font-family: var(--PRIMARY-FONT-FAMILY);
-  font-style: var(--PRIMARY-FONT-STYLE);
   font-weight: 300;
   font-size: 16px;
   line-height: 18px;

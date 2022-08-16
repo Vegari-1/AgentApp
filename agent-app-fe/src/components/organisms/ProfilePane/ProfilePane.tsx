@@ -5,12 +5,12 @@ import GridCardModel from "../../../models/GridCardModel";
 import { UserDataPayload } from "../../../models/slices/auth";
 import { RootState } from "../../../store/store";
 import GridCard from "../../atoms/GridCard/GridCard";
-import SidebarItem from "../../atoms/SidebarItem/SidebarItem";
 import ApiKeyForm from "../../molecules/ApiKeyForm/ApiKeyForm";
 import CompanyRegisterForm from "../../molecules/CompanyRegisterForm/CompanyRegisterForm";
 import Layout from "../Layout/Layout";
 
 import classes from "./ProfilePane.module.css";
+import TextIconButton from "../../atoms/TextIconButton/TextIconButton";
 
 const ProfilePane: React.FC = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ const ProfilePane: React.FC = () => {
     { label: "Surname", value: userData.surname },
   ];
 
-  const companyHandler = () => {
+  const onCompanyClickHandler = () => {
     navigate("/company/" + userData.companyId);
   };
 
@@ -36,12 +36,10 @@ const ProfilePane: React.FC = () => {
         </div>
         {userData.companyId && (
           <div className={classes["company-link"]}>
-            <SidebarItem
+            <TextIconButton
               text="Visit your Company"
-              value="company"
-              selected=""
               icon={<JobOfferIcon height={25} width={25} />}
-              onClick={companyHandler}
+              onClick={onCompanyClickHandler}
             />
           </div>
         )}
