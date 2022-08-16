@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { UserDataPayload } from "../../../models/slices/auth";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 const SidebarItemList: React.FC = () => {
   // da li je validno da ovde bude if sta ce biti prikazano kao lista u sidebaru u zavisnosti od role?
@@ -15,17 +15,17 @@ const SidebarItemList: React.FC = () => {
     (state: RootState) => state.auth.userData
   );
 
-  const profileHandler = () => {
-    navigate("/profile");
+  const [selected, setSelected] = useState(
+    window.location.href.split("/").at(-1)!
+  );
+
+  const clickHandler = (value: string) => {
+    setSelected(value);
   };
 
-  const companiesHandler = () => {
-    navigate("/companies");
-  };
-
-  const requestsHandler = () => {
-    navigate("/admin");
-  };
+  useEffect(() => {
+    navigate("/" + selected);
+  }, [selected]);
 
   const logoutHandler = () => {
     sessionStorage.removeItem("token");
@@ -38,27 +38,35 @@ const SidebarItemList: React.FC = () => {
         <Fragment>
           <SidebarItem
             text="Profile"
+            value="profile"
+            selected={selected}
             icon={<ProfileIcon height={25} width={25} />}
-            onClickHandler={profileHandler}
+            onClick={clickHandler}
           />
           <SidebarItem
             text="Companies"
+            value="companies"
+            selected={selected}
             icon={<JobOfferIcon height={25} width={25} />}
-            onClickHandler={companiesHandler}
+            onClick={clickHandler}
           />
         </Fragment>
       )}
       {userData.role === "ROLE_ADMIN" && (
         <SidebarItem
           text="Company requests"
+          value="requests"
+          selected={selected}
           icon={<JobOfferIcon height={25} width={25} />}
-          onClickHandler={requestsHandler}
+          onClick={clickHandler}
         />
       )}
       <SidebarItem
         text="Logout"
+        value="logout"
+        selected={selected}
         icon={<LogoutIcon height={25} width={25} />}
-        onClickHandler={logoutHandler}
+        onClick={logoutHandler}
       />
     </div>
   );

@@ -38,8 +38,10 @@ const ProfilePane: React.FC = () => {
           <div className={classes["company-link"]}>
             <SidebarItem
               text="Visit your Company"
+              value="company"
+              selected=""
               icon={<JobOfferIcon height={25} width={25} />}
-              onClickHandler={companyHandler}
+              onClick={companyHandler}
             />
           </div>
         )}
