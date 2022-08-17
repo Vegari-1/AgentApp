@@ -1,13 +1,25 @@
 @import "../../../styles.css";
 
 .primary-input-field {
-  background-color: #f8f8f8;
+  background-color: var(--LIGHT-GREY);
   padding: 12px 20px;
   margin: 6px 0;
   width: 100%;
   border: 1px solid transparent;
   border-radius: var(--BORDER-RADIUS);
   box-sizing: border-box;
+
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.primary-input-field::placeholder {
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+  color: var(--DARK-GREY);
 }
 
 .primary-input-field-error {

@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import GridCard from "../../components/atoms/GridCard/GridCard";
+import { useNavigate, useParams } from "react-router-dom";
+import GridCard from "../../components/molecules/GridCard/GridCard";
 import CompanyPane from "../../components/organisms/CompanyPane/CompanyPane";
 import GridCardModel from "../../models/GridCardModel";
 import { UserDataPayload } from "../../models/slices/auth";
@@ -20,8 +20,9 @@ const CompanyPage: React.FC = () => {
     (state: RootState) => state.auth.userData
   );
 
+  const navigate = useNavigate();
   const editCompanyHandler = () => {
-    console.log("hello edit company");
+    navigate("edit");
   };
 
   return (
@@ -29,6 +30,7 @@ const CompanyPage: React.FC = () => {
       companyId={id!}
       showAddButton={userData.companyId === +id!}
       onAddButtonClick={editCompanyHandler}
+      isEdit
     >
       <GridCard title="Company information" content={companyInfo} />
     </CompanyPane>

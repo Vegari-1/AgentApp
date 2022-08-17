@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import JobOfferCard from "../../components/atoms/JobOfferCard/JobOfferCard";
 import CompanyPane from "../../components/organisms/CompanyPane/CompanyPane";
 import JobOfferModel from "../../models/JobOfferModel";
@@ -49,8 +49,9 @@ const CompanyJobOfferPage: React.FC = () => {
     (state: RootState) => state.auth.userData
   );
 
+  const navigate = useNavigate();
   const addJobOfferHandler = () => {
-    console.log("hello add job offer");
+    navigate("add");
   };
 
   return (

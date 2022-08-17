@@ -8,7 +8,7 @@ interface HeaderItemProps {
 
 const HeaderItem: React.FC<HeaderItemProps> = ({ text, link }) => {
   const activeStyle = {
-    textDecoration: "underline",
+    background: "#2a555f",
   };
 
   return (

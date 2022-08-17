@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-const companyRegisterValidationSchema = Yup.object().shape({
+const companyValidationSchema = Yup.object().shape({
   industrySector: Yup.string().required("* Required field"),
   companyName: Yup.string().required("* Required field"),
   companyEmail: Yup.string().required("* Required field"),
@@ -8,4 +8,4 @@ const companyRegisterValidationSchema = Yup.object().shape({
   companyInfo: Yup.string().required("* Required field"),
 });
 
-export default companyRegisterValidationSchema;
+export default companyValidationSchema;

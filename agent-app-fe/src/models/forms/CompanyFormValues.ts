@@ -1,4 +1,4 @@
-interface CompanyRegisterFormValues {
+interface CompanyFormValues {
   industrySector: string;
   companyName: string;
   companyEmail: string;
@@ -6,4 +6,4 @@ interface CompanyRegisterFormValues {
   companyInfo: string;
 }
 
-export default CompanyRegisterFormValues;
+export default CompanyFormValues;

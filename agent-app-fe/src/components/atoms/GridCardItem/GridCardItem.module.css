@@ -1,0 +1,29 @@
+@import "../../../styles.css";
+
+.grid-item-wrapper {
+  border-bottom: 1px solid var(--VERY-LIGHT-GREY);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.grid-item {
+  height: 45px;
+  margin-right: 5%;
+
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+  font-weight: 200;
+  font-size: 16px;
+  line-height: 22px;
+
+  color: rgba(0, 0, 0, 0.8);
+
+  display: flex;
+  align-items: center;
+}
+
+.grid-item-bold {
+  font-weight: 600;
+}

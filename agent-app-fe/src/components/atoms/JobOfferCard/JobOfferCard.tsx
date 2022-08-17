@@ -11,7 +11,7 @@ const JobOfferCard: React.FC<JobOfferCardProps> = ({ jobOffer }) => {
       <div className={classes["card-title"]}>
         <div className={classes["title"]}>{jobOffer.title}</div>
         <div className={classes["company"]}>
-          at <i>{jobOffer.company.companyName}</i>
+          at {jobOffer.company.companyName}
         </div>
       </div>
       <div className={classes["card-info"]}>

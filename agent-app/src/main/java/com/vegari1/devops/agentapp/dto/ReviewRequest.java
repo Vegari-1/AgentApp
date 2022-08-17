@@ -11,9 +11,9 @@ import javax.validation.constraints.NotEmpty;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class InterviewRequest {
+public class ReviewRequest {
 
-    @NotEmpty(message = "Interview text must not be empty")
-    private String interviewText;
+    @NotEmpty(message = "Text must not be empty")
+    private String content;
 
 }
