@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import TextCard from "../../components/atoms/TextCard/TextCard";
 import CompanyPane from "../../components/organisms/CompanyPane/CompanyPane";
 import ReviewModel from "../../models/ReviewModel";
@@ -55,8 +55,9 @@ const CompanyInterviewPage: React.FC = () => {
     (state: RootState) => state.auth.userData
   );
 
+  const navigate = useNavigate();
   const addInterviewHandler = () => {
-    console.log("hello add interview");
+    navigate("add");
   };
 
   return (

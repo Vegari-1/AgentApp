@@ -1,4 +1,4 @@
-import CompanyRegisterFormValues from "../models/forms/CompanyRegisterFormValues";
+import CompanyFormValues from "../models/forms/CompanyFormValues";
 import ApiService from "./ApiService";
 
 const ENDPOINTS = {
@@ -6,9 +6,7 @@ const ENDPOINTS = {
 };
 
 export class CompanyService extends ApiService {
-  companyRegisterRequest = async (
-    companyRegisterData: CompanyRegisterFormValues
-  ) => {
+  companyRegisterRequest = async (companyRegisterData: CompanyFormValues) => {
     const { data } = await this.apiClient.post(
       ENDPOINTS.COMPANYREQUEST,
       companyRegisterData

@@ -1,5 +1,5 @@
-import CompanyRegisterFormValues from "../forms/CompanyRegisterFormValues";
+import CompanyFormValues from "../forms/CompanyFormValues";
 
 export interface CompanyRegisterPayload {
-  formValues: CompanyRegisterFormValues;
+  formValues: CompanyFormValues;
 }

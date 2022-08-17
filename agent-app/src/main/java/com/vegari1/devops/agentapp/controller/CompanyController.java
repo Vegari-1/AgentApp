@@ -78,7 +78,7 @@ public class CompanyController {
     @PostMapping("/{companyId}/comment")
     public ResponseEntity<ReviewResponse> createCompanyComment(
             @PathVariable Long companyId,
-            @Valid @RequestBody CommentRequest commentRequest) {
+            @Valid @RequestBody ReviewRequest commentRequest) {
         Comment comment = companyService.createCompanyComment(commentMapper.toEntity(commentRequest), companyId);
         return new ResponseEntity<>(commentMapper.toResponse(comment), HttpStatus.CREATED);
     }
@@ -95,7 +95,7 @@ public class CompanyController {
     @PostMapping("/{companyId}/interview")
     public ResponseEntity<ReviewResponse> createCompanyInterview(
             @PathVariable Long companyId,
-            @Valid @RequestBody InterviewRequest interviewRequest) {
+            @Valid @RequestBody ReviewRequest interviewRequest) {
         Interview interview = companyService.createCompanyInterview(interviewMapper.toEntity(interviewRequest), companyId);
         return new ResponseEntity<>(interviewMapper.toResponse(interview), HttpStatus.CREATED);
     }

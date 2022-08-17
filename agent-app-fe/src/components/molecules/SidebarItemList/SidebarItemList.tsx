@@ -1,13 +1,14 @@
 import SidebarItem from "../../atoms/SidebarItem/SidebarItem";
 import { ReactComponent as JobOfferIcon } from "../../../assets/svg/job-offer.svg";
 import { ReactComponent as ProfileIcon } from "../../../assets/svg/profile.svg";
-import { ReactComponent as LogoutIcon } from "../../../assets/svg/logout.svg";
+import { ReactComponent as LogoutIcon } from "../../../assets/svg/logout-danger.svg";
 import { useNavigate } from "react-router-dom";
 import { UserDataPayload } from "../../../models/slices/auth";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { Fragment } from "react";
 import classes from "./SidebarItemList.module.css";
+import SidebarItemLogout from "../../atoms/SidebarItemLogout/SidebarItemLogout";
 
 const SidebarItemList: React.FC = () => {
   const navigate = useNavigate();
@@ -55,7 +56,7 @@ const SidebarItemList: React.FC = () => {
         />
       )}
       <div className={classes["bottom"]}>
-        <SidebarItem
+        <SidebarItemLogout
           text="Logout"
           value="logout"
           selected={selected}

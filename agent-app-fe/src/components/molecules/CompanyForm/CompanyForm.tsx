@@ -1,15 +1,21 @@
 import { Field, Formik } from "formik";
 import { useDispatch } from "react-redux";
-import CompanyRegisterFormValues from "../../../models/forms/CompanyRegisterFormValues";
+import CompanyFormValues from "../../../models/forms/CompanyFormValues";
+import CompanyRegisterFormValues from "../../../models/forms/CompanyFormValues";
 import { companyRegisterRequest } from "../../../store/slices/company";
+import companyValidationSchema from "../../../validations/companyValidationSchema";
 
-import companyRegisterValidationSchema from "../../../validations/companyRegisterValidationSchema";
 import PrimaryButton from "../../atoms/PrimaryButton/PrimaryButton";
 import PrimaryInputField from "../../atoms/PrimaryInputField/PrimaryInputField";
+import PrimaryTextArea from "../../atoms/PrimaryTextArea/PrimaryTextArea";
 
-import classes from "./CompanyRegisterForm.module.css";
+import classes from "./CompanyForm.module.css";
 
-const companyRegisterFormInitialValues: CompanyRegisterFormValues = {
+interface CompanyFormProps {
+  isRegister?: boolean;
+}
+
+const companyFormInitialValues: CompanyFormValues = {
   industrySector: "",
   companyName: "",
   companyEmail: "",
@@ -17,7 +23,7 @@ const companyRegisterFormInitialValues: CompanyRegisterFormValues = {
   companyInfo: "",
 };
 
-const CompanyRegisterForm: React.FC = () => {
+const CompanyForm: React.FC<CompanyFormProps> = ({ isRegister }) => {
   const dispatch = useDispatch();
 
   const submitHandler = (formValues: CompanyRegisterFormValues) => {
@@ -26,8 +32,8 @@ const CompanyRegisterForm: React.FC = () => {
 
   return (
     <Formik
-      initialValues={companyRegisterFormInitialValues}
-      validationSchema={companyRegisterValidationSchema}
+      initialValues={companyFormInitialValues}
+      validationSchema={companyValidationSchema}
       onSubmit={(formValues, { resetForm }) => {
         submitHandler(formValues);
         resetForm({
@@ -43,7 +49,9 @@ const CompanyRegisterForm: React.FC = () => {
     >
       {({ handleSubmit }) => (
         <div className={classes["form"]}>
-          <h2 className={classes.label}>Register company</h2>
+          <h2 className={classes.label}>
+            {isRegister ? "Register" : "Edit"} company
+          </h2>
           <div className={classes.fields}>
             <Field
               component={PrimaryInputField}
@@ -74,8 +82,8 @@ const CompanyRegisterForm: React.FC = () => {
               value="companyWebsite"
             />
             <Field
-              component={PrimaryInputField}
-              text="Company info"
+              component={PrimaryTextArea}
+              placeholder="Company info"
               type="text"
               name="companyInfo"
               value="companyInfo"
@@ -83,7 +91,7 @@ const CompanyRegisterForm: React.FC = () => {
           </div>
           <div className={classes.button}>
             <PrimaryButton
-              text="Register"
+              text={isRegister ? "Register" : "Save"}
               onClickHandler={handleSubmit}
               isSubmit
               small
@@ -95,4 +103,4 @@ const CompanyRegisterForm: React.FC = () => {
   );
 };
 
-export default CompanyRegisterForm;
+export default CompanyForm;

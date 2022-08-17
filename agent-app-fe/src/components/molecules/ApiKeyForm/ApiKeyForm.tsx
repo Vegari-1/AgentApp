@@ -34,7 +34,7 @@ const ApiKeyForm: React.FC = () => {
             <h2 className={classes.label}>Connect to Dislinkt</h2>
             <img
               className={classes.logo}
-              src="./images/dislinkt.png"
+              src="../images/dislinkt.png"
               alt="logo"
             />
           </div>

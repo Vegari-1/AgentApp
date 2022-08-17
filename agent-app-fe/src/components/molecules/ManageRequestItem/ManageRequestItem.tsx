@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { ReactComponent as AcceptIcon } from "../../../assets/svg/edit.svg";
+import { ReactComponent as AcceptIcon } from "../../../assets/svg/done.svg";
 import { ReactComponent as DeclineIcon } from "../../../assets/svg/close.svg";
 
 import classes from "./ManageRequestItem.module.css";
@@ -52,15 +52,15 @@ const ManageRequestItem: React.FC<ManageRequestItemProps> = ({
         <span className={classes["contact"]}>{`${website}\n${email}`}</span>
         <div className={classes["actions"]}>
           <AcceptIcon
-            width={30}
-            height={30}
+            width={25}
+            height={25}
             cursor="pointer"
             onClick={acceptHanlder}
           />
           <span className={classes["space"]} />
           <DeclineIcon
-            width={30}
-            height={30}
+            width={25}
+            height={25}
             cursor="pointer"
             onClick={declineHandler}
           />

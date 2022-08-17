@@ -1,14 +1,16 @@
 @import "../../../styles.css";
 
 .card-wrapper {
+  border-top: 15px solid var(--PRIMARY-COLOR);
   border-radius: var(--BORDER-RADIUS);
 
   margin-top: 40px;
   padding: 30px 40px 30px 40px;
 
-  background: var(--SECONDARY-COLOR-LIGHTER);
+  background: white;
   box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
 
+  color: rgba(0, 0, 0, 0.8);
   font-family: var(--PRIMARY-FONT-FAMILY);
   font-style: var(--PRIMARY-FONT-STYLE);
   font-weight: 300;
@@ -19,15 +21,22 @@
 .card-footer {
   padding-top: 20px;
   font-weight: 600;
+
+  display: flex;
+  justify-content: space-between;
 }
 
 .left {
-  display: inline-block;
-  width: 50%;
+  display: flex;
+  align-items: center;
 }
 
 .right {
-  display: inline-block;
-  width: 50%;
   text-align: right;
+  display: flex;
+  align-items: center;
+}
+
+.separator {
+  margin-left: 7px;
 }

@@ -1,0 +1,36 @@
+@import "../../../styles.css";
+
+.side-bar-item {
+  height: 50px;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 5%;
+  border-radius: var(--BORDER-RADIUS);
+  border: 1px solid var(--DANGER);
+
+  background: white;
+
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 22px;
+
+  color: var(--DANGER);
+
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+
+  cursor: pointer;
+}
+
+.side-bar-item:hover {
+  outline: 1px solid red;
+}
+
+.side-bar-item-icon {
+  margin-right: 5%;
+  margin-left: 5%;
+  margin-top: 1%;
+}

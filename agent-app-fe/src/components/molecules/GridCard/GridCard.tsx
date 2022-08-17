@@ -1,5 +1,5 @@
-import { Fragment } from "react";
 import GridCardModel from "../../../models/GridCardModel";
+import GridCardItem from "../../atoms/GridCardItem/GridCardItem";
 import classes from "./GridCard.module.css";
 
 interface GridCardProps {
@@ -13,12 +13,11 @@ const GridCard: React.FC<GridCardProps> = ({ title, content }) => {
       <h2 className={classes["card-title"]}>{title}</h2>
       <div className={classes["content-wrapper"]}>
         {content.map((contentItem) => (
-          <Fragment key={contentItem.label}>
-            <span>{contentItem.label}:</span>
-            <span className={classes["content-row-value"]}>
-              {contentItem.value}
-            </span>
-          </Fragment>
+          <GridCardItem
+            key={contentItem.label}
+            name={contentItem.label}
+            value={contentItem.value}
+          />
         ))}
       </div>
     </div>

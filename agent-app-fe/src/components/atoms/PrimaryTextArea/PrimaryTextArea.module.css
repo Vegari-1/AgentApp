@@ -1,0 +1,75 @@
+@import "../../../styles.css";
+
+.text-area-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-area-label {
+  height: 16px;
+
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+  font-weight: var(--FONT-WEIGHT-LIGHT);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.text-area-label-error {
+  color: var(--DANGER);
+}
+
+.text-area {
+  padding-top: 14px;
+  padding-left: 22px;
+
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+  font-weight: var(--FONT-WEIGHT-LIGHT);
+  font-size: 16px;
+  line-height: 20px;
+
+  color: #000;
+
+  background: var(--LIGHT-GREY);
+  border-radius: var(--BORDER-RADIUS);
+  border: none;
+
+  resize: none;
+}
+
+.text-area::placeholder {
+  color: var(--DARK-GREY);
+}
+
+.text-area:focus-visible {
+  outline: 1px solid var(--PRIMARY-COLOR);
+}
+
+.text-area-error {
+  border: 1px solid var(--DANGER);
+  background: var(--LIGHT-GREY);
+}
+
+.text-area-error:focus-visible {
+  outline: 1px solid var(--PRIMARY-COLOR);
+}
+
+.text-area-error::placeholder {
+  color: var(--DANGER);
+}
+
+.text-area-error-span {
+  height: 16px;
+  margin-top: 3px;
+
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+  font-weight: var(--FONT-WEIGHT-LIGHT);
+  font-size: 12px;
+  line-height: 16px;
+
+  display: block;
+
+  color: var(--DANGER);
+}

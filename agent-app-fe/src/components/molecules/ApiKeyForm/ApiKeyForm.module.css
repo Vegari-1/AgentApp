@@ -9,12 +9,13 @@
 }
 
 .api-key-form {
+  border-top: 15px solid var(--PRIMARY-COLOR);
   border-radius: var(--BORDER-RADIUS);
 
   margin: 40px;
   padding: 30px 40px 30px 40px;
 
-  background: var(--SECONDARY-COLOR-LIGHTER);
+  background: white;
   box-shadow: 0 7px 14px rgba(0, 0, 0, 0.25), 0 5px 5px rgba(0, 0, 0, 0.22);
 
   font-family: var(--PRIMARY-FONT-FAMILY);

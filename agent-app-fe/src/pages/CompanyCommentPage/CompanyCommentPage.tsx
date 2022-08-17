@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import TextCard from "../../components/atoms/TextCard/TextCard";
 import CompanyPane from "../../components/organisms/CompanyPane/CompanyPane";
 import ReviewModel from "../../models/ReviewModel";
@@ -35,8 +35,9 @@ const CompanyCommentPage: React.FC = () => {
     (state: RootState) => state.auth.userData
   );
 
+  const navigate = useNavigate();
   const addCommentHandler = () => {
-    console.log("hello add comment");
+    navigate("add");
   };
 
   return (

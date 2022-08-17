@@ -47,3 +47,22 @@ export function* handleSignUp({
     yield toast.error(error.response.data.message);
   }
 }
+
+// export function* handleAutoLogin({
+//   payload,
+// }: ReturnType<typeof autoLogin>): Generator<any, any, string> {
+//   const token: string = sessionStorage.getItem("token")!;
+//   if (token) {
+//     const decodedAuthToken: any = jwt(token);
+//     const dateNowSeconds = Math.round(new Date().getTime() / 1000);
+//     //still valid auth token
+//     if (decodedAuthToken.exp - dateNowSeconds > 0) {
+//       yield put(signIn({}));
+//     }
+//     //expired auth token
+//     else {
+//       yield put(logoutAction());
+//       yield payload.navigate("/auth");
+//     }
+//   }
+// }
