@@ -1,7 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CompanyRegisterPayload } from "../../models/slices/company";
+import CompanyModel from "../../models/CompanyModel";
+import {
+  CompanyRegisterPayload,
+  CompanySliceValues,
+} from "../../models/slices/company";
 
-const initCompanySliceValues = {};
+const initCompanySliceValues: CompanySliceValues = {
+  companies: [],
+};
+
 const companySlice = createSlice({
   name: "company",
   initialState: initCompanySliceValues,
@@ -10,9 +17,12 @@ const companySlice = createSlice({
       state,
       action: PayloadAction<CompanyRegisterPayload>
     ) {},
+    setCompanies(state, action: PayloadAction<CompanyModel[]>) {
+      state.companies = action.payload;
+    },
   },
 });
 
-export const { companyRegisterRequest } = companySlice.actions;
+export const { companyRegisterRequest, setCompanies } = companySlice.actions;
 
 export default companySlice.reducer;

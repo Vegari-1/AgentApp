@@ -2,15 +2,22 @@ import CompanyFormValues from "../models/forms/CompanyFormValues";
 import ApiService from "./ApiService";
 
 const ENDPOINTS = {
-  COMPANYREQUEST: "/company/request",
+  COMPANY_REQUEST: "/company/request",
+  GET_COMPANIES: "/company",
 };
 
 export class CompanyService extends ApiService {
   companyRegisterRequest = async (companyRegisterData: CompanyFormValues) => {
     const { data } = await this.apiClient.post(
-      ENDPOINTS.COMPANYREQUEST,
+      ENDPOINTS.COMPANY_REQUEST,
       companyRegisterData
     );
+
+    return data;
+  };
+
+  getCompanies = async () => {
+    const { data } = await this.apiClient.get(ENDPOINTS.GET_COMPANIES);
 
     return data;
   };

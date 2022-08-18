@@ -1,7 +1,7 @@
 import { Field, Formik } from "formik";
 import { useDispatch } from "react-redux";
 import SignUpFormValues from "../../../models/forms/SingUpFormValues";
-import { signUp } from "../../../store/slices/auth";
+import { signUp } from "../../../store/actions/auth-actions";
 import signUpValidationSchema from "../../../validations/signUpValidationSchema";
 import PrimaryButton from "../../atoms/PrimaryButton/PrimaryButton";
 import PrimaryInputField from "../../atoms/PrimaryInputField/PrimaryInputField";
@@ -12,22 +12,24 @@ const signUpFormInitialValues: SignUpFormValues = {
   username: "",
   password: "",
   name: "",
-  surname: ""
+  surname: "",
 };
 
 const SignUpForm: React.FC = () => {
   const dispatch = useDispatch();
   const submitHandler = (formValues: SignUpFormValues) => {
-    dispatch(signUp({ formValues }));
+    dispatch(signUp(formValues));
   };
 
   return (
     <Formik
       initialValues={signUpFormInitialValues}
       validationSchema={signUpValidationSchema}
-      onSubmit={(formValues, {resetForm}) => {
-        submitHandler(formValues); 
-        resetForm({values: {username: '', password: '', name: '', surname: ''}});
+      onSubmit={(formValues, { resetForm }) => {
+        submitHandler(formValues);
+        resetForm({
+          values: { username: "", password: "", name: "", surname: "" },
+        });
       }}
     >
       {({ handleSubmit }) => (

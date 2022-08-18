@@ -9,7 +9,6 @@ import companyReducer from "./slices/company";
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
-  // ??????
   reducer: {
     auth: authReducer,
     dislinkt: dislinktReducer,
