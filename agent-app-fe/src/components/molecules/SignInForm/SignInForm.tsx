@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 import SignInFormValues from "../../../models/forms/SignInFormValues";
-import { signIn } from "../../../store/slices/auth";
+import { signIn } from "../../../store/actions/auth-actions";
 import signInValidationSchema from "../../../validations/signInValidationSchema";
 import PrimaryButton from "../../atoms/PrimaryButton/PrimaryButton";
 import PrimaryInputField from "../../atoms/PrimaryInputField/PrimaryInputField";
@@ -18,23 +18,25 @@ const signInFormInitialValues: SignInFormValues = {
 const SignInForm: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const submitHandler = (formValues: SignInFormValues) => {
-    dispatch(signIn({ formValues, navigate }));
+    dispatch(signIn(formValues));
+    // dis don vrk (da procita sa stanja ulogovanog i na osnovu toga redirektuje),
+    // cita pre nego sto se zavrsi, moralo bi da se radi u sagi -> manki help :pleading emoji:
+    navigate("/profile");
   };
 
   return (
     <Formik
       initialValues={signInFormInitialValues}
       validationSchema={signInValidationSchema}
-      onSubmit={(formValues, {resetForm}) => {
-        submitHandler(formValues); 
-        resetForm({values: {username: '', password: ''}});
+      onSubmit={(formValues, { resetForm }) => {
+        submitHandler(formValues);
+        resetForm({ values: { username: "", password: "" } });
       }}
     >
       {({ handleSubmit }) => (
         <div className={classes["sing-in-form"]}>
-        <h1 className={classes.label}>Sign In</h1>
+          <h1 className={classes.label}>Sign In</h1>
           <img className={classes.logo} src="./images/logo.png" alt="logo" />
           <div className={classes.fields}>
             <Field

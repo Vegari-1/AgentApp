@@ -4,14 +4,16 @@ import { ReactComponent as ProfileIcon } from "../../../assets/svg/profile.svg";
 import { ReactComponent as LogoutIcon } from "../../../assets/svg/logout-danger.svg";
 import { useNavigate } from "react-router-dom";
 import { UserDataPayload } from "../../../models/slices/auth";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { Fragment } from "react";
 import classes from "./SidebarItemList.module.css";
 import SidebarItemLogout from "../../atoms/SidebarItemLogout/SidebarItemLogout";
+import { logOut } from "../../../store/actions/auth-actions";
 
 const SidebarItemList: React.FC = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userData: UserDataPayload = useSelector(
     (state: RootState) => state.auth.userData
   );
@@ -22,7 +24,7 @@ const SidebarItemList: React.FC = () => {
   };
 
   const logoutHandler = () => {
-    sessionStorage.removeItem("token");
+    dispatch(logOut());
     navigate("/auth");
   };
 

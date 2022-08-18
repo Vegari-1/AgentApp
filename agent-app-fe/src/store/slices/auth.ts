@@ -1,27 +1,25 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { SignInPayload, SignUpPayload, UserDataPayload } from "../../models/slices/auth";
+import { UserDataPayload } from "../../models/slices/auth";
 
 const initAuthSliceValues = {
   signInActive: false,
-  userData: {} as UserDataPayload
+  userData: {} as UserDataPayload,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState: initAuthSliceValues,
   reducers: {
-    signIn(state, action: PayloadAction<SignInPayload>) {},
-    signUp(state, action: PayloadAction<SignUpPayload>) {},
-    goToSignIn(state) {
-      state.signInActive = true;
+    setSignInActive(state, action: PayloadAction<boolean>) {
+      state.signInActive = action.payload;
     },
-    userData(state, action: PayloadAction<UserDataPayload>) {
+    setUserData(state, action: PayloadAction<UserDataPayload>) {
       state.userData = action.payload;
-    }
+    },
   },
 });
 
-export const { signIn, signUp, goToSignIn, userData } = authSlice.actions;
+export const { setSignInActive, setUserData } = authSlice.actions;
 
 export default authSlice.reducer;
