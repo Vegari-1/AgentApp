@@ -26,7 +26,14 @@ public class CompanyController {
     private final InterviewMapper interviewMapper;
     private final CompanyRequestMapper companyRequestMapper;
 
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping
+    public ResponseEntity<List<CompanyDto>> getCompanies() {
+        List<Company> companies = companyService.getCompanies();
+        return ResponseEntity.ok(companyMapper.toResponseList(companies));
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/{companyId}")
     public ResponseEntity<CompanyDto> getCompanyById(@PathVariable Long companyId) {
         Company company = companyService.getCompanyById(companyId);
@@ -34,17 +41,17 @@ public class CompanyController {
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
-    @PatchMapping("/{companyId}")
-    public ResponseEntity<CompanyDto> updateCompanyInfo(
-            @PathVariable Long companyId, @RequestBody CompanyInfoRequest companyInfoRequest) {
-        Company company = companyService.updateCompanyInfo(companyId, companyInfoRequest.getCompanyInfo());
+    @PutMapping("/{companyId}")
+    public ResponseEntity<CompanyDto> updateCompany(
+            @PathVariable Long companyId, @RequestBody CompanyDto companyEditRequest) {
+        Company company = companyService.updateCompanyInfo(companyId, companyMapper.toEntity(companyEditRequest));
         return ResponseEntity.ok(companyMapper.toResponse(company));
     }
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/request")
-    public ResponseEntity<CompanyRequestDto> createCompanyRegistrationRequest(
-            @Valid @RequestBody CompanyRequestDto companyRequestDto) {
+    public ResponseEntity<CompanyDto> createCompanyRegistrationRequest(
+            @Valid @RequestBody CompanyDto companyRequestDto) {
         CompanyRegistrationRequest companyRequest =
                 companyService.createCompanyRegReq(companyRequestMapper.toEntity(companyRequestDto));
         return new ResponseEntity<>(companyRequestMapper.toResponse(companyRequest), HttpStatus.CREATED);
@@ -52,7 +59,7 @@ public class CompanyController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/request")
-    public ResponseEntity<List<CompanyRequestDto>> getCompanyRegistrationRequest() {
+    public ResponseEntity<List<CompanyDto>> getCompanyRegistrationRequest() {
         List<CompanyRegistrationRequest> companyRequests = companyService.getCompanyRegReqs();
         return ResponseEntity.ok(companyRequestMapper.toResponseList(companyRequests));
     }

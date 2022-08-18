@@ -1,41 +1,37 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Layout from "../../components/organisms/Layout/Layout";
 import ManageCompanyRequests from "../../components/organisms/ManageCompanyRequests/ManageCompanyRequests";
-import CompanyModel from "../../models/CompanyModel";
+import {
+  acceptCompanyRequest,
+  declineCompanyRequest,
+  getCompanyRequests,
+} from "../../store/actions/company-actions";
+import { RootState } from "../../store/store";
 
 const AdminPage: React.FC = () => {
-  // dobavljanje koje se nalazi u plmanagecountries
+  const [refresh, setRefresh] = useState(false);
 
-  const requests: CompanyModel[] = [
-    {
-      id: "1",
-      industrySector: "Design",
-      companyName: "GreatDesign",
-      companyEmail: "great@design.com",
-      companyWebsite: "www.great-design.com",
-      companyInfo:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque gravida interdum ex, et pulvinar ex egestas eu. Donec augue sapien, posuere vel tortor ac, elementum porttitor orci. Donec dictum sagittis ex, quis ultrices velit mollis vel.",
-    },
-    {
-      id: "2",
-      industrySector: "Software",
-      companyName: "GreatSoftware",
-      companyEmail: "great@software.com",
-      companyWebsite: "www.great-software.com",
-      companyInfo:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque gravida interdum ex, et pulvinar ex egestas eu. Donec augue sapien, posuere vel tortor ac, elementum porttitor orci. Donec dictum sagittis ex, quis ultrices velit mollis vel.",
-    },
-  ];
+  const requests = useSelector(
+    (state: RootState) => state.company.companyRequests
+  );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCompanyRequests());
+    setRefresh(false);
+    // primjetio sam da ovo ide u beskonacnost, ali ne ako se dispatch stavi u zavisnosti
+    // da li ce ga mozda opet pozvati jer zavisi od dispatcha a u medjuvremenu smo pozvali dispatch?
+    // no :(
+  }, [dispatch, refresh]);
 
-  const declineRequestHandler = (id: string) => {
-    console.log("decline");
-    // dispatch(deleteCountry({ id, navigate, path: "/manage-countries" }));
+  const declineRequestHandler = (id: number) => {
+    dispatch(declineCompanyRequest(id));
+    setRefresh(true);
   };
 
-  const acceptRequestHandler = (id: string) => {
-    console.log("accept");
-    // dispatch(
-    //   getCountryById({ id: id!, route: EDIT_COUNTRY_PATH + id, navigate })
-    // );
+  const acceptRequestHandler = (id: number) => {
+    dispatch(acceptCompanyRequest(id));
+    setRefresh(true);
   };
 
   return (

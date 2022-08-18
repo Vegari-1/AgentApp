@@ -30,6 +30,11 @@ public class CompanyService implements ICompanyService {
     private final ICompanyRegistrationRepository companyRegistrationRepository;
 
     @Override
+    public List<Company> getCompanies() {
+        return companyRepository.findAll();
+    }
+
+    @Override
     public Company getCompanyById(Long companyId) throws EntityNotFoundException {
         return companyRepository.findById(companyId)
                 .orElseThrow(() -> new EntityNotFoundException(
@@ -37,14 +42,34 @@ public class CompanyService implements ICompanyService {
     }
 
     @Override
-    public Company updateCompanyInfo(Long companyId, String companyInfo) throws EntityNotFoundException, ForbiddenException {
+    public Company updateCompanyInfo(Long companyId, Company editCompany) throws EntityNotFoundException, ForbiddenException {
         Company company = companyRepository.findById(companyId)
                 .orElseThrow(() -> new EntityNotFoundException(
                         Company.class.getSimpleName(), "id"));
         User owner = ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         if (!owner.equals(company.getOwner()))
             throw new ForbiddenException(company.getClass().getSimpleName());
-        company.setCompanyInfo(companyInfo);
+        if (!company.getCompanyName().equals(editCompany.getCompanyName())) {
+            companyRepository.findByCompanyName(editCompany.getCompanyName())
+                    .ifPresent(existingCompany -> {
+                        throw new EntityExistsException(
+                                existingCompany.getClass().getSimpleName(),
+                                "company name");
+                    });
+        }
+        if (!company.getCompanyEmail().equals(editCompany.getCompanyEmail())) {
+            companyRepository.findByCompanyEmail(editCompany.getCompanyEmail())
+                    .ifPresent(existingCompany -> {
+                        throw new EntityExistsException(
+                                existingCompany.getClass().getSimpleName(),
+                                "company email");
+                    });
+        }
+        company.setIndustrySector(editCompany.getIndustrySector());
+        company.setCompanyName(editCompany.getCompanyName());
+        company.setCompanyWebsite(editCompany.getCompanyWebsite());
+        company.setCompanyEmail(editCompany.getCompanyEmail());
+        company.setCompanyInfo(editCompany.getCompanyInfo());
         return companyRepository.save(company);
     }
 
@@ -68,6 +93,20 @@ public class CompanyService implements ICompanyService {
         Long ownerId = ((User)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getId();
         User owner = userRepository.findById(ownerId)
                 .orElseThrow(() -> new EntityNotFoundException(User.class.getSimpleName(), "id"));
+
+        companyRegistrationRepository.findByOwnerId(ownerId)
+                .ifPresent(existingCompanyRequest -> {
+                    throw new EntityExistsException(
+                            "Company registration request",
+                            "owner");
+                });
+        companyRepository.findByOwnerId(ownerId)
+                .ifPresent(existingCompanyRequest -> {
+                    throw new EntityExistsException(
+                            "Company",
+                            "owner");
+                });
+
         companyRegReq.setOwner(owner);
         return companyRegistrationRepository.save(companyRegReq);
     }

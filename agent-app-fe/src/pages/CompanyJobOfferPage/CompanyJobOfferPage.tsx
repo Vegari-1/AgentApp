@@ -17,7 +17,7 @@ const CompanyJobOfferPage: React.FC = () => {
       startDate: new Date(),
       endDate: new Date(),
       company: {
-        id: "1",
+        id: 1,
         industrySector: "sektor",
         companyName: "kul ime",
         companyEmail: "mail",
@@ -34,7 +34,7 @@ const CompanyJobOfferPage: React.FC = () => {
       startDate: new Date(),
       endDate: new Date(),
       company: {
-        id: "1",
+        id: 1,
         industrySector: "sektor",
         companyName: "kul ime",
         companyEmail: "mail",

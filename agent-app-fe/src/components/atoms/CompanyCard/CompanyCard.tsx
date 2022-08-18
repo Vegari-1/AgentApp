@@ -5,7 +5,7 @@ import { ReactComponent as MailIcon } from "../../../assets/svg/mail.svg";
 
 interface CompanyCardProps {
   company: CompanyModel;
-  onClick: (id: string) => void;
+  onClick: (id: number) => void;
 }
 
 const CompanyCard: React.FC<CompanyCardProps> = ({ company, onClick }) => {

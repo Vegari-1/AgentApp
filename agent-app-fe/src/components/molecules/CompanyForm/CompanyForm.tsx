@@ -1,8 +1,12 @@
 import { Field, Formik } from "formik";
 import { useDispatch } from "react-redux";
+import CompanyModel from "../../../models/CompanyModel";
 import CompanyFormValues from "../../../models/forms/CompanyFormValues";
 import CompanyRegisterFormValues from "../../../models/forms/CompanyFormValues";
-import { companyRegisterRequest } from "../../../store/slices/company";
+import {
+  createCompanyRequest,
+  editCompany,
+} from "../../../store/actions/company-actions";
 import companyValidationSchema from "../../../validations/companyValidationSchema";
 
 import PrimaryButton from "../../atoms/PrimaryButton/PrimaryButton";
@@ -13,6 +17,8 @@ import classes from "./CompanyForm.module.css";
 
 interface CompanyFormProps {
   isRegister?: boolean;
+  id?: number;
+  company?: CompanyModel;
 }
 
 const companyFormInitialValues: CompanyFormValues = {
@@ -23,28 +29,39 @@ const companyFormInitialValues: CompanyFormValues = {
   companyInfo: "",
 };
 
-const CompanyForm: React.FC<CompanyFormProps> = ({ isRegister }) => {
+const CompanyForm: React.FC<CompanyFormProps> = ({
+  isRegister,
+  id,
+  company,
+}) => {
   const dispatch = useDispatch();
 
   const submitHandler = (formValues: CompanyRegisterFormValues) => {
-    dispatch(companyRegisterRequest({ formValues }));
+    if (isRegister) {
+      dispatch(createCompanyRequest(formValues));
+    } else {
+      formValues.id = id;
+      dispatch(editCompany(formValues));
+    }
   };
 
   return (
     <Formik
-      initialValues={companyFormInitialValues}
+      initialValues={isRegister ? companyFormInitialValues : company!}
       validationSchema={companyValidationSchema}
       onSubmit={(formValues, { resetForm }) => {
         submitHandler(formValues);
-        resetForm({
-          values: {
-            industrySector: "",
-            companyName: "",
-            companyEmail: "",
-            companyWebsite: "",
-            companyInfo: "",
-          },
-        });
+        if (isRegister) {
+          resetForm({
+            values: {
+              industrySector: "",
+              companyName: "",
+              companyEmail: "",
+              companyWebsite: "",
+              companyInfo: "",
+            },
+          });
+        }
       }}
     >
       {({ handleSubmit }) => (

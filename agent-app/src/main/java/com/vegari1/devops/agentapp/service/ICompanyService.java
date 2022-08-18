@@ -11,9 +11,11 @@ import java.util.Map;
 
 public interface ICompanyService {
 
+    List<Company> getCompanies();
+
     Company getCompanyById(Long companyId) throws EntityNotFoundException;
 
-    Company updateCompanyInfo(Long companyId, String companyInfo) throws EntityNotFoundException, ForbiddenException;
+    Company updateCompanyInfo(Long companyId, Company editCompany) throws EntityNotFoundException, ForbiddenException;
 
     CompanyRegistrationRequest createCompanyRegReq(CompanyRegistrationRequest companyRegReq)
             throws EntityExistsException;
