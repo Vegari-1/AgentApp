@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 @Getter
@@ -20,6 +21,7 @@ public class CompanyDto {
     @NotEmpty(message = "Company name must not be empty")
     private String companyName;
     @NotEmpty(message = "Company email must not be empty")
+    @Email(message = "Company email must be valid format")
     private String companyEmail;
     @NotEmpty(message = "Company website must not be empty")
     private String companyWebsite;

@@ -1,9 +1,9 @@
-import SignInFormValues from "../../models/forms/SignInFormValues";
 import SignUpFormValues from "../../models/forms/SingUpFormValues";
+import { SignInPayload } from "../../models/slices/auth";
 import { LOG_OUT, SIGN_IN, SIGN_UP } from "./action-types";
 
-export const signIn = (singInFormValues: SignInFormValues) => {
-  return { type: SIGN_IN, payload: singInFormValues };
+export const signIn = (singInPayload: SignInPayload) => {
+  return { type: SIGN_IN, payload: singInPayload };
 };
 
 export const signUp = (singUpFormValues: SignUpFormValues) => {

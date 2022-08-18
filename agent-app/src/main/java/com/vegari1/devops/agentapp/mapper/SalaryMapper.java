@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +21,7 @@ public class SalaryMapper implements
         IMapper<Salary, SalaryRequest, SalaryResponse> {
 
     private final UserMapper userMapper;
+    private static final DecimalFormat decimalFormat = new DecimalFormat("0.00");
 
     @Override
     public Salary toEntity(SalaryRequest request) {
@@ -42,7 +44,8 @@ public class SalaryMapper implements
     public List<SalaryMeanResponse> toResponseList(Map<String, Double> meanSalaryMap) {
         List<SalaryMeanResponse> meanSalaries = new ArrayList<>();
         for (Map.Entry<String, Double> meanSalary : meanSalaryMap.entrySet()) {
-            meanSalaries.add(new SalaryMeanResponse(meanSalary.getKey(), meanSalary.getValue()));
+            meanSalaries.add(new SalaryMeanResponse(meanSalary.getKey(),
+                    decimalFormat.format(meanSalary.getValue())));
         }
         return meanSalaries;
     }

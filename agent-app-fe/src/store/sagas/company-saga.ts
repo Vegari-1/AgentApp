@@ -1,22 +1,38 @@
 import { toast } from "react-toastify";
 import { call, put } from "redux-saga/effects";
 import CompanyModel from "../../models/CompanyModel";
+import JobOfferModel from "../../models/JobOfferModel";
+import ReviewModel from "../../models/ReviewModel";
+import SalaryModel from "../../models/SalaryModel";
 import companyService from "../../services/CompanyService";
 import {
   acceptCompanyRequest,
+  createCompanyComment,
+  createCompanyInterview,
+  createCompanyJobOffer,
   createCompanyRequest,
+  createCompanySalary,
   declineCompanyRequest,
   editCompany,
+  getCompanyById,
+  getCompanyComments,
+  getCompanyInterviews,
+  getCompanyJobOffers,
+  getCompanySalaries,
 } from "../actions/company-actions";
 import {
+  setActiveCompany,
+  setActiveCompanyComments,
+  setActiveCompanyInterviews,
+  setActiveCompanyJobOffers,
+  setActiveCompanySalaries,
   setCompanies,
   setCompanyRequests,
-  setUpdatedCompany,
 } from "../slices/company";
 
 export function* handleGetCompanyRequests(): Generator<
   any,
-  any,
+  void,
   CompanyModel[]
 > {
   try {
@@ -31,7 +47,11 @@ export function* handleGetCompanyRequests(): Generator<
 
 export function* handleCreateCompanyRequest({
   payload,
-}: ReturnType<typeof createCompanyRequest>): Generator<any, any, CompanyModel> {
+}: ReturnType<typeof createCompanyRequest>): Generator<
+  any,
+  void,
+  CompanyModel
+> {
   try {
     yield call(companyService.createCompanyRequest, payload);
     yield toast.success("Succesfully created company registration request");
@@ -42,7 +62,11 @@ export function* handleCreateCompanyRequest({
 
 export function* handleAcceptCompanyRequests({
   payload,
-}: ReturnType<typeof acceptCompanyRequest>): Generator<any, any, CompanyModel> {
+}: ReturnType<typeof acceptCompanyRequest>): Generator<
+  any,
+  void,
+  CompanyModel
+> {
   try {
     yield call(companyService.acceptCompanyRequest, payload);
   } catch (error: any) {
@@ -52,7 +76,7 @@ export function* handleAcceptCompanyRequests({
 
 export function* handleDeclineCompanyRequests({
   payload,
-}: ReturnType<typeof declineCompanyRequest>): Generator<any, any, void> {
+}: ReturnType<typeof declineCompanyRequest>): Generator<any, void, void> {
   try {
     yield call(companyService.declineCompanyRequest, payload);
   } catch (error: any) {
@@ -60,7 +84,7 @@ export function* handleDeclineCompanyRequests({
   }
 }
 
-export function* handleGetCompanies(): Generator<any, any, CompanyModel[]> {
+export function* handleGetCompanies(): Generator<any, void, CompanyModel[]> {
   try {
     const companies: CompanyModel[] = yield call(companyService.getCompanies);
     yield put(setCompanies(companies));
@@ -69,29 +93,154 @@ export function* handleGetCompanies(): Generator<any, any, CompanyModel[]> {
   }
 }
 
+export function* handleGetCompanyById({
+  payload,
+}: ReturnType<typeof getCompanyById>): Generator<any, void, CompanyModel> {
+  try {
+    const company: CompanyModel = yield call(
+      companyService.getCompanyById,
+      payload
+    );
+    yield put(setActiveCompany(company));
+  } catch (error: any) {
+    yield toast.error(error.response.data.message);
+  }
+}
+
 export function* handleEditCompany({
   payload,
-}: ReturnType<typeof editCompany>): Generator<any, any, CompanyModel> {
+}: ReturnType<typeof editCompany>): Generator<any, void, CompanyModel> {
   try {
     const company: CompanyModel = yield call(
       companyService.editCompany,
       payload
     );
-    yield put(setUpdatedCompany(company));
-    // ovde je pitanje, kako cemo update state da odradimo?
-    // pa verovatno na useeffect za pregled (kao za admina)
-    // posto smo update element, trebali bismo da ga update i na stanju
-    // mozemo da cuvamo kao trenutno gledanu kompaniju
-    // ili samo ovde opet filter da update
-    // ne znam sta je bolje
-    // ako imamo pojedinacnu, onda dupliramo stanje
-    // hipotetecki ako bi postojala paginacija, mozda onda ne bismo imali u tom trenutku na stanju
-    // bas tu kompaniju (ili bismo morali da je imamo, nekako mora doci do nje)
-    // MOZE DA DODJE PREKO RUTE DO NASE KOMPANIJE, ONDA JE POTENCIJALNO NEMAMO NA STANJU
-    // (ako dodje preko rute, svakako sve gubimo sa stanja, tako da ne pokrivamo taj slucaj)
-    // u svakom drugom slucaju, mora nam postojati na stanju vec (ucitana uz sve)
-    // pre nego sto joj pristupimo direktno
+    yield put(setActiveCompany(company));
     yield toast.success("Succesfully updated company");
+  } catch (error: any) {
+    yield toast.error(error.response.data.message);
+  }
+}
+
+export function* handleGetCompanyJobOffers({
+  payload,
+}: ReturnType<typeof getCompanyJobOffers>): Generator<
+  any,
+  void,
+  JobOfferModel[]
+> {
+  try {
+    const companyJobOffers: JobOfferModel[] = yield call(
+      companyService.getCompanyJobOffers,
+      payload
+    );
+    yield put(setActiveCompanyJobOffers(companyJobOffers));
+  } catch (error: any) {
+    yield toast.error(error.response.data.message);
+  }
+}
+
+export function* handleGetCompanyComments({
+  payload,
+}: ReturnType<typeof getCompanyComments>): Generator<any, void, ReviewModel[]> {
+  try {
+    const companyComments: ReviewModel[] = yield call(
+      companyService.getCompanyComments,
+      payload
+    );
+    yield put(setActiveCompanyComments(companyComments));
+  } catch (error: any) {
+    yield toast.error(error.response.data.message);
+  }
+}
+
+export function* handleGetCompanyInterviews({
+  payload,
+}: ReturnType<typeof getCompanyInterviews>): Generator<
+  any,
+  void,
+  ReviewModel[]
+> {
+  try {
+    const companyInterviews: ReviewModel[] = yield call(
+      companyService.getCompanyInterviews,
+      payload
+    );
+    yield put(setActiveCompanyInterviews(companyInterviews));
+  } catch (error: any) {
+    yield toast.error(error.response.data.message);
+  }
+}
+
+export function* handleGetCompanySalaries({
+  payload,
+}: ReturnType<typeof getCompanySalaries>): Generator<any, void, SalaryModel[]> {
+  try {
+    const companySalaries: SalaryModel[] = yield call(
+      companyService.getCompanySalaries,
+      payload
+    );
+    yield put(setActiveCompanySalaries(companySalaries));
+  } catch (error: any) {
+    yield toast.error(error.response.data.message);
+  }
+}
+
+export function* handleCreateCompanyJobOffer({
+  payload,
+}: ReturnType<typeof createCompanyJobOffer>): Generator<any, void, any> {
+  try {
+    yield call(companyService.createCompanyJobOffer, payload);
+    yield call(
+      handleGetCompanyJobOffers,
+      getCompanyJobOffers(payload.companyId!)
+    );
+    yield toast.success("Succesfully created company job offer");
+  } catch (error: any) {
+    yield toast.error(error.response.data.message);
+  }
+}
+
+export function* handleCreateCompanyComment({
+  payload,
+}: ReturnType<typeof createCompanyComment>): Generator<any, void, any> {
+  try {
+    yield call(companyService.createCompanyComment, payload);
+    yield call(
+      handleGetCompanyComments,
+      getCompanyComments(payload.companyId!)
+    );
+    yield toast.success("Succesfully created company comment");
+  } catch (error: any) {
+    yield toast.error(error.response.data.message);
+  }
+}
+
+export function* handleCreateCompanyInterview({
+  payload,
+}: ReturnType<typeof createCompanyInterview>): Generator<any, void, any> {
+  try {
+    yield call(companyService.createCompanyInterview, payload);
+    yield call(
+      handleGetCompanyInterviews,
+      getCompanyInterviews(payload.companyId!)
+    );
+    yield toast.success("Succesfully created company interview");
+  } catch (error: any) {
+    yield toast.error(error.response.data.message);
+  }
+}
+
+export function* handleCreateCompanySalary({
+  payload,
+}: ReturnType<typeof createCompanySalary>): Generator<any, void, any> {
+  try {
+    yield call(companyService.createCompanySalary, payload);
+    yield call(
+      handleGetCompanySalaries,
+      getCompanySalaries(payload.companyId!)
+    );
+    yield toast.success("Succesfully created company salary");
   } catch (error: any) {
     yield toast.error(error.response.data.message);
   }

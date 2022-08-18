@@ -3,20 +3,26 @@ import { useNavigate, useParams } from "react-router-dom";
 import GridCard from "../../components/molecules/GridCard/GridCard";
 import CompanyPane from "../../components/organisms/CompanyPane/CompanyPane";
 import GridCardModel from "../../models/GridCardModel";
+import SalaryModel from "../../models/SalaryModel";
 import { UserDataPayload } from "../../models/slices/auth";
 import { RootState } from "../../store/store";
 
 const CompanySalaryPage: React.FC = () => {
-  const salaryInfo: GridCardModel[] = [
-    { label: "Designer", value: "1200" },
-    { label: "Developer", value: "1400" },
-    { label: "Helper", value: "900" },
-  ];
-
   const { id } = useParams();
   const userData: UserDataPayload = useSelector(
     (state: RootState) => state.auth.userData
   );
+
+  const salaryInfo: GridCardModel[] = useSelector((state: RootState) => {
+    const salaries: SalaryModel[] = state.company.activeCompanySalaries;
+    return salaries.map(
+      (salary) =>
+        ({
+          label: salary.position,
+          value: salary.amount.toString(),
+        } as GridCardModel)
+    );
+  });
 
   const navigate = useNavigate();
   const addSalaryHandler = () => {
@@ -29,7 +35,12 @@ const CompanySalaryPage: React.FC = () => {
       showAddButton={userData.companyId !== +id!}
       onAddButtonClick={addSalaryHandler}
     >
-      <GridCard title="Salary Information" content={salaryInfo} />
+      {salaryInfo.length !== 0 && (
+        <GridCard title="Salary Information" content={salaryInfo} />
+      )}
+      {salaryInfo.length === 0 && (
+        <div>Currently there is no salary info for this company</div>
+      )}
     </CompanyPane>
   );
 };

@@ -1,6 +1,8 @@
 import { Field, Formik } from "formik";
 import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import SalaryFormValues from "../../../models/forms/SalaryFormValues";
+import { createCompanySalary } from "../../../store/actions/company-actions";
 import salaryValidationSchema from "../../../validations/salaryValidationSchema";
 import PrimaryButton from "../../atoms/PrimaryButton/PrimaryButton";
 import PrimaryInputField from "../../atoms/PrimaryInputField/PrimaryInputField";
@@ -13,11 +15,14 @@ const salaryFormInitialValues: SalaryFormValues = {
 };
 
 const SalaryForm: React.FC = () => {
+  const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const submitHandler = (formValues: SalaryFormValues) => {
-    console.log(formValues);
-    // dispatch(companyRegisterRequest({ formValues }));
+    formValues.companyId = +id!;
+    dispatch(createCompanySalary(formValues));
+    navigate("/company/" + id + "/salary");
   };
 
   return (

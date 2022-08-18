@@ -4,6 +4,7 @@ import com.vegari1.devops.agentapp.dto.*;
 import com.vegari1.devops.agentapp.mapper.*;
 import com.vegari1.devops.agentapp.model.*;
 import com.vegari1.devops.agentapp.service.ICompanyService;
+import com.vegari1.devops.agentapp.service.IJobOfferService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +21,11 @@ import java.util.Map;
 public class CompanyController {
 
     private final ICompanyService companyService;
+    private final IJobOfferService jobOfferService;
     private final SalaryMapper salaryMapper;
     private final CompanyMapper companyMapper;
     private final CommentMapper commentMapper;
+    private final JobOfferMapper jobOfferMapper;
     private final InterviewMapper interviewMapper;
     private final CompanyRequestMapper companyRequestMapper;
 
@@ -80,6 +83,22 @@ public class CompanyController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/{companyId}/job-offer")
+    public ResponseEntity<List<JobOfferResponse>> getAllCompanyJobOffers(
+            @PathVariable Long companyId) {
+        List<JobOffer> jobOffers = jobOfferService.getJobOfferByCompanyId(companyId);
+        return new ResponseEntity<>(jobOfferMapper.toResponseList(jobOffers), HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @PostMapping("/{companyId}/job-offer")
+    public ResponseEntity<JobOfferResponse> createJobOffer(
+            @PathVariable Long companyId,
+            @Valid @RequestBody JobOfferRequest jobOfferRequest) {
+        JobOffer jobOffer = jobOfferService.createJobOffer(jobOfferMapper.toEntity(jobOfferRequest), companyId);
+        return new ResponseEntity<>(jobOfferMapper.toResponse(jobOffer), HttpStatus.CREATED);
+    }
 
     @PreAuthorize("hasRole('ROLE_USER')")
     @PostMapping("/{companyId}/comment")

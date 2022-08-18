@@ -43,10 +43,7 @@ const PrimaryTextArea: React.FC<PrimaryTextAreaProps> = ({
         }}
         rows={5}
         cols={50}
-      >
-        At w3schools.com you will learn how to make a website. They offer free
-        tutorials in all web development technologies.
-      </textarea>
+      ></textarea>
       <span className={classes["text-area-error-span"]}>
         {shouldDisplayError ? errors[name] : ""}
       </span>

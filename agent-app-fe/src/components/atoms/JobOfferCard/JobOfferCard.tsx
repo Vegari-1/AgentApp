@@ -27,12 +27,12 @@ const JobOfferCard: React.FC<JobOfferCardProps> = ({ jobOffer }) => {
         <div className={classes["date"]}>
           Active from:
           <br />
-          <b>{jobOffer.startDate.toDateString()}</b>
+          <b>{new Date(jobOffer.startDate).toDateString()}</b>
         </div>
         <div className={classes["date"]}>
           Active to:
           <br />
-          <b>{jobOffer.endDate.toDateString()}</b>
+          <b>{new Date(jobOffer.endDate).toDateString()}</b>
         </div>
       </div>
     </div>

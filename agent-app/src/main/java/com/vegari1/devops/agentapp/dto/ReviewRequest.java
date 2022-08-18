@@ -13,7 +13,7 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 public class ReviewRequest {
 
-    @NotEmpty(message = "Text must not be empty")
+    @NotEmpty(message = "Content must not be empty")
     private String content;
 
 }

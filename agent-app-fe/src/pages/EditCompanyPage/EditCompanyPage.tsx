@@ -7,12 +7,8 @@ import { RootState } from "../../store/store";
 
 const EditCompanyPage: React.FC = () => {
   const { id } = useParams();
-  // useselector dobavi trenutno aktivnu kompaniju
-  // za sada ovde moze da filtrira od svih po id-u
-  const company: CompanyModel | undefined = useSelector((state: RootState) =>
-    state.company.companies.find((company) => {
-      return company.id === +id!;
-    })
+  const company: CompanyModel = useSelector(
+    (state: RootState) => state.company.activeCompany
   );
 
   return (
