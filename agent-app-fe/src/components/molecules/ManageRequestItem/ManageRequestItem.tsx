@@ -6,14 +6,14 @@ import { ReactComponent as DeclineIcon } from "../../../assets/svg/close.svg";
 import classes from "./ManageRequestItem.module.css";
 
 interface ManageRequestItemProps {
-  id: string;
+  id: number;
   sector: string;
   name: string;
   email: string;
   website: string;
   info: string;
-  acceptRequest: (id: string) => void;
-  declineRequest: (id: string) => void;
+  acceptRequest: (id: number) => void;
+  declineRequest: (id: number) => void;
 }
 
 const ManageRequestItem: React.FC<ManageRequestItemProps> = ({

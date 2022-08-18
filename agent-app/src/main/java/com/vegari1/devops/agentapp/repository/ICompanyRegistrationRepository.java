@@ -10,5 +10,6 @@ import java.util.Optional;
 public interface ICompanyRegistrationRepository extends JpaRepository<CompanyRegistrationRequest, Long> {
 
     Optional<CompanyRegistrationRequest> findByCompanyNameOrCompanyEmail(String companyName, String companyEmail);
+    Optional<CompanyRegistrationRequest> findByOwnerId(Long ownerId);
 
 }

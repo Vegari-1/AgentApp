@@ -1,5 +1,5 @@
 interface CompanyModel {
-  id: string;
+  id: number;
   industrySector: string;
   companyName: string;
   companyEmail: string;

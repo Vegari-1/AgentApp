@@ -4,6 +4,7 @@ interface CompanyFormValues {
   companyEmail: string;
   companyWebsite: string;
   companyInfo: string;
+  id?: number;
 }
 
 export default CompanyFormValues;

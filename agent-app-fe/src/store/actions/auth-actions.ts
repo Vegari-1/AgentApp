@@ -2,7 +2,6 @@ import SignInFormValues from "../../models/forms/SignInFormValues";
 import SignUpFormValues from "../../models/forms/SingUpFormValues";
 import { LOG_OUT, SIGN_IN, SIGN_UP } from "./action-types";
 
-// payload je sta saljemo na bek
 export const signIn = (singInFormValues: SignInFormValues) => {
   return { type: SIGN_IN, payload: singInFormValues };
 };

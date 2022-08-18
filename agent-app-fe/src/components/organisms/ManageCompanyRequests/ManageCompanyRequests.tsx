@@ -4,8 +4,8 @@ import classes from "./ManageCompanyRequests.module.css";
 
 interface ManageCompanyRequestsProps {
   requests: CompanyModel[];
-  acceptRequest: (id: string) => void;
-  declineRequest: (id: string) => void;
+  acceptRequest: (id: number) => void;
+  declineRequest: (id: number) => void;
 }
 
 const ManageCompanyRequests: React.FC<ManageCompanyRequestsProps> = ({
