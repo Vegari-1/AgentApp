@@ -9,19 +9,9 @@ import { setSignInActive, setUserData } from "../slices/auth";
 
 export function* handleSignIn({
   payload,
-}: // prima akciju koju destruktuiramo i uzmemo samo pejload i bitno je da bude tipa typeof signIn
-// ISTRAZITI STA SU OVA PRVA DVA ANY
-// veri kompleks, didnt rid it ol
-//https://understandable.dev/deep-dives/typescript-and-redux-sagas/
-// ALI, prvo je sta sve pozivamo u okviru generatora
-// drugo je povratna vrednost generatora (void jer ne vracamo nista)
-// trece je sta god intermediate imamo da primamo (najcesce sta nam servis vrati)
-// step, return, intermediate
-// posto imamo mnogo ovde poziva usput, da ne bismo pisali sve, mozemo samo any
-// (ako bismo sve, moraju biti razdvojeni | )
-ReturnType<typeof signIn>): Generator<any, void, string> {
+}: ReturnType<typeof signIn>): Generator<any, void, string> {
   try {
-    const token: string = yield call(authService.signIn, payload);
+    const token: string = yield call(authService.signIn, payload.formValues);
 
     sessionStorage.setItem("token", token);
     const tokenUserPayload: any = jwt(token);
@@ -32,14 +22,15 @@ ReturnType<typeof signIn>): Generator<any, void, string> {
       surname: tokenUserPayload.user.surname,
       role: tokenUserPayload.user.authorities[0].name,
       companyId: tokenUserPayload.user.companyId,
+      apiKey: tokenUserPayload.user.apiKey,
     };
     yield put(setUserData(userDataPayload));
 
-    // if (userDataPayload.role === "ROLE_ADMIN") {
-    //   yield payload.navigate("/requests");
-    // } else {
-    //   yield payload.navigate("/profile");
-    // }
+    if (userDataPayload.role === "ROLE_ADMIN") {
+      yield payload.navigate("/requests");
+    } else {
+      yield payload.navigate("/profile");
+    }
     yield toast.success("Successfully signed in");
   } catch (error: any) {
     yield toast.error(error.response.data.message);
@@ -48,7 +39,7 @@ ReturnType<typeof signIn>): Generator<any, void, string> {
 
 export function* handleSignUp({
   payload,
-}: ReturnType<typeof signUp>): Generator<any, any, UserModel> {
+}: ReturnType<typeof signUp>): Generator<any, void, UserModel> {
   try {
     yield call(authService.signUp, payload);
 

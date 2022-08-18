@@ -1,7 +1,8 @@
 import { Field, Formik } from "formik";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import JobOfferFormValues from "../../../models/forms/JobOfferFormValues";
+import { createCompanyJobOffer } from "../../../store/actions/company-actions";
 import jobOfferValidationSchema from "../../../validations/jobOfferValidationSchema";
 import PrimaryButton from "../../atoms/PrimaryButton/PrimaryButton";
 import PrimaryInputField from "../../atoms/PrimaryInputField/PrimaryInputField";
@@ -13,7 +14,7 @@ const jobOfferFormInitialValues: JobOfferFormValues = {
   title: "",
   position: "",
   jobDescription: "",
-  qualifications: [],
+  qualificationsCombined: "",
   startDate: new Date(),
   endDate: new Date(),
 };
@@ -21,12 +22,15 @@ const jobOfferFormInitialValues: JobOfferFormValues = {
 const JobOfferForm: React.FC = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const submitHandler = (formValues: JobOfferFormValues) => {
-    console.log(id);
-    console.log(formValues);
-    // splitovati qualifications po zarezu i stripovati vajtspejsova (jer unosi kao string)
-    // dispatch(companyRegisterRequest({ formValues }));
+    formValues.companyId = +id!;
+    formValues.qualifications = formValues.qualificationsCombined
+      .split(",")
+      .map((qual) => qual.trim());
+    dispatch(createCompanyJobOffer(formValues));
+    navigate("/company/" + id + "/job-offer");
   };
 
   return (
@@ -40,7 +44,7 @@ const JobOfferForm: React.FC = () => {
             title: "",
             position: "",
             jobDescription: "",
-            qualifications: [],
+            qualificationsCombined: "",
             startDate: new Date(),
             endDate: new Date(),
           },
@@ -76,8 +80,8 @@ const JobOfferForm: React.FC = () => {
               component={PrimaryInputField}
               text="Qualifications (seperated by ',')"
               type="text"
-              name="qualifications"
-              value="qualifications"
+              name="qualificationsCombined"
+              value="qualificationsCombined"
             />
             <Field
               component={PrimaryInputField}

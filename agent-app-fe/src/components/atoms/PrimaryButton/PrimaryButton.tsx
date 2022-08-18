@@ -18,7 +18,6 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({
       className={`${
         small ? classes["primary-button-small"] : classes["primary-button"]
       }`}
-      // className={classes["primary-button"]}
       onClick={onClickHandler}
       type={isSubmit ? "submit" : "button"}
     >

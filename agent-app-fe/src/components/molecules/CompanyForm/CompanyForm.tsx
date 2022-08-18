@@ -1,5 +1,6 @@
 import { Field, Formik } from "formik";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import CompanyModel from "../../../models/CompanyModel";
 import CompanyFormValues from "../../../models/forms/CompanyFormValues";
 import CompanyRegisterFormValues from "../../../models/forms/CompanyFormValues";
@@ -35,13 +36,16 @@ const CompanyForm: React.FC<CompanyFormProps> = ({
   company,
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const submitHandler = (formValues: CompanyRegisterFormValues) => {
     if (isRegister) {
       dispatch(createCompanyRequest(formValues));
+      navigate("/profile");
     } else {
       formValues.id = id;
       dispatch(editCompany(formValues));
+      navigate("/company/" + id);
     }
   };
 

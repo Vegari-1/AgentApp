@@ -12,6 +12,6 @@ import lombok.Setter;
 public class SalaryMeanResponse {
 
     private String position;
-    private double amount;
+    private String amount;
 
 }

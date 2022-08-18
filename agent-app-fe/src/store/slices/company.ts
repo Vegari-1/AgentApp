@@ -1,10 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import CompanyModel from "../../models/CompanyModel";
+import JobOfferModel from "../../models/JobOfferModel";
+import ReviewModel from "../../models/ReviewModel";
+import SalaryModel from "../../models/SalaryModel";
 import { CompanySliceValues } from "../../models/slices/company";
 
 const initCompanySliceValues: CompanySliceValues = {
   companyRequests: [],
   companies: [],
+  activeCompany: {} as CompanyModel,
+  activeCompanyJobOffers: [],
+  activeCompanyComments: [],
+  activeCompanyInterviews: [],
+  activeCompanySalaries: [],
 };
 
 const companySlice = createSlice({
@@ -17,16 +25,39 @@ const companySlice = createSlice({
     setCompanies(state, action: PayloadAction<CompanyModel[]>) {
       state.companies = action.payload;
     },
-    setUpdatedCompany(state, action: PayloadAction<CompanyModel>) {
-      const companyIndex = state.companies.findIndex(
-        (company) => company.id === action.payload.id
-      );
-      state.companies[companyIndex] = action.payload;
+    setActiveCompany(state, action: PayloadAction<CompanyModel>) {
+      state.activeCompany = action.payload;
     },
+    setActiveCompanyJobOffers(state, action: PayloadAction<JobOfferModel[]>) {
+      state.activeCompanyJobOffers = action.payload;
+    },
+    setActiveCompanyComments(state, action: PayloadAction<ReviewModel[]>) {
+      state.activeCompanyComments = action.payload;
+    },
+    setActiveCompanyInterviews(state, action: PayloadAction<ReviewModel[]>) {
+      state.activeCompanyInterviews = action.payload;
+    },
+    setActiveCompanySalaries(state, action: PayloadAction<SalaryModel[]>) {
+      state.activeCompanySalaries = action.payload;
+    },
+    // setUpdatedCompany(state, action: PayloadAction<CompanyModel>) {
+    //   const companyIndex = state.companies.findIndex(
+    //     (company) => company.id === action.payload.id
+    //   );
+    //   state.companies[companyIndex] = action.payload;
+    // },
   },
 });
 
-export const { setCompanyRequests, setCompanies, setUpdatedCompany } =
-  companySlice.actions;
+export const {
+  setCompanyRequests,
+  setCompanies,
+  setActiveCompany,
+  // setUpdatedCompany,
+  setActiveCompanyJobOffers,
+  setActiveCompanyComments,
+  setActiveCompanyInterviews,
+  setActiveCompanySalaries,
+} = companySlice.actions;
 
 export default companySlice.reducer;

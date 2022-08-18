@@ -19,9 +19,6 @@ const AdminPage: React.FC = () => {
   useEffect(() => {
     dispatch(getCompanyRequests());
     setRefresh(false);
-    // primjetio sam da ovo ide u beskonacnost, ali ne ako se dispatch stavi u zavisnosti
-    // da li ce ga mozda opet pozvati jer zavisi od dispatcha a u medjuvremenu smo pozvali dispatch?
-    // no :(
   }, [dispatch, refresh]);
 
   const declineRequestHandler = (id: number) => {

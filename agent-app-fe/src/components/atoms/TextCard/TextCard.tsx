@@ -15,7 +15,7 @@ const TextCard: React.FC<TextCardProps> = ({ review }) => {
         <div className={classes["left"]}>
           <DateIcon width={25} height={25} />
           <span className={classes["separator"]}>
-            {review.timestamp.toDateString()}
+            {new Date(review.timestamp).toDateString()}
           </span>
         </div>
         <div className={classes["right"]}>

@@ -1,6 +1,11 @@
 import { Field, Formik } from "formik";
 import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import ReviewFormValues from "../../../models/forms/ReviewFormValues";
+import {
+  createCompanyComment,
+  createCompanyInterview,
+} from "../../../store/actions/company-actions";
 import reviewValidationSchema from "../../../validations/reviewValidationSchema";
 import PrimaryButton from "../../atoms/PrimaryButton/PrimaryButton";
 import PrimaryTextArea from "../../atoms/PrimaryTextArea/PrimaryTextArea";
@@ -16,12 +21,19 @@ const reviewFormInitialValues: ReviewFormValues = {
 };
 
 const ReviewForm: React.FC<ReviewFormProps> = ({ type }) => {
+  const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const submitHandler = (formValues: ReviewFormValues) => {
-    // u zavisnosti od tipa dispacuj ili comment ili interview akciju
-    console.log(formValues);
-    // dispatch(companyRegisterRequest({ formValues }));
+    formValues.companyId = +id!;
+    if (type === "comment") {
+      dispatch(createCompanyComment(formValues));
+      navigate("/company/" + id + "/comment");
+    } else {
+      dispatch(createCompanyInterview(formValues));
+      navigate("/company/" + id + "/interview");
+    }
   };
 
   return (

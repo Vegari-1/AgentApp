@@ -15,14 +15,10 @@ const CompanyPage: React.FC = () => {
     (state: RootState) => state.auth.userData
   );
 
-  const company: CompanyModel | undefined = useSelector((state: RootState) =>
-    // problem u slucaju da prvo ne ode na companies i onda ucitamo sve companies
-    // bolje ovde ici po id-u i onda duplirati u stanju
-    // IZMENITI VEROVATNO
-    state.company.companies.find((company) => {
-      return company.id === +id!;
-    })
+  const company: CompanyModel = useSelector(
+    (state: RootState) => state.company.activeCompany
   );
+
   const companyInfo: GridCardModel[] = [
     { label: "Industry sector", value: company?.industrySector! },
     { label: "Name", value: company?.companyName! },

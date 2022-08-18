@@ -1,28 +1,28 @@
 import { Field, Formik } from "formik";
 import { useDispatch } from "react-redux";
 import ApiKeyFormValues from "../../../models/forms/ApiKeyFormValues";
+import { addApiKey } from "../../../store/actions/dislinkt-actions";
 
-import { addApiKey } from "../../../store/slices/dislinkt";
 import apiKeyValidationSchema from "../../../validations/apiKeyValidationSchema";
 import PrimaryButton from "../../atoms/PrimaryButton/PrimaryButton";
 import PrimaryInputField from "../../atoms/PrimaryInputField/PrimaryInputField";
 
 import classes from "./ApiKeyForm.module.css";
 
-const apiKeyFormInitialValues: ApiKeyFormValues = {
-  apiKey: "",
-};
+interface ApiKeyFormProps {
+  apiKey: string;
+}
 
-const ApiKeyForm: React.FC = () => {
+const ApiKeyForm: React.FC<ApiKeyFormProps> = ({ apiKey }) => {
   const dispatch = useDispatch();
 
   const submitHandler = (formValues: ApiKeyFormValues) => {
-    dispatch(addApiKey({ formValues }));
+    dispatch(addApiKey(formValues));
   };
 
   return (
     <Formik
-      initialValues={apiKeyFormInitialValues}
+      initialValues={apiKey ? { apiKey } : { apiKey: "" }}
       validationSchema={apiKeyValidationSchema}
       onSubmit={(formValues) => {
         submitHandler(formValues);

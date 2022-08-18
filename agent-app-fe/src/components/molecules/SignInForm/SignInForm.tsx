@@ -19,10 +19,7 @@ const SignInForm: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const submitHandler = (formValues: SignInFormValues) => {
-    dispatch(signIn(formValues));
-    // dis don vrk (da procita sa stanja ulogovanog i na osnovu toga redirektuje),
-    // cita pre nego sto se zavrsi, moralo bi da se radi u sagi -> manki help :pleading emoji:
-    navigate("/profile");
+    dispatch(signIn({ formValues, navigate }));
   };
 
   return (
