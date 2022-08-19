@@ -9,8 +9,8 @@
 }
 
 .empty-entity-image {
-  height: 177px;
-  width: 20%;
+  height: 222px;
+  width: 40%;
 
   background-image: url("../../../../public/images/empty-entity-list.png");
   background-size: contain;
