@@ -5,6 +5,7 @@ interface JobOfferFormValues {
   qualificationsCombined: string;
   startDate: Date;
   endDate: Date;
+  share: boolean;
   qualifications?: string[];
   companyId?: number;
 }

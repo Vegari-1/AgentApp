@@ -5,6 +5,7 @@ import JobOfferFormValues from "../../../models/forms/JobOfferFormValues";
 import { createCompanyJobOffer } from "../../../store/actions/company-actions";
 import jobOfferValidationSchema from "../../../validations/jobOfferValidationSchema";
 import PrimaryButton from "../../atoms/PrimaryButton/PrimaryButton";
+import PrimaryCheckBox from "../../atoms/PrimaryCheckBox/PrimaryCheckBox";
 import PrimaryInputField from "../../atoms/PrimaryInputField/PrimaryInputField";
 import PrimaryTextArea from "../../atoms/PrimaryTextArea/PrimaryTextArea";
 
@@ -17,6 +18,7 @@ const jobOfferFormInitialValues: JobOfferFormValues = {
   qualificationsCombined: "",
   startDate: new Date(),
   endDate: new Date(),
+  share: false,
 };
 
 const JobOfferForm: React.FC = () => {
@@ -47,6 +49,7 @@ const JobOfferForm: React.FC = () => {
             qualificationsCombined: "",
             startDate: new Date(),
             endDate: new Date(),
+            share: false,
           },
         });
       }}
@@ -96,6 +99,13 @@ const JobOfferForm: React.FC = () => {
               type="date"
               name="endDate"
               value="endDate"
+            />
+            <Field
+              component={PrimaryCheckBox}
+              type="checkbox"
+              label="Share on Dislinkt?"
+              name="share"
+              value="share"
             />
           </div>
           <div className={classes.button}>

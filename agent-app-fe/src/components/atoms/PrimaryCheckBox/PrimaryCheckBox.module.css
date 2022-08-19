@@ -1,0 +1,74 @@
+@import "../../../styles.css";
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-label {
+  margin: 0px 10px;
+  height: 20px;
+
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.checkbox-label-error {
+  color: var(--DANGER);
+}
+
+.checkbox {
+  border-radius: 5px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: 0;
+  background: var(--LIGHT-GREY);
+  height: 20px;
+  width: 20px;
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--PRIMARY-COLOR-LIGHTER);
+  background-image: url("../../../../public/images/done.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.checkbox::placeholder {
+  color: var(--DARK-GREY);
+}
+
+.checkbox:focus-visible {
+  outline: 1px solid var(--PRIMARY-COLOR);
+}
+
+.checkbox-error {
+  border: 1px solid var(--DANGER);
+  background: var(--LIGHT-GREY);
+}
+
+.checkbox-error:focus-visible {
+  outline: 1px solid var(--PRIMARY-COLOR);
+}
+
+.checkbox-error::placeholder {
+  color: var(--DANGER);
+}
+
+.checkbox-error-span {
+  height: 16px;
+  margin-top: 3px;
+
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+  font-weight: var(--FONT-WEIGHT-LIGHT);
+  font-size: 12px;
+  line-height: 16px;
+
+  display: block;
+
+  color: var(--DANGER);
+}

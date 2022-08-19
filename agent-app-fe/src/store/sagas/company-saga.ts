@@ -5,6 +5,7 @@ import JobOfferModel from "../../models/JobOfferModel";
 import ReviewModel from "../../models/ReviewModel";
 import SalaryModel from "../../models/SalaryModel";
 import companyService from "../../services/CompanyService";
+import dislinktService from "../../services/DislinktService";
 import {
   acceptCompanyRequest,
   createCompanyComment,
@@ -69,6 +70,7 @@ export function* handleAcceptCompanyRequests({
 > {
   try {
     yield call(companyService.acceptCompanyRequest, payload);
+    yield call(handleGetCompanyRequests);
   } catch (error: any) {
     yield toast.error(error.response.data.message);
   }
@@ -79,6 +81,7 @@ export function* handleDeclineCompanyRequests({
 }: ReturnType<typeof declineCompanyRequest>): Generator<any, void, void> {
   try {
     yield call(companyService.declineCompanyRequest, payload);
+    yield call(handleGetCompanyRequests);
   } catch (error: any) {
     yield toast.error(error.response.data.message);
   }
@@ -190,12 +193,18 @@ export function* handleCreateCompanyJobOffer({
   payload,
 }: ReturnType<typeof createCompanyJobOffer>): Generator<any, void, any> {
   try {
-    yield call(companyService.createCompanyJobOffer, payload);
+    const jobOffer: JobOfferModel = yield call(
+      companyService.createCompanyJobOffer,
+      payload
+    );
+    yield toast.success("Succesfully created company job offer");
     yield call(
       handleGetCompanyJobOffers,
       getCompanyJobOffers(payload.companyId!)
     );
-    yield toast.success("Succesfully created company job offer");
+    if (payload.share) {
+      yield call(dislinktService.shareJobOffer, jobOffer.id);
+    }
   } catch (error: any) {
     yield toast.error(error.response.data.message);
   }

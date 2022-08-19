@@ -40,12 +40,6 @@ const companySlice = createSlice({
     setActiveCompanySalaries(state, action: PayloadAction<SalaryModel[]>) {
       state.activeCompanySalaries = action.payload;
     },
-    // setUpdatedCompany(state, action: PayloadAction<CompanyModel>) {
-    //   const companyIndex = state.companies.findIndex(
-    //     (company) => company.id === action.payload.id
-    //   );
-    //   state.companies[companyIndex] = action.payload;
-    // },
   },
 });
 
@@ -53,7 +47,6 @@ export const {
   setCompanyRequests,
   setCompanies,
   setActiveCompany,
-  // setUpdatedCompany,
   setActiveCompanyJobOffers,
   setActiveCompanyComments,
   setActiveCompanyInterviews,

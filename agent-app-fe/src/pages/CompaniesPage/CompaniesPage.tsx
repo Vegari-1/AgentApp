@@ -27,8 +27,6 @@ const CompaniesPage: React.FC = () => {
   const navigate = useNavigate();
   const onCompanyClickHandler = (id: number) => {
     dispatch(getCompanyById(id));
-    // ovde da dobavimo za sve komentare, job ofere, intervjue
-    // ne znam gde drugde bismo mogli (jer se redirekcija radi u headeru kroz navlink)
     dispatch(getCompanyJobOffers(id));
     dispatch(getCompanyComments(id));
     dispatch(getCompanyInterviews(id));
