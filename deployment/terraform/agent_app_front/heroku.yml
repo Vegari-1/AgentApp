@@ -2,4 +2,4 @@ build:
   docker:
     web: Dockerfile
   config:
-    API_URL: "'https://agent-app-backend-prod.herokuapp.com/api'"
+    API_URL: "'https://agent-app-backend-test.herokuapp.com/api'"

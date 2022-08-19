@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CompanyCard from "../../components/atoms/CompanyCard/CompanyCard";
+import EntititesEmptyList from "../../components/atoms/EntitiesEmptyList/EntititesEmptyList";
 import Layout from "../../components/organisms/Layout/Layout";
 import CompanyModel from "../../models/CompanyModel";
 import {
@@ -37,13 +38,15 @@ const CompaniesPage: React.FC = () => {
   return (
     <Layout>
       <div className={classes["content-wrapper"]}>
-        {companies.map((company) => (
-          <CompanyCard
-            key={company.id}
-            company={company}
-            onClick={onCompanyClickHandler}
-          />
-        ))}
+        {companies.length !== 0 &&
+          companies.map((company) => (
+            <CompanyCard
+              key={company.id}
+              company={company}
+              onClick={onCompanyClickHandler}
+            />
+          ))}
+        {companies.length === 0 && <EntititesEmptyList entities="companies" />}
       </div>
     </Layout>
   );

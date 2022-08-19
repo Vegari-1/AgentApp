@@ -13,10 +13,6 @@
   line-height: 20px;
 }
 
-.checkbox-label-error {
-  color: var(--DANGER);
-}
-
 .checkbox {
   border-radius: 5px;
   cursor: pointer;
@@ -37,38 +33,6 @@ input[type="checkbox"]:checked {
   background-position: center;
 }
 
-.checkbox::placeholder {
-  color: var(--DARK-GREY);
-}
-
 .checkbox:focus-visible {
   outline: 1px solid var(--PRIMARY-COLOR);
-}
-
-.checkbox-error {
-  border: 1px solid var(--DANGER);
-  background: var(--LIGHT-GREY);
-}
-
-.checkbox-error:focus-visible {
-  outline: 1px solid var(--PRIMARY-COLOR);
-}
-
-.checkbox-error::placeholder {
-  color: var(--DANGER);
-}
-
-.checkbox-error-span {
-  height: 16px;
-  margin-top: 3px;
-
-  font-family: var(--PRIMARY-FONT-FAMILY);
-  font-style: var(--PRIMARY-FONT-STYLE);
-  font-weight: var(--FONT-WEIGHT-LIGHT);
-  font-size: 12px;
-  line-height: 16px;
-
-  display: block;
-
-  color: var(--DANGER);
 }

@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import EntititesEmptyList from "../../components/atoms/EntitiesEmptyList/EntititesEmptyList";
 import TextCard from "../../components/atoms/TextCard/TextCard";
 import CompanyPane from "../../components/organisms/CompanyPane/CompanyPane";
 import ReviewModel from "../../models/ReviewModel";
@@ -27,12 +28,12 @@ const CompanyInterviewPage: React.FC = () => {
       showAddButton={userData.companyId !== +id!}
       onAddButtonClick={addInterviewHandler}
     >
-      {interviews &&
+      {interviews.length !== 0 &&
         interviews.map((interview) => (
           <TextCard key={interview.id} review={interview}></TextCard>
         ))}
       {interviews.length === 0 && (
-        <div>Currently there are no interviews for this company</div>
+        <EntititesEmptyList entities="interviews" company />
       )}
     </CompanyPane>
   );

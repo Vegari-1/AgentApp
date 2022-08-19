@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import EntititesEmptyList from "../../components/atoms/EntitiesEmptyList/EntititesEmptyList";
 import GridCard from "../../components/molecules/GridCard/GridCard";
 import CompanyPane from "../../components/organisms/CompanyPane/CompanyPane";
 import GridCardModel from "../../models/GridCardModel";
@@ -39,7 +40,7 @@ const CompanySalaryPage: React.FC = () => {
         <GridCard title="Salary Information" content={salaryInfo} />
       )}
       {salaryInfo.length === 0 && (
-        <div>Currently there is no salary info for this company</div>
+        <EntititesEmptyList entities="salaries" company />
       )}
     </CompanyPane>
   );
