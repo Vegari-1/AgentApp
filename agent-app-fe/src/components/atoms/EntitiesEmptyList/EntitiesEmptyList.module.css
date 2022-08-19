@@ -1,0 +1,29 @@
+@import "../../../styles.css";
+
+.empty-entity-list {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+}
+
+.empty-entity-image {
+  height: 177px;
+  width: 20%;
+
+  background-image: url("../../../../public/images/empty-entity-list.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.empty-entity-text {
+  font-family: var(--PRIMARY-FONT-FAMILY);
+  font-style: var(--PRIMARY-FONT-STYLE);
+  font-weight: var(--FONT-WEIGHT-EXTRA-LIGH);
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+
+  color: rgba(0, 0, 0, 0.8);
+}

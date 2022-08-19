@@ -1,4 +1,5 @@
 import CompanyModel from "../../../models/CompanyModel";
+import EntititesEmptyList from "../../atoms/EntitiesEmptyList/EntititesEmptyList";
 import ManageRequestItem from "../../molecules/ManageRequestItem/ManageRequestItem";
 import classes from "./ManageCompanyRequests.module.css";
 
@@ -29,11 +30,7 @@ const ManageCompanyRequests: React.FC<ManageCompanyRequestsProps> = ({
         />
       ))}
 
-      {requests.length === 0 && (
-        <div className={classes["no-requests"]}>
-          No active requests currently
-        </div>
-      )}
+      {requests.length === 0 && <EntititesEmptyList entities="requests" />}
     </div>
   );
 };

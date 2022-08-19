@@ -15,21 +15,11 @@ const PrimaryCheckBox: React.FC<PrimaryCheckBoxProps> = ({
   label,
   type,
 }) => {
-  const shouldDisplayError = errors[name] && touched[name];
-
   return (
     <div className={classes["checkbox-wrapper"]}>
-      <label
-        className={`${classes["checkbox-label"]} ${
-          shouldDisplayError && classes["checkbox-label-error"]
-        }`}
-      >
-        {label}
-      </label>
+      <label className={classes["checkbox-label"]}>{label}</label>
       <input
-        className={`${classes["checkbox"]} ${
-          shouldDisplayError && classes["checkbox-error"]
-        }`}
+        className={classes["checkbox"]}
         type={type}
         name={name}
         value={value as string}
@@ -42,9 +32,6 @@ const PrimaryCheckBox: React.FC<PrimaryCheckBoxProps> = ({
           onBlur(name);
         }}
       ></input>
-      <span className={classes["checkbox-error-span"]}>
-        {shouldDisplayError ? errors[name] : ""}
-      </span>
     </div>
   );
 };

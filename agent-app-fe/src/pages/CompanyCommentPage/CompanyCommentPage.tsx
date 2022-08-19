@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import EntititesEmptyList from "../../components/atoms/EntitiesEmptyList/EntititesEmptyList";
 import TextCard from "../../components/atoms/TextCard/TextCard";
 import CompanyPane from "../../components/organisms/CompanyPane/CompanyPane";
 import ReviewModel from "../../models/ReviewModel";
@@ -27,12 +28,12 @@ const CompanyCommentPage: React.FC = () => {
       showAddButton={userData.companyId !== +id!}
       onAddButtonClick={addCommentHandler}
     >
-      {comments &&
+      {comments.length !== 0 &&
         comments.map((comment) => (
           <TextCard key={comment.id} review={comment}></TextCard>
         ))}
       {comments.length === 0 && (
-        <div>Currently there are no comments for this company</div>
+        <EntititesEmptyList entities="comments" company />
       )}
     </CompanyPane>
   );

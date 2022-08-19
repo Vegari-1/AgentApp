@@ -1,6 +1,6 @@
 .manage-requests {
   width: 95%;
-  margin: 2% 0% 2% 5%;
+  margin: 2% 5% 2% 5%;
   flex: 1;
   overflow: auto;
 }

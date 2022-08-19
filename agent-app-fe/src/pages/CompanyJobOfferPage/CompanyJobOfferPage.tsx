@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import EntititesEmptyList from "../../components/atoms/EntitiesEmptyList/EntititesEmptyList";
 import JobOfferCard from "../../components/atoms/JobOfferCard/JobOfferCard";
 import CompanyPane from "../../components/organisms/CompanyPane/CompanyPane";
 import { UserDataPayload } from "../../models/slices/auth";
@@ -26,10 +27,10 @@ const CompanyJobOfferPage: React.FC = () => {
       showAddButton={userData.companyId === +id!}
       onAddButtonClick={addJobOfferHandler}
     >
-      {offers &&
+      {offers.length !== 0 &&
         offers.map((offer) => <JobOfferCard key={offer.id} jobOffer={offer} />)}
       {offers.length === 0 && (
-        <div>Currently there are no job offers for this company</div>
+        <EntititesEmptyList entities="job offers" company />
       )}
     </CompanyPane>
   );
