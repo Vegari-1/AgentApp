@@ -2,6 +2,7 @@ import { all, takeLatest } from "redux-saga/effects";
 import {
   ACCEPT_COMPANY_REQUEST,
   ADD_API_KEY,
+  AUTO_LOGIN,
   CREATE_COMPANY_COMMENT,
   CREATE_COMPANY_INTERVIEW,
   CREATE_COMPANY_JOB_OFFER,
@@ -20,7 +21,12 @@ import {
   SIGN_IN,
   SIGN_UP,
 } from "../actions/action-types";
-import { handleLogOut, handleSignIn, handleSignUp } from "./auth-saga";
+import {
+  handleAutoLogin,
+  handleLogOut,
+  handleSignIn,
+  handleSignUp,
+} from "./auth-saga";
 import {
   handleAcceptCompanyRequests,
   handleCreateCompanyComment,
@@ -45,6 +51,7 @@ export default function* rootSaga() {
     takeLatest(SIGN_IN, handleSignIn),
     takeLatest(SIGN_UP, handleSignUp),
     takeLatest(LOG_OUT, handleLogOut),
+    takeLatest(AUTO_LOGIN, handleAutoLogin),
 
     takeLatest(ADD_API_KEY, handleAddApiKey),
 

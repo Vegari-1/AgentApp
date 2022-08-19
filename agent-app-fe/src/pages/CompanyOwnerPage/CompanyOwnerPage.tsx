@@ -22,7 +22,6 @@ const CompanyOwnerPage: React.FC = () => {
   useEffect(() => {
     if (userData.companyId) {
       dispatch(getCompanyById(userData.companyId));
-      // ovde za sve tabove dobaviti?
       dispatch(getCompanyJobOffers(userData.companyId));
       dispatch(getCompanyComments(userData.companyId));
       dispatch(getCompanyInterviews(userData.companyId));

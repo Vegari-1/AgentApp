@@ -11,9 +11,7 @@ const jobOfferValidationSchema = Yup.object().shape({
   title: Yup.string().required("* Required field"),
   position: Yup.string().required("* Required field"),
   jobDescription: Yup.string().required("* Required field"),
-  // qualifications: Yup.array()
-  //   .required("* Required field")
-  //   .min(1, "Must have at least 1 qualification"),
+  qualificationsCombined: Yup.string().required("* Required field"),
   startDate: Yup.date()
     .min(today, "Start date cannot be in the past")
     .required("* Required field"),

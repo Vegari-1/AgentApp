@@ -1,7 +1,7 @@
 import CompanyModel from "./CompanyModel";
 
 interface JobOfferModel {
-  id: string;
+  id: number;
   title: string;
   position: string;
   jobDescription: string;

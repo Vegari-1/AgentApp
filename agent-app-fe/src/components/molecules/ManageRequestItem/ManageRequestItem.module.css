@@ -2,7 +2,7 @@
 
 .manage-request-item-wrapper {
   width: 95%;
-  height: 70px;
+  height: 60px;
   padding: 10px 1px;
 
   border-top: 1px solid var(--VERY-LIGHT-GREY);
@@ -13,8 +13,8 @@
 
   font-family: var(--PRIMARY-FONT-FAMILY);
   font-style: var(--PRIMARY-FONT-STYLE);
-  font-size: 20px;
-  line-height: 25px;
+  font-size: 18px;
+  line-height: 22px;
   color: rgba(0, 0, 0, 0.8);
 }
 
@@ -67,7 +67,7 @@
 
 .delete-button {
   width: 10%;
-  height: 90px;
+  height: 80px;
 
   background: var(--DANGER);
   border: none;

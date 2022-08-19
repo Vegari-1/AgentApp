@@ -1,6 +1,7 @@
 export const SIGN_IN = "SIGN_IN";
 export const SIGN_UP = "SIGN_UP";
 export const LOG_OUT = "LOG_OUT";
+export const AUTO_LOGIN = "AUTO_LOGIN";
 
 export const ADD_API_KEY = "ADD_API_KEY";
 

@@ -16,3 +16,7 @@ export interface UserDataPayload {
   companyId: number;
   apiKey: string;
 }
+
+export interface AutoLoginPayload {
+  navigate: NavigateFunction;
+}
