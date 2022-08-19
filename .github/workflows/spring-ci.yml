@@ -101,7 +101,7 @@ jobs:
           cp -R "${{ env.PROJ_DIR_FE }}" "./deployment/terraform/agent_app_front/source"
 
       - name: Deploy app to TEST env
-        #if: github.event_name == 'push' && github.ref_name == 'develop'
+        if: github.event_name == 'push' && github.ref_name == 'develop'
         run: |
           cd ./deployment
           echo "TERRAFORM_BACKEND=agent-app-terraform-test" > env.conf
@@ -109,14 +109,19 @@ jobs:
           echo "GATEWAY_NAME=agent-app-frontend-test" >> env.conf
           printf "HEROKU_EMAIL=%s\n" ${{ secrets.HEROKU_TEST_EMAIL }} >> env.conf
           printf "HEROKU_API_KEY=%s" ${{ secrets.HEROKU_TEST_API_KEY }} >> env.conf
+          docker compose up destroy
+          docker compose up deploy
           docker compose up deploy
 
       - name: Deploy app to PROD env
         if: github.event_name == 'push' && github.ref_name == 'main'
         run: |
           cd ./deployment
-          export HEROKU_EMAIL=${{ secrets.HEROKU_PROD_EMAIL }}
-          export HEROKU_API_KEY=${{ secrets.HEROKU_PROD_API_KEY }}
+          echo "TERRAFORM_BACKEND=agent-app-terraform-prod" > env.conf
+          echo "APP_NAME=agent-app-backend-prod" >> env.conf
+          echo "GATEWAY_NAME=agent-app-frontend-prod" >> env.conf
+          printf "HEROKU_EMAIL=%s\n" ${{ secrets.HEROKU_PROD_EMAIL }} >> env.conf
+          printf "HEROKU_API_KEY=%s" ${{ secrets.HEROKU_PROD_API_KEY }} >> env.conf
           docker compose up destroy
           docker compose up deploy
           docker compose up deploy
