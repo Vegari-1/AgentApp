@@ -1,4 +1,5 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import EntititesEmptyList from "../../components/atoms/EntitiesEmptyList/EntititesEmptyList";
 import GridCard from "../../components/molecules/GridCard/GridCard";
@@ -6,9 +7,11 @@ import CompanyPane from "../../components/organisms/CompanyPane/CompanyPane";
 import GridCardModel from "../../models/GridCardModel";
 import SalaryModel from "../../models/SalaryModel";
 import { UserDataPayload } from "../../models/slices/auth";
+import { getCompanySalaries } from "../../store/actions/company-actions";
 import { RootState } from "../../store/store";
 
 const CompanySalaryPage: React.FC = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const userData: UserDataPayload = useSelector(
     (state: RootState) => state.auth.userData
@@ -24,6 +27,10 @@ const CompanySalaryPage: React.FC = () => {
         } as GridCardModel)
     );
   });
+
+  useEffect(() => {
+    dispatch(getCompanySalaries(+id!));
+  }, [dispatch, id]);
 
   const navigate = useNavigate();
   const addSalaryHandler = () => {

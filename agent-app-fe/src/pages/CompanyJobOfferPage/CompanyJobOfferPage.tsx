@@ -1,12 +1,15 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import EntititesEmptyList from "../../components/atoms/EntitiesEmptyList/EntititesEmptyList";
 import JobOfferCard from "../../components/atoms/JobOfferCard/JobOfferCard";
 import CompanyPane from "../../components/organisms/CompanyPane/CompanyPane";
 import { UserDataPayload } from "../../models/slices/auth";
+import { getCompanyJobOffers } from "../../store/actions/company-actions";
 import { RootState } from "../../store/store";
 
 const CompanyJobOfferPage: React.FC = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
   const userData: UserDataPayload = useSelector(
     (state: RootState) => state.auth.userData
@@ -15,6 +18,10 @@ const CompanyJobOfferPage: React.FC = () => {
   const offers = useSelector(
     (state: RootState) => state.company.activeCompanyJobOffers
   );
+
+  useEffect(() => {
+    dispatch(getCompanyJobOffers(+id!));
+  }, [dispatch, id]);
 
   const navigate = useNavigate();
   const addJobOfferHandler = () => {

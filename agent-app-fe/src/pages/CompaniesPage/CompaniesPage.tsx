@@ -5,14 +5,7 @@ import CompanyCard from "../../components/atoms/CompanyCard/CompanyCard";
 import EntititesEmptyList from "../../components/atoms/EntitiesEmptyList/EntititesEmptyList";
 import Layout from "../../components/organisms/Layout/Layout";
 import CompanyModel from "../../models/CompanyModel";
-import {
-  getCompanies,
-  getCompanyById,
-  getCompanyComments,
-  getCompanyInterviews,
-  getCompanyJobOffers,
-  getCompanySalaries,
-} from "../../store/actions/company-actions";
+import { getCompanies } from "../../store/actions/company-actions";
 import { RootState } from "../../store/store";
 import classes from "./CompaniesPage.module.css";
 
@@ -27,11 +20,6 @@ const CompaniesPage: React.FC = () => {
 
   const navigate = useNavigate();
   const onCompanyClickHandler = (id: number) => {
-    dispatch(getCompanyById(id));
-    dispatch(getCompanyJobOffers(id));
-    dispatch(getCompanyComments(id));
-    dispatch(getCompanyInterviews(id));
-    dispatch(getCompanySalaries(id));
     navigate("/company/" + id);
   };
 
