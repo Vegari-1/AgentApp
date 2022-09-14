@@ -13,6 +13,8 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 public class DislinktJobOfferRequest {
 
+    @NotEmpty(message = "API key must not be empty")
+    private String apiKey;
     @NotEmpty(message = "Position name must not be empty")
     private String positionName;
     @NotEmpty(message = "Job description must not be empty")
