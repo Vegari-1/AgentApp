@@ -1,6 +1,7 @@
 package com.vegari1.devops.agentapp.controller;
 
 import com.vegari1.devops.agentapp.dto.ApiKeyRequest;
+import com.vegari1.devops.agentapp.model.Config;
 import com.vegari1.devops.agentapp.service.IDislinktService;
 import com.vegari1.devops.agentapp.service.IUserService;
 import lombok.AllArgsConstructor;
@@ -33,4 +34,9 @@ public class DislinktController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @PutMapping("/config")
+    public ResponseEntity<Config> updateDislinktConfig(@RequestBody String url) {
+        Config config = dislinktService.updateConfigUrl(url);
+        return new ResponseEntity<>(config, HttpStatus.OK);
+    }
 }
